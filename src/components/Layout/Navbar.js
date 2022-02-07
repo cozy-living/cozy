@@ -4,7 +4,7 @@ import React, { Component } from "react";
 
 class Navbar extends Component {
   render() {
-    return <div>Placeholder</div>;
+    return <div>Nav Bar will be here</div>;
   }
 }
 
