@@ -12,40 +12,40 @@ import Signup from "./pages/Signup";
 import Navbar from "./components/Layout/Navbar";
 
 function App() {
-  return (
-    <>
-    <Navbar />
-    <Switch>
-        <Route path="/" exact>
-          <Redirect to="/home" />
-        </Route>
-        <Route path="/home" exact>
-          <Home />
-        </Route>
-        <Route path="/login">
-          <Login />
-        </Route>
-        <Route path="/signup">
-          <Signup />
-        </Route>
-        <Route path="/dashboard">
-          <Dashboard />
-        </Route>
-        <Route path="/discussion">
-          <DiscussionBoard />
-        </Route>
-        <Route path="/service">
-          <ServiceBoard />
-        </Route>
-        <Route path="/payment">
-          <Payment />
-        </Route>
-        <Route path="*">
-          <NotFound />
-        </Route>
-      </Switch>
-    </>
-  );
+	return (
+		<>
+			<Navbar />
+			<Switch>
+				<Route path="/" exact>
+					<Redirect to="/home" />
+				</Route>
+				<Route path="/home" exact>
+					<Home />
+				</Route>
+				<Route path="/login">
+					<Login />
+				</Route>
+				<Route path="/signup">
+					<Signup />
+				</Route>
+				<Route path="/dashboard">
+					<Dashboard />
+				</Route>
+				<Route path="/discussion">
+					<DiscussionBoard />
+				</Route>
+				<Route path="/service">
+					<ServiceBoard />
+				</Route>
+				<Route path="/payment">
+					<Payment />
+				</Route>
+				<Route path="*">
+					<NotFound />
+				</Route>
+			</Switch>
+		</>
+	);
 }
 
 export default App;
