@@ -166,7 +166,7 @@ const CreateForm = (props) => {
 
   //   phone number prefix selector
   const prefixSelector = (
-    <Form.Item name="prefix" noStyle>
+    <Form.Item style={{ width: "1px" }} name="prefix" noStyle>
       <Select
         style={{
           width: 70,
@@ -177,17 +177,6 @@ const CreateForm = (props) => {
       </Select>
     </Form.Item>
   );
-  const [autoCompleteResult, setAutoCompleteResult] = useState([]);
-
-  const onWebsiteChange = (value) => {
-    if (!value) {
-      setAutoCompleteResult([]);
-    } else {
-      setAutoCompleteResult(
-        [".com", ".org", ".net"].map((domain) => `${value}${domain}`)
-      );
-    }
-  };
 
   return (
     <Form
@@ -200,6 +189,7 @@ const CreateForm = (props) => {
         prefix: "+1",
       }}
       scrollToFirstError
+      style={{ left: "50%", marginTop: "30px" }}
     >
       {/* Full Name */}
       <Form.Item
@@ -209,12 +199,12 @@ const CreateForm = (props) => {
         rules={[
           {
             required: true,
-            message: "Please input your nickname!",
+            message: "Please input your Fullname!",
             whitespace: true,
           },
         ]}
       >
-        <Input />
+        <Input style={{ width: "auto" }} placeholder="your name" />
       </Form.Item>
 
       {/* gender selection */}
@@ -228,7 +218,7 @@ const CreateForm = (props) => {
           },
         ]}
       >
-        <Select placeholder="select your gender">
+        <Select style={{ width: "auto" }} placeholder="select your gender">
           <Option value="male">Male</Option>
           <Option value="female">Female</Option>
           <Option value="other">Other</Option>
@@ -250,7 +240,10 @@ const CreateForm = (props) => {
           },
         ]}
       >
-        <Input />
+        <Input
+          placeholder="Please input your E-mail"
+          style={{ width: "6cm" }}
+        />
       </Form.Item>
 
       {/* phone number */}
@@ -267,7 +260,7 @@ const CreateForm = (props) => {
         <Input
           addonBefore={prefixSelector}
           style={{
-            width: "100%",
+            width: "auto",
           }}
         />
       </Form.Item>
@@ -284,13 +277,13 @@ const CreateForm = (props) => {
           },
         ]}
       >
-        <Cascader options={residences} />
+        <Cascader style={{ width: "auto" }} options={residences} />
       </Form.Item>
 
       {/* post detail intro */}
       <Form.Item
-        name="intro"
-        label="Intro"
+        name="detail"
+        label="Post Detail"
         rules={[
           {
             required: true,
@@ -298,7 +291,12 @@ const CreateForm = (props) => {
           },
         ]}
       >
-        <Input.TextArea showCount maxLength={100} />
+        <Input.TextArea
+          placeholder="Write your post here"
+          style={{ height: "150px", width: "600px" }}
+          showCount
+          maxLength={300}
+        />
       </Form.Item>
 
       {/* aggreement checker */}
@@ -327,7 +325,7 @@ const CreateForm = (props) => {
         <Button
           htmlType="button"
           style={{
-            margin: "0 8px",
+            margin: "0 35px",
           }}
           onClick={props.onCancel}
         >
