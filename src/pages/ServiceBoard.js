@@ -8,7 +8,7 @@ class ServiceBoard extends Component {
 
   render() {
     return (
-      <div className='centered'>
+      <div classname='centered'>
         <h1>Service</h1>
         {
         this.state.admin ? <AdminService />
@@ -19,4 +19,5 @@ class ServiceBoard extends Component {
     )
   }
 }
-  export default ServiceBoard;
+
+export default ServiceBoard;
