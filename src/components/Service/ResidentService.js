@@ -32,7 +32,7 @@ class ResidentService extends Component {
     const {myService, requests} = {...this.state};
     return (
       <>
-        <div>
+        <div id="service_botton">
           <Button onClick={this.resetService} disabled={!myService}>Reserve Service</Button>
           <Button onClick={this.setService} disabled={myService}>My Service</Button>
         </div>
