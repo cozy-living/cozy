@@ -2,10 +2,10 @@
 
 import React, { Component } from "react";
 
-class ViewRequests extends Component {
+class AdminService extends Component {
   render() {
     return <div>Placeholder</div>;
   }
 }
 
-export default ViewRequests;
+export default AdminService;
