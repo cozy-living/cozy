@@ -1,7 +1,10 @@
 // TODO: implement the popup window for creating a new post by a user (must be a resident)
 import CreateForm from "./CreateForm";
 import React, { useState } from "react";
+<<<<<<< HEAD
 import { Button } from "antd";
+=======
+>>>>>>> 6995b6e (rebase)
 
 const CreatePost = () => {
   const [isCreating, setIsCreating] = useState(false);
