@@ -2,6 +2,7 @@
 import CreateForm from "./CreateForm";
 import React, { useState } from "react";
 import { Button } from "antd";
+import { fixControlledValue } from "antd/lib/input/Input";
 
 const CreatePost = () => {
   const [isCreating, setIsCreating] = useState(false);
@@ -23,9 +24,7 @@ const CreatePost = () => {
           shape="round"
           onClick={startCreatingHandler}
           style={{
-            marginLeft: "30px",
-            marginTop: "30px",
-            marginBottom: "30px",
+            marginLeft: "15%",
           }}
         >
           Create Post

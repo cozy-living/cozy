@@ -1,0 +1,19 @@
+.edit {
+  position: absolute;
+  right: 115px;
+  margin-top: 20px;
+  width: 100px;
+  background-color: rgb(193, 101, 255);
+  color: white;
+  border-color: rgb(193, 101, 255);
+}
+
+.delete {
+  position: absolute;
+  right: 0px;
+  margin-top: 20px;
+  width: 100px;
+  background-color: rgb(193, 101, 255);
+  color: white;
+  border-color: rgb(193, 101, 255);
+}
