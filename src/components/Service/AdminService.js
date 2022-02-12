@@ -4,7 +4,11 @@ import React, { Component } from "react";
 
 class AdminService extends Component {
   render() {
-    return <div>Placeholder</div>;
+    return (
+      <>
+        <h1 className="service_title">Service</h1>
+      </>
+    );
   }
 }
 

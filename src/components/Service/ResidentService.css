@@ -1,10 +1,22 @@
-.calendar {
-    width: 500px;
+.service_form {
+    width: 80%;
     border: 1px solid #f0f0f0;
     border-radius: 2px;
-    margin: 50px;
+    margin-top: 20px;
+    margin-left: 100px;
+    margin-right: 100px;
   }
 
 #service_botton {
-    margin-left: 20px;
+    margin-left: 50px;
+}
+
+.service_title {
+  margin-left: 50px;
+}
+
+.resident_service_item {
+  padding-left: 100px;
+  padding-top: 20px;
+  padding-right: 100px;
 }
