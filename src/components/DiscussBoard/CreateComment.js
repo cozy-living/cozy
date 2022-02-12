@@ -1,11 +1,13 @@
-// TODO: implement the popup window for creating a new comment by a user
+import React from "react";
 
-import React, { Component } from "react";
+import classes from "./CreateComment.module.css";
 
-class CreateComment extends Component {
-  render() {
-    return <div>Placeholder</div>;
-  }
-}
+const CreateComment = () => {
+  return (
+    <div>
+      <button className={classes.button}>Reply</button>
+    </div>
+  );
+};
 
 export default CreateComment;

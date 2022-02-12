@@ -2,47 +2,43 @@ import React from "react";
 
 import { Card, Col, Row } from "antd";
 import classes from "./Post.module.css";
-import CreateComment from "./CreateComment";
+import MyPostButton from "./MyPostButton";
 
-const Post = () => {
-  const getText = () => {
-    return <p>Posts</p>;
-  };
-
+const MyPost = () => {
   return (
     <div>
       <Col span={20}>
         <Card className={classes.card} title="User1">
-          Post1
+          My Post #1
         </Card>
-        <CreateComment />
+        <MyPostButton />
       </Col>
       <Col span={20}>
         <Card className={classes.card} title="User2">
-          Post2
+          My Post #2
         </Card>
-        <CreateComment />
+        <MyPostButton />
       </Col>
       <Col span={20}>
         <Card className={classes.card} title="User3">
-          Post3
+          My Post #3
         </Card>
-        <CreateComment />
+        <MyPostButton />
       </Col>
       <Col span={20}>
         <Card className={classes.card} title="User3">
-          Post4
+          My Post #4
         </Card>
-        <CreateComment />
+        <MyPostButton />
       </Col>
       <Col span={20}>
         <Card className={classes.card} title="User3">
-          Post5
+          My Post #5
         </Card>
-        <CreateComment />
+        <MyPostButton />
       </Col>
     </div>
   );
 };
 
-export default Post;
+export default MyPost;

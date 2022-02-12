@@ -1,10 +1,45 @@
+import { useState } from "react";
+
+import CreateComment from "../components/DiscussBoard/CreateComment";
 import CreatePost from "../components/DiscussBoard/CreatePost";
+import Post from "../components/DiscussBoard/Post";
+import MyPost from "../components/DiscussBoard/MyPost";
+
+import { Menu } from "antd";
+import classes from "./DiscussionBoard.module.css";
 
 const DiscussionBoard = () => {
+  const [showPost, setShowPost] = useState(false);
+
+  const [showMyPost, setShowMyPost] = useState(false);
+
+  const ShowPostHandler = () => {
+    setShowPost(true);
+    setShowMyPost(false);
+  };
+
+  const ShowMyPostHandler = () => {
+    setShowMyPost(true);
+    setShowPost(false);
+  };
+
   return (
-    <div className="centered">
+    <div className={classes.page}>
+      <p className={classes.title}>Discussion Board</p>
+      {/* TODO: need to make it a modal */}
       <CreatePost />
-      <p>The DiscussionBoard page</p>
+      <div className={classes.tabs}>
+        <button className={classes.button} onClick={ShowPostHandler}>
+          Posts
+        </button>
+        <button className={classes.button} onClick={ShowMyPostHandler} style={{ marginLeft: "10px" }}>
+          My Posts
+        </button>
+      </div>
+      <div className={classes.posts}>
+        {showPost && <Post visible={showPost} />}
+        {showMyPost && <MyPost visible={showMyPost} />}
+      </div>
     </div>
   );
 };
