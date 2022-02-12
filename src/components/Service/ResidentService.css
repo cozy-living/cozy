@@ -1,4 +1,4 @@
-.service_form {
+.reserve_form {
     width: 80%;
     border: 1px solid #f0f0f0;
     border-radius: 2px;
@@ -7,15 +7,15 @@
     margin-right: 100px;
   }
 
-#service_botton {
-    margin-left: 50px;
+.reserve_botton {
+  margin-left: 50px;
 }
 
 .service_title {
   margin-left: 50px;
 }
 
-.resident_service_item {
+.resident_item {
   padding-left: 100px;
   padding-top: 20px;
   padding-right: 100px;

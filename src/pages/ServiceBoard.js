@@ -8,7 +8,7 @@ class ServiceBoard extends Component {
 
   render() {
     return (
-      <div classname='centered'>
+      <div className='centered'>
         {
         this.state.admin ? <AdminService />
         :

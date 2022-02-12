@@ -1,7 +1,7 @@
 // TODO: implement the service component. The Service page should contain 2 tabs (CreateRequest + ViewRequests) for a resident, and one tab only (ProcessRequests) for an admin
-
 import React, { Component } from "react";
 import { Button, Calendar, List, Cascader} from "antd";
+import styles from './ResidentService.css';
 
 class ResidentService extends Component {
   state = {
@@ -45,8 +45,8 @@ class ResidentService extends Component {
     ];
     return (
       <>
-        <h1 className="service_title">Service</h1>
-        <div id="service_botton">
+        <h1 className={styles.service_title}>Service</h1>
+        <div className={styles.reserve_botton}>
           <Button onClick={this.resetService} disabled={!myService}>Reserve Service</Button>
           <Button onClick={this.setService} disabled={myService}>My Service</Button>
         </div>
@@ -57,7 +57,7 @@ class ResidentService extends Component {
               dataSource={requests}
               style={{margin: "40px"}}
               renderItem={item => (
-                  <List.Item className="resident_service_item">
+                  <List.Item className="resident_item">
                     <List.Item.Meta
                       title={item.date}
                       description={item.type}
@@ -67,7 +67,7 @@ class ResidentService extends Component {
               )}
             />
             :
-            <div className="service_form">
+            <div className="reserve_form">
               <Cascader options={options} onChange={this.onCascaderChange} placeholder="Please select" />
               <Calendar fullscreen={false} onPanelChange={this.onPanelChange} />
             </div>
