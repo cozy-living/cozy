@@ -1,0 +1,17 @@
+.footer {
+  padding-top: 180px;
+  padding-bottom: 90px;
+  background-color: rgb(4, 4, 114);
+  text-align: center;
+}
+
+.image {
+    height: 10px;
+    width: 10px;
+}
+
+.link {
+    font-size: 18px;
+    font-family: Times, Times New Roman, serif;
+    font-weight: bold;
+}

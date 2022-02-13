@@ -7,6 +7,7 @@ import MyPost from "../components/DiscussBoard/MyPost";
 
 import { Menu } from "antd";
 import classes from "./DiscussionBoard.module.css";
+import ModalButton from "../components/DiscussBoard/ModalButton";
 
 const DiscussionBoard = () => {
   const [showPost, setShowPost] = useState(false);
@@ -27,12 +28,16 @@ const DiscussionBoard = () => {
     <div className={classes.page}>
       <p className={classes.title}>Discussion Board</p>
       {/* TODO: need to make it a modal */}
-      <CreatePost />
+      <ModalButton />
       <div className={classes.tabs}>
         <button className={classes.button} onClick={ShowPostHandler}>
           Posts
         </button>
-        <button className={classes.button} onClick={ShowMyPostHandler} style={{ marginLeft: "10px" }}>
+        <button
+          className={classes.button}
+          onClick={ShowMyPostHandler}
+          style={{ marginLeft: "10px" }}
+        >
           My Posts
         </button>
       </div>
