@@ -1,9 +1,22 @@
-const ServiceBoard = () => {
+import React, {Component} from 'react';
+import AdminService from '../components/Service/AdminService';
+import ResidentService from '../components/Service/ResidentService';
+class ServiceBoard extends Component {
+  state = {
+    admin: false,
+  }
+
+  render() {
     return (
       <div className='centered'>
-        <p>The ServiceBoard page</p>
+        {
+        this.state.admin ? <AdminService />
+        :
+        <ResidentService />
+        }
       </div>
-    );
-  };
-  
-  export default ServiceBoard;
+    )
+  }
+}
+
+export default ServiceBoard;
