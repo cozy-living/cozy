@@ -2,6 +2,7 @@ import React from "react"
 
 import { Row, Col, Layout, Menu, Button, Avatar, Dropdown } from "antd"
 import { UserOutlined } from "@ant-design/icons/lib/icons"
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 const { Header } = Layout;
 
@@ -13,18 +14,18 @@ const { Header } = Layout;
 
 
 const profileOption = (
-	<Menu>
-		<Menu.Item>
-			<a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
-				Account
-			</a>
-		</Menu.Item>
-		<Menu.Item style={{ color: "red" }}>
-			<a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
-				Log Out
-			</a>
-		</Menu.Item>
-	</Menu>
+	<Router>
+		<Menu>
+			<Menu.Item>
+				<span>Account</span>
+				<Link to="/dashboard"></Link>
+			</Menu.Item>
+			<Menu.Item style={{ color: "red" }}>
+				<span>Log Out</span>
+			</Menu.Item>
+		</Menu>
+	</Router>
+
 )
 
 
@@ -35,6 +36,7 @@ class Navbar extends React.Component {
 
 	render() {
 		return (
+
 			<Header style={{ background: "white" }}>
 				<Row>
 					<Col span={4} style={{ display: "flex", justifyContent: "start", alignItems: "center" }}>
@@ -45,10 +47,22 @@ class Navbar extends React.Component {
 					</Col>
 					<Col span={16} style={{ display: "flex", justifyContent: "start", alignItems: "center" }}>
 						<Menu theme="light" mode="horizontal" defaultSelectedKeys={['1']}>
-							<Menu.Item key="1">Home</Menu.Item>
-							<Menu.Item key="2">Payment</Menu.Item>
-							<Menu.Item key="3">Service</Menu.Item>
-							<Menu.Item key="4">Post</Menu.Item>
+							<Menu.Item key="1">
+								<span>Home</span>
+								<Link to="/" />
+							</Menu.Item>
+							<Menu.Item key="2">
+								<span>Payment</span>
+								<Link to="payment" />
+							</Menu.Item>
+							<Menu.Item key="3">
+								<span>Service</span>
+								<Link to="service" />
+							</Menu.Item>
+							<Menu.Item key="4">
+								<span>Post</span>
+								<Link to="discussion" />
+							</Menu.Item>
 						</Menu>
 					</Col>
 					<Col span={4}>
