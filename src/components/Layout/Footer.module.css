@@ -6,11 +6,12 @@
 }
 
 .image {
-    margin-bottom: 30px;
+  margin-bottom: 30px;
+  font-size: 40px;
 }
 
 .link {
-    font-size: 18px;
-    font-family: Times, Times New Roman, serif;
-    font-weight: bold;
+  font-size: 18px;
+  font-family: Times, Times New Roman, serif;
+  font-weight: bold;
 }

@@ -8,10 +8,7 @@ import {
   InstagramOutlined,
 } from "@ant-design/icons";
 import classes from "./Footer.module.css";
-import twitter from "../../assets/images/twitter.png";
-import facebook from "../../assets/images/facebook.png";
-import instagram from "../../assets/images/instagram.png";
-import google from "../../assets/images/google.png";
+
 
 const Footer = () => {
   return (
