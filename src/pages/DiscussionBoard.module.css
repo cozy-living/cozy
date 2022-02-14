@@ -10,12 +10,13 @@
   margin-top: 30px;
   text-align: center;
   font-size: 18px;
-  margin-left: 80px;
+  display: flex;
+  justify-content: center;
 }
 
 .posts {
   margin-top: 30px;
-  margin-left: 20%;
+  margin-left: 25%;
 }
 
 .button {
