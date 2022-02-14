@@ -1,13 +1,12 @@
 // TODO: implement the service component. The Service page should contain 2 tabs (CreateRequest + ViewRequests) for a resident, and one tab only (ProcessRequests) for an admin
 import React, { Component } from "react";
-import { Button, Calendar, List, Cascader} from "antd";
+import { Button, Calendar, List, Layout, Form, Select} from "antd";
 import styles from './ResidentService.css';
 
 class ResidentService extends Component {
   state = {
     myService: false,
-    requests: [{id: 1, type: "room reservation", date: "2022.02.09", state: "unfinished", user_id: "1"},
-              {id: 2, type: "maintainance", date: "2022.02.09", state: "unfinished", user_id: "2"}],
+    loading: false,
   }
 
   setService = () => {
@@ -24,29 +23,31 @@ class ResidentService extends Component {
     console.log(this.state.myService);
   }
 
-  
-  onPanelChange = (value) => {
-    console.log("choose value:", value);
-  }
-  onCascaderChange = (value) => {
-    console.log("choose value:", value)
+  onFinish = (values) => {
+    console.log("form values:", values);
   }
   render() {
-    const {myService, requests} = {...this.state};
+    const {myService} = this.state;
+    const {Content} = Layout;
+    const {Option} = Select;
+    //dummy data
     const options = [
       {
-        value: 'Room reservation',
-        label: 'Room reservation',
+        value: 'Room Reservation',
+        label: 'Room Reservation',
       },
       {
         value: 'Maintainance',
         label: 'Maintainance',
       },
     ];
+    const requests = [{id: 1, type: "Room Reservation", date: "2022.02.09", state: "unfinished", user_id: "1"},
+              {id: 2, type: "Maintainance", date: "2022.02.09", state: "unfinished", user_id: "2"}]
+    //dummy data
     return (
-      <>
-        <h1 className={styles.service_title}>Service</h1>
-        <div className={styles.reserve_botton}>
+      <Content style={{height:"550px", display:"flex", flexDirection:"column", justifyContent:"flex-start", overflow: "auto"}}>
+        <h1 className="service_title">Service</h1>
+        <div className="reserve_botton">
           <Button onClick={this.resetService} disabled={!myService}>Reserve Service</Button>
           <Button onClick={this.setService} disabled={myService}>My Service</Button>
         </div>
@@ -67,12 +68,39 @@ class ResidentService extends Component {
               )}
             />
             :
-            <div className="reserve_form">
-              <Cascader options={options} onChange={this.onCascaderChange} placeholder="Please select" />
-              <Calendar fullscreen={false} onPanelChange={this.onPanelChange} />
-            </div>
+            <Form 
+              className="reserve_form"
+              onFinish={this.onFinish}
+              >
+              <Form.Item
+                name="type" label="service" rules={[{required: true, message: "service type required"}]}
+                >
+                <Select placeholder="Select service">
+                  <Option value="room_reservation">Room Reservation</Option>
+                  <Option value="maintainance">Maintainance</Option>
+                </Select>
+
+              </Form.Item>
+              <Form.Item
+                name="date" 
+                label="date" 
+                rules={[{required: true, message: "date required"}]}
+                >
+                <Calendar fullscreen={false} defaultValue={null}/>
+              </Form.Item>
+              <Form.Item>
+                <Button 
+                  type="primary"
+                  htmlType="submit" 
+                  style={{marginLeft: "600px", marginBottom: "20px"}}
+                  loading={this.state.loading}>
+                  Submit
+                </Button>
+              </Form.Item>
+            </Form>
           }
-      </>
+
+      </Content>
     );
   }
 }
