@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import "antd/dist/antd.css";
+import React from "react";
+
 import { Form, Input, Cascader, Select, Checkbox, Button } from "antd";
+
 const { Option } = Select;
 
 // dummy data for resident
@@ -293,7 +294,7 @@ const CreateForm = (props) => {
       >
         <Input.TextArea
           placeholder="Write your post here"
-          style={{ height: "150px", width: "600px" }}
+          style={{ height: "150px", width: "auto" }}
           showCount
           maxLength={300}
         />
@@ -318,20 +319,6 @@ const CreateForm = (props) => {
         </Checkbox>
       </Form.Item>
 
-      <Form.Item {...tailFormItemLayout}>
-        <Button htmlType="submit" type="primary">
-          Submit
-        </Button>
-        <Button
-          htmlType="button"
-          style={{
-            margin: "0 35px",
-          }}
-          onClick={props.onCancel}
-        >
-          Cancel
-        </Button>
-      </Form.Item>
     </Form>
   );
 };

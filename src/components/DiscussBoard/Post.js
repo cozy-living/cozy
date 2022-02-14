@@ -14,32 +14,32 @@ const Post = () => {
       <Col span={20}>
         <Card className={classes.card} title="User1">
           Post1
+          {<CreateComment />}
         </Card>
-        <CreateComment />
       </Col>
       <Col span={20}>
         <Card className={classes.card} title="User2">
           Post2
+          {<CreateComment />}
         </Card>
-        <CreateComment />
       </Col>
       <Col span={20}>
         <Card className={classes.card} title="User3">
           Post3
+          {<CreateComment />}
         </Card>
-        <CreateComment />
       </Col>
       <Col span={20}>
         <Card className={classes.card} title="User3">
           Post4
+          {<CreateComment />}
         </Card>
-        <CreateComment />
       </Col>
       <Col span={20}>
         <Card className={classes.card} title="User3">
           Post5
+          {<CreateComment />}
         </Card>
-        <CreateComment />
       </Col>
     </div>
   );
