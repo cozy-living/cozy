@@ -1,6 +1,12 @@
 import React from "react";
 
-import { Row, Col } from "antd";
+import { Row, Col, Space } from "antd";
+import {
+  TwitterOutlined,
+  FacebookOutlined,
+  GooglePlusOutlined,
+  InstagramOutlined,
+} from "@ant-design/icons";
 import classes from "./Footer.module.css";
 import twitter from "../../assets/images/twitter.png";
 import facebook from "../../assets/images/facebook.png";
@@ -11,18 +17,20 @@ const Footer = () => {
   return (
     <div className={classes.footer}>
       <div className={classes.image}>
-        <a href="https://twitter.com/">
-          <img src={twitter} />
-        </a>
-        <a href="https://www.facebook.com/">
-          <img src={facebook} />
-        </a>
-        <a href="https://www.google.com/">
-          <img src={google} />
-        </a>
-        <a href="https://www.instagram.com/">
-          <img src={instagram} />
-        </a>
+        <Space>
+          <a href="https://twitter.com/">
+            <TwitterOutlined />
+          </a>
+          <a href="https://www.facebook.com/">
+            <FacebookOutlined />
+          </a>
+          <a href="https://www.google.com/">
+            <GooglePlusOutlined />
+          </a>
+          <a href="https://www.instagram.com/">
+            <InstagramOutlined />
+          </a>
+        </Space>
       </div>
       <div className={classes.link}>
         <Row>
