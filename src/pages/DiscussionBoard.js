@@ -1,11 +1,8 @@
 import { useState } from "react";
 
-import CreateComment from "../components/DiscussBoard/CreateComment";
-import CreatePost from "../components/DiscussBoard/CreatePost";
 import Post from "../components/DiscussBoard/Post";
 import MyPost from "../components/DiscussBoard/MyPost";
 
-import { Menu } from "antd";
 import classes from "./DiscussionBoard.module.css";
 import ModalButton from "../components/DiscussBoard/ModalButton";
 
