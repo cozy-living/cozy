@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import { Button, Calendar, List, Layout, Form, Select} from "antd";
 import styles from './ResidentService.css';
+import { CloseOutlined } from "@ant-design/icons/lib/icons";
 
 class ResidentService extends Component {
   state = {
@@ -25,7 +26,12 @@ class ResidentService extends Component {
 
   onFinish = (values) => {
     console.log("form values:", values);
+    //TODO:return the values to backend
   }
+  onCancel = () => {
+    //TODO:cancel the reservation
+  }
+
   render() {
     const {myService} = this.state;
     const {Content} = Layout;
@@ -41,8 +47,8 @@ class ResidentService extends Component {
         label: 'Maintainance',
       },
     ];
-    const requests = [{id: 1, type: "Room Reservation", date: "2022.02.09", state: "unfinished", user_id: "1"},
-              {id: 2, type: "Maintainance", date: "2022.02.09", state: "unfinished", user_id: "2"}]
+    const requests = [{id: 1, type: "Room Reservation", suit: "1A", date: "2022.02.09", state: "unfinished", user_id: "1"},
+              {id: 2, type: "Maintainance", suit: "2A", date: "2022.02.09", state: "unfinished", user_id: "2"}]
     //dummy data
     return (
       <Content style={{height:"550px", display:"flex", flexDirection:"column", justifyContent:"flex-start", overflow: "auto"}}>
@@ -57,13 +63,14 @@ class ResidentService extends Component {
               bordered
               dataSource={requests}
               style={{margin: "40px"}}
+              //TODO:get items from backend
               renderItem={item => (
                   <List.Item className="resident_item">
                     <List.Item.Meta
-                      title={item.date}
-                      description={item.type}
+                      title={item.type}
+                      description={"APT:" + item.suit + "\tDATE:" + item.date}
                     />
-                    <Button>Delete</Button>
+                    <Button type="danger" icon={<CloseOutlined/>} shape="circle" onClick={this.onCancel}></Button>
                   </List.Item>
               )}
             />
