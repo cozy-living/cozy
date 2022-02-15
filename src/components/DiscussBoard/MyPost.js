@@ -25,18 +25,6 @@ const MyPost = () => {
           {<MyPostButton />}
         </Card>
       </Col>
-      <Col span={16}>
-        <Card className={classes.card} title="User3">
-          My Post #4
-          {<MyPostButton />}
-        </Card>
-      </Col>
-      <Col span={16}>
-        <Card className={classes.card} title="User3">
-          My Post #5
-          {<MyPostButton />}
-        </Card>
-      </Col>
     </div>
   );
 };
