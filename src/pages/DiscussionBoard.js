@@ -4,12 +4,43 @@ import Post from "../components/DiscussBoard/Post";
 import MyPost from "../components/DiscussBoard/MyPost";
 
 import classes from "./DiscussionBoard.module.css";
-import ModalButton from "../components/DiscussBoard/ModalButton";
+import CreatePost from "../components/DiscussBoard/CreatePost";
+
+/*
+          DiscussionBoard
+               /   \
+     CreatePost      Post
+          |            |
+   getting data     update data
+*/
+
+const DUMMY_DATA = [
+  {
+    id: "u1",
+    name: "Hanwen Liu",
+    email: "aidisheng880@gmail.com",
+    title: "Fixing the Toilet",
+    date: "2022-02-15",
+    detail: "My toilet is stock, please have someone to fix it",
+  },
+  {
+    id: "u2",
+    name: "Stranger",
+    email: "stranger@testing.com",
+    title: "Loud Noise in APT 202",
+    date: "2022-02-14",
+    detail:
+      "The APT 202 is very loud during the night time, please keep it down!",
+  },
+];
 
 const DiscussionBoard = () => {
   const [showPost, setShowPost] = useState(false);
 
   const [showMyPost, setShowMyPost] = useState(false);
+
+  // exchange dummy data to fetch data from backend
+  const [newPosts, setNewPosts] = useState(DUMMY_DATA);
 
   const ShowPostHandler = () => {
     setShowPost(true);
@@ -21,11 +52,17 @@ const DiscussionBoard = () => {
     setShowPost(false);
   };
 
+  const addPostHandler = (post) => {
+    setNewPosts((prevPosts) => {
+      return [post, ...prevPosts];
+    });
+  };
+
   return (
     <div className={classes.page}>
       <p className={classes.title}>Discussion Board</p>
       {/* TODO: need to make it a modal */}
-      <ModalButton />
+      <CreatePost onAddPost={addPostHandler} />
       <div className={classes.tabs}>
         <button className={classes.button} onClick={ShowPostHandler}>
           Posts
@@ -39,7 +76,7 @@ const DiscussionBoard = () => {
         </button>
       </div>
       <div className={classes.posts}>
-        {showPost && <Post visible={showPost} />}
+        {showPost && <Post visible={showPost} data={newPosts}/>}
         {showMyPost && <MyPost visible={showMyPost} />}
       </div>
     </div>

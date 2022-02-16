@@ -10,12 +10,13 @@
   margin-top: 30px;
   text-align: center;
   font-size: 18px;
-  margin-left: 80px;
+  display: flex;
+  justify-content: center;
 }
 
 .posts {
   margin-top: 30px;
-  margin-left: 20%;
+  margin-left: 400px;
 }
 
 .button {
@@ -26,6 +27,6 @@
 }
 
 .page {
-  background-color: rgb(196, 196, 196);
+  /* background-color: rgb(196, 196, 196); */
   padding-bottom: 80px;
 }
