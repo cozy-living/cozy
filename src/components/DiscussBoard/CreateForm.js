@@ -158,16 +158,12 @@ const CreateForm = (props) => {
   /*
   Fullname
   E-mail
-  Phone Number
-  Residence
   Post Title
   Date
   Post Detail
   */
   const [enteredName, setEnteredName] = useState("");
   const [enteredEmail, setEnteredEmail] = useState("");
-  const [enteredPhone, setEnteredPhone] = useState("");
-  const [enteredResidence, setEnteredResidence] = useState([""]);
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredDate, setEnteredDate] = useState("");
   const [enteredDetail, setEnteredDetail] = useState("");
@@ -178,14 +174,6 @@ const CreateForm = (props) => {
 
   const emailChangeHandler = (event) => {
     setEnteredEmail(event.target.value);
-  };
-
-  const phoneChangeHandler = (event) => {
-    setEnteredPhone(event.target.value);
-  };
-
-  const residenceChangeHandler = (event) => {
-    setEnteredResidence(event.target.value);
   };
 
   const titleChangeHandler = (event) => {
@@ -206,8 +194,6 @@ const CreateForm = (props) => {
     const postData = {
       name: enteredName,
       email: enteredEmail,
-      phone: enteredPhone,
-      residence: enteredResidence,
       title: enteredTitle,
       date: enteredDate,
       detail: enteredDetail,
@@ -217,8 +203,6 @@ const CreateForm = (props) => {
     // cleanup after submission
     setEnteredName("");
     setEnteredEmail("");
-    setEnteredPhone("");
-    setEnteredResidence([""]);
     setEnteredTitle("");
     setEnteredDate("");
     setEnteredDetail("");
@@ -256,7 +240,6 @@ const CreateForm = (props) => {
       }}
       scrollToFirstError
       style={{ left: "50%", marginTop: "30px" }}
-
       onSubmit={sumbitHandler}
     >
       {/* Full Name */}
@@ -298,44 +281,6 @@ const CreateForm = (props) => {
           placeholder="Please input your E-mail"
           style={{ width: "6cm" }}
         />
-      </Form.Item>
-
-      {/* phone number */}
-      <Form.Item
-        name="phone"
-        label="Phone Number"
-        rules={[
-          {
-            required: true,
-            message: "Please input your phone number!",
-          },
-        ]}
-        value={enteredPhone}
-        onChange={phoneChangeHandler}
-      >
-        <Input
-          addonBefore={prefixSelector}
-          style={{
-            width: "auto",
-          }}
-        />
-      </Form.Item>
-
-      {/* Resident -> TODO: need to switch to select APT */}
-      <Form.Item
-        name="residence"
-        label="Residence"
-        rules={[
-          {
-            type: "array",
-            required: true,
-            message: "Please select your habitual residence!",
-          },
-        ]}
-        value={enteredResidence}
-        onChange={residenceChangeHandler}
-      >
-        <Cascader style={{ width: "auto" }} options={residences} />
       </Form.Item>
 
       {/* post title */}
@@ -424,7 +369,6 @@ const CreateForm = (props) => {
         </Form.Item>
       </div>
     </Form>
-    
   );
 };
 

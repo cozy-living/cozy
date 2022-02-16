@@ -19,8 +19,6 @@ const DUMMY_DATA = [
     id: "u1",
     name: "Hanwen Liu",
     email: "aidisheng880@gmail.com",
-    phone: "9172505669",
-    residence: ["Unit 1/", "Floor 1/", "APT 100"],
     title: "Fixing the Toilet",
     date: "2022-02-15",
     detail: "My toilet is stock, please have someone to fix it",
@@ -29,8 +27,6 @@ const DUMMY_DATA = [
     id: "u2",
     name: "Stranger",
     email: "stranger@testing.com",
-    phone: "1234567890",
-    residence: ["Unit 2/", "Floor 1/", "APT 102"],
     title: "Loud Noise in APT 202",
     date: "2022-02-14",
     detail:
@@ -43,6 +39,7 @@ const DiscussionBoard = () => {
 
   const [showMyPost, setShowMyPost] = useState(false);
 
+  // exchange dummy data to fetch data from backend
   const [newPosts, setNewPosts] = useState(DUMMY_DATA);
 
   const ShowPostHandler = () => {

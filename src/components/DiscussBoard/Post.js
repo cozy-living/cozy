@@ -16,17 +16,16 @@ const Post = (props) => {
   return (
     <div className={classes.container}>
       <Col span={16}>
-          {props.data.map((post) => (
-            <PostEntry
-              name={post.name}
-              email={post.email}
-              phone={post.phone}
-              residence={post.residence}
-              title={post.title}
-              date={post.date}
-              detail={post.detail}
-            />
-          ))}
+        {props.data.map((post) => (
+          <PostEntry
+            id={post.id}
+            name={post.name}
+            email={post.email}
+            title={post.title}
+            date={post.date}
+            detail={post.detail}
+          />
+        ))}
       </Col>
     </div>
   );

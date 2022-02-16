@@ -26,7 +26,7 @@ const CreatePost = (props) => {
   const savePostDataHandler = (enteredPostData) => {
     const postData = {
       ...enteredPostData,
-      // id: Math.random().toString(),
+      id: Math.random().toString(),
     };
     props.onAddPost(postData);
   }
