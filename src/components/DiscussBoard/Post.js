@@ -3,43 +3,29 @@ import React from "react";
 import { Card, Col, Row } from "antd";
 import classes from "./Post.module.css";
 import CreateComment from "./CreateComment";
+import AddComment from "./AddComment";
+import PostEntry from "./PostEntry";
 
-const Post = () => {
+const Post = (props) => {
   const getText = () => {
     return <p>Posts</p>;
   };
 
+  let newTitle = "OPS";
+
   return (
-    <div>
-      <Col span={20}>
-        <Card className={classes.card} title="User1">
-          Post1
-        </Card>
-        <CreateComment />
-      </Col>
-      <Col span={20}>
-        <Card className={classes.card} title="User2">
-          Post2
-        </Card>
-        <CreateComment />
-      </Col>
-      <Col span={20}>
-        <Card className={classes.card} title="User3">
-          Post3
-        </Card>
-        <CreateComment />
-      </Col>
-      <Col span={20}>
-        <Card className={classes.card} title="User3">
-          Post4
-        </Card>
-        <CreateComment />
-      </Col>
-      <Col span={20}>
-        <Card className={classes.card} title="User3">
-          Post5
-        </Card>
-        <CreateComment />
+    <div className={classes.container}>
+      <Col span={16}>
+        {props.data.map((post) => (
+          <PostEntry
+            id={post.id}
+            name={post.name}
+            email={post.email}
+            title={post.title}
+            date={post.date}
+            detail={post.detail}
+          />
+        ))}
       </Col>
     </div>
   );

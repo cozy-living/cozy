@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Modal, Button } from "antd";
 import CreateForm from "./CreateForm";
 
-const CreatePost = (props) => {
+const ModalButton = () => {
   const [visible, setVisible] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -22,14 +22,6 @@ const CreatePost = (props) => {
   const onCancelHandler = () => {
     setVisible(false);
   };
-
-  const savePostDataHandler = (enteredPostData) => {
-    const postData = {
-      ...enteredPostData,
-      id: Math.random().toString(),
-    };
-    props.onAddPost(postData);
-  }
 
   return (
     <>
@@ -61,10 +53,10 @@ const CreatePost = (props) => {
           </Button>,
         ]}
       >
-        {<CreateForm onSavePostData={savePostDataHandler}/>}
+        {<CreateForm />}
       </Modal>
     </>
   );
 };
 
-export default CreatePost;
+export default ModalButton;

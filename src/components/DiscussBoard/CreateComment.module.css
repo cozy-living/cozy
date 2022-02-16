@@ -1,9 +1,12 @@
-.button {
-  position: absolute;
-  right: 0px;
-  margin-top: 20px;
-  width: 100px;
-  background-color: rgb(193, 101, 255);
-  color: white;
-  border-color: rgb(193, 101, 255);
-}
+.container {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .button {
+    margin-top: 20px;
+    width: 100px;
+    background-color: rgb(193, 101, 255);
+    color: white;
+    border-color: rgb(193, 101, 255);
+  }
