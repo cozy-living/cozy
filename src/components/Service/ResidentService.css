@@ -12,6 +12,8 @@
 }
 
 .service_title {
+  font-weight: bold;
+  font-size: xx-large;
   margin-left: 50px;
   margin-top: 20px;
 }
