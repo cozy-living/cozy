@@ -22,7 +22,7 @@ class App extends React.Component {
 
 	render() {
 		return (
-			<Layout style={{ height: "100vh" }}>
+			<Layout style={{ height: "auto" }}>
 				<Router>
 					<Navbar />
 					<Switch>

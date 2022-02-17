@@ -1,0 +1,13 @@
+.title {
+    font-weight: bold;
+    font-size: xx-large;
+    margin-left: 50px;
+    margin-top: 20px;
+    
+}
+
+.items {
+    padding-left: 100px;
+    padding-top: 20px;
+    padding-right: 100px;
+  }

@@ -1,6 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 
-import { Form, Input, Cascader, Select, Checkbox, Button } from "antd";
+import {
+  Form,
+  Input,
+  Cascader,
+  Select,
+  Checkbox,
+  Button,
+  DatePicker,
+} from "antd";
 
 const { Option } = Select;
 
@@ -145,20 +153,61 @@ const formItemLayout = {
     },
   },
 };
-const tailFormItemLayout = {
-  wrapperCol: {
-    xs: {
-      span: 24,
-      offset: 0,
-    },
-    sm: {
-      span: 16,
-      offset: 8,
-    },
-  },
-};
 
 const CreateForm = (props) => {
+  /*
+  Fullname
+  E-mail
+  Post Title
+  Date
+  Post Detail
+  */
+  const [enteredName, setEnteredName] = useState("");
+  const [enteredEmail, setEnteredEmail] = useState("");
+  const [enteredTitle, setEnteredTitle] = useState("");
+  const [enteredDate, setEnteredDate] = useState("");
+  const [enteredDetail, setEnteredDetail] = useState("");
+
+  const nameChangeHandler = (event) => {
+    setEnteredName(event.target.value);
+  };
+
+  const emailChangeHandler = (event) => {
+    setEnteredEmail(event.target.value);
+  };
+
+  const titleChangeHandler = (event) => {
+    setEnteredTitle(event.target.value);
+  };
+
+  const dateChangeHandler = (event) => {
+    setEnteredDate(event.target.value);
+  };
+
+  const detailChangeHandler = (event) => {
+    setEnteredDetail(event.target.value);
+  };
+
+  const sumbitHandler = (event) => {
+    event.preventDefault();
+
+    const postData = {
+      name: enteredName,
+      email: enteredEmail,
+      title: enteredTitle,
+      date: enteredDate,
+      detail: enteredDetail,
+    };
+
+    props.onSavePostData(postData);
+    // cleanup after submission
+    setEnteredName("");
+    setEnteredEmail("");
+    setEnteredTitle("");
+    setEnteredDate("");
+    setEnteredDetail("");
+  };
+
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
@@ -191,6 +240,7 @@ const CreateForm = (props) => {
       }}
       scrollToFirstError
       style={{ left: "50%", marginTop: "30px" }}
+      onSubmit={sumbitHandler}
     >
       {/* Full Name */}
       <Form.Item
@@ -204,26 +254,10 @@ const CreateForm = (props) => {
             whitespace: true,
           },
         ]}
+        value={enteredName}
+        onChange={nameChangeHandler}
       >
         <Input style={{ width: "auto" }} placeholder="your name" />
-      </Form.Item>
-
-      {/* gender selection */}
-      <Form.Item
-        name="gender"
-        label="Gender"
-        rules={[
-          {
-            required: true,
-            message: "Please select gender!",
-          },
-        ]}
-      >
-        <Select style={{ width: "auto" }} placeholder="select your gender">
-          <Option value="male">Male</Option>
-          <Option value="female">Female</Option>
-          <Option value="other">Other</Option>
-        </Select>
       </Form.Item>
 
       {/* Email */}
@@ -240,6 +274,8 @@ const CreateForm = (props) => {
             message: "Please input your E-mail!",
           },
         ]}
+        value={enteredEmail}
+        onChange={emailChangeHandler}
       >
         <Input
           placeholder="Please input your E-mail"
@@ -247,38 +283,37 @@ const CreateForm = (props) => {
         />
       </Form.Item>
 
-      {/* phone number */}
+      {/* post title */}
       <Form.Item
-        name="phone"
-        label="Phone Number"
+        name="title"
+        label="Post Title"
         rules={[
           {
             required: true,
-            message: "Please input your phone number!",
+            message: "Please input your post title!",
+            whitespace: true,
           },
         ]}
+        value={enteredTitle}
+        onChange={titleChangeHandler}
       >
-        <Input
-          addonBefore={prefixSelector}
-          style={{
-            width: "auto",
-          }}
-        />
+        <Input style={{ width: "auto" }} placeholder="your name" />
       </Form.Item>
 
-      {/* Resident -> TODO: need to switch to select APT */}
+      {/* Post Date */}
       <Form.Item
-        name="residence"
-        label="Residence"
+        name="date"
+        label="Date"
         rules={[
           {
-            type: "array",
             required: true,
-            message: "Please select your habitual residence!",
+            message: "Please input your post date!",
           },
         ]}
+        value={enteredDate}
+        onChange={dateChangeHandler}
       >
-        <Cascader style={{ width: "auto" }} options={residences} />
+        <DatePicker />
       </Form.Item>
 
       {/* post detail intro */}
@@ -288,9 +323,11 @@ const CreateForm = (props) => {
         rules={[
           {
             required: true,
-            message: "Please input Intro",
+            message: "Please input your post detail",
           },
         ]}
+        value={enteredDetail}
+        onChange={detailChangeHandler}
       >
         <Input.TextArea
           placeholder="Write your post here"
@@ -312,13 +349,25 @@ const CreateForm = (props) => {
                 : Promise.reject(new Error("Should accept agreement")),
           },
         ]}
-        {...tailFormItemLayout}
+        style={{ textAlign: "center", marginLeft: "190px" }}
       >
         <Checkbox>
           I have read the <a href="">agreement</a>
         </Checkbox>
       </Form.Item>
-
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginTop: "10px",
+        }}
+      >
+        <Form.Item>
+          <Button type="primary" htmlType="submit">
+            Requirement Check
+          </Button>
+        </Form.Item>
+      </div>
     </Form>
   );
 };
