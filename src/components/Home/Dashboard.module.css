@@ -3,11 +3,16 @@
     font-size: xx-large;
     margin-left: 50px;
     margin-top: 20px;
-    
+    color: rgb(4, 4, 114);
 }
 
 .items {
-    padding-left: 100px;
+    display: flex;
+    justify-content: left;
+    padding-left: 50px;
     padding-top: 20px;
-    padding-right: 100px;
+    padding-right: 50px;
+    padding-bottom: 20px;
+    border: 2px solid rgb(4, 4, 114);
+    border-radius: 40px;
   }
