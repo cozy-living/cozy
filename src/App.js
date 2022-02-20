@@ -5,14 +5,14 @@ import {  BrowserRouter as Router, Route, Switch, Redirect } from "react-router-
 import Dashboard from "./pages/Dashboard";
 import DiscussionBoard from "./pages/DiscussionBoard";
 import Home from "./pages/Home";
-import Login from "./pages/Login";
 import NotFound from "./pages/NotFount";
 import Payment from "./pages/Payment";
 import ServiceBoard from "./pages/ServiceBoard";
-import Signup from "./pages/Signup";
 
 import Navbar from "./components/Layout/Navbar";
 import Footer from "./components/Layout/Footer";
+import Login from "./components/Authentication/Login"
+import Signup from "./components/Authentication/Signup"
 import Layout from "antd/lib/layout/layout";
 
 class App extends React.Component {
