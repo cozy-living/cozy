@@ -1,6 +1,6 @@
 import React from "react"
 
-import { Row, Col, Layout, Menu, Button, Avatar, Dropdown } from "antd"
+import { Row, Col, Layout, Menu, Button, Avatar, Dropdown, message } from "antd"
 import { UserOutlined } from "@ant-design/icons/lib/icons"
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Login from "../Authentication/Login"
@@ -15,27 +15,76 @@ const { Header } = Layout;
 //   #4. Navbar collapses when window is resized: use grid gutter for responsive design ({ xs: 8, sm: 16, md: 24, lg: 32 })
 
 
-const profileOption = (
-	<Router>
-		<Menu>
-			<Menu.Item>
-				<span>Account</span>
-				<Link to="/dashboard"></Link>
-			</Menu.Item>
-			<Menu.Item style={{ color: "red" }}>
-				<span>Log Out</span>
-			</Menu.Item>
-		</Menu>
-	</Router>
-)
+// const profileOption = (
+// 	<Menu>
+// 		<Menu.Item>
+// 			<span>Account</span>
+// 			<Link to="/dashboard"></Link>
+// 		</Menu.Item>
+// 		<Menu.Item
+// 			style={{ color: "red" }}
+// 			onClick={this.handleLogOut}
+// 		>
+// 			<span>Log Out</span>
+// 		</Menu.Item>
+// 	</Menu>
+// )
 
 
 class Navbar extends React.Component {
 	state = {
-		authed: false
+		authed: false,
+		username: "",
 	}
 
+
+	componentDidMount() {
+		const authToken = localStorage.getItem("authToken")
+		const username = localStorage.getItem("username")
+		this.setState({
+			authed: authToken != null,
+			username: username,
+		})
+	}
+
+
+
+	handleLoginSuccess = (token, username) => {
+		localStorage.setItem("authToken", token)
+		localStorage.setItem("username", username)
+		this.setState({
+			authed: true,
+			username: username
+		})
+	}
+	
+	handleLogOut = () => {
+		localStorage.removeItem("authToken")
+		localStorage.removeItem("username")
+		this.setState({
+			authed: false,
+		})
+	}
+
+
+
 	render() {
+
+		const profileOption = (
+			<Menu>
+				<Menu.Item>
+					<span>Account</span>
+					<Link to="/dashboard"></Link>
+				</Menu.Item>
+				<Menu.Item
+					style={{ color: "red" }}
+					onClick={this.handleLogOut}
+				>
+					<span>Log Out</span>
+				</Menu.Item>
+			</Menu>
+		)
+
 		return (
 
 			<Header style={{ background: "white" }}>
@@ -69,13 +118,13 @@ class Navbar extends React.Component {
 					<Col span={4}>
 						{this.state.authed ?
 							<div style={{ display: "flex", justifyContent: "end", alignItems: "center" }}>
-								<span style={{ marginRight: "12px" }}>Hello, Eddy ~</span>
+								<span style={{ marginRight: "12px" }}>Hello, {this.state.username} ~</span>
 								<Dropdown overlay={profileOption} placement="bottomCenter" arrow>
 									<Avatar icon={<UserOutlined />}></Avatar>
 								</Dropdown>
 							</div> :
 							<>
-								<Login />
+								<Login handleLoginSuccess={this.handleLoginSuccess} />
 								<Signup />
 							</>
 						}

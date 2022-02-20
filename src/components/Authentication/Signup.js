@@ -1,6 +1,8 @@
 import React from "react"
 import { Form, Button, Input, Space, message, Modal } from "antd"
 import { UserOutlined } from "@ant-design/icons"
+import { register } from "../../utils"
+
 
 class Signup extends React.Component {
 	formRef = React.createRef()
@@ -16,48 +18,40 @@ class Signup extends React.Component {
 
 	showModal = () => {
 		this.setState({
-			visible: true
+			visible: true,
 		})
 	}
 
 	handleCancel = () => {
 		this.setState({
-			visible: false
+			visible: false,
+			loading: false,
 		})
 	}
 
 	handleSubmit = async () => {
-		this.setState({
-			loading: true
-		})
-	}
-
-	handleSignup = async () => {
 		const formInstance = this.formRef.current
 
-		// try {
-		// 	await formInstance.validateFields()
-		// } catch (error) {
-		// 	return
-		// }
-
 		this.setState({
 			loading: true
 		})
 
-		
-
-		// try {
-		// 	const { asHost } = this.state
-		// 	const resp = await login(formInstance.getFieldsValue(true), asHost)
-		// 	this.props.handleLoginSuccess(resp.token, asHost)
-		// } catch (error) {
-		// 	message.error(error.message)
-		// } finally {
-		// 	this.setState({
-		// 		loading: false,
-		// 	})
-		// }
+		try {
+			let f = formInstance.getFieldValue()
+			delete f["confirm"]
+			await register(f)
+			message.success("Successfully created account")
+			this.setState({
+				visible: false
+			})
+		} catch (error) {
+			message.error(error.message)
+		} finally {
+			this.setState({
+				loading: false,
+			})
+			formInstance.resetFields()
+		}
 	}
 
 	render() {
@@ -87,6 +81,36 @@ class Signup extends React.Component {
 					]}
 				>
 					<Form ref={this.formRef} onFinish={this.onFinish}>
+						<Form.Item
+							name="suite"
+							rules={[
+								{
+									required: true,
+									message: 'Please enter suite number',
+								},
+							]}
+						>
+							<Input
+								disabled={this.state.loading}
+								placeholder="Suite"
+							>
+							</Input>
+						</Form.Item>
+						<Form.Item
+							name="username"
+							rules={[
+								{
+									required: true,
+									message: 'Please create a username',
+								},
+							]}
+						>
+							<Input
+								disabled={this.state.loading}
+								placeholder="Username"
+							>
+							</Input>
+						</Form.Item>
 						<Form.Item
 							name="email"
 							rules={[
