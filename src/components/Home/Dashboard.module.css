@@ -9,6 +9,7 @@
 .items {
     display: flex;
     justify-content: left;
+    background-color: white;
     padding-left: 50px;
     padding-top: 20px;
     padding-right: 50px;
