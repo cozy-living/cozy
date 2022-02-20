@@ -3,6 +3,8 @@ import React from "react"
 import { Row, Col, Layout, Menu, Button, Avatar, Dropdown } from "antd"
 import { UserOutlined } from "@ant-design/icons/lib/icons"
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import Login from "../Authentication/Login"
+import Signup from "../Authentication/Signup"
 
 const { Header } = Layout;
 
@@ -25,7 +27,6 @@ const profileOption = (
 			</Menu.Item>
 		</Menu>
 	</Router>
-
 )
 
 
@@ -67,16 +68,16 @@ class Navbar extends React.Component {
 					</Col>
 					<Col span={4}>
 						{this.state.authed ?
-							<>
-								<Button type="secondary" style={{ margin: "6px" }}>Log In</Button>
-								<Button type="primary" style={{ margin: "6px" }}>Sign Up</Button>
-							</> :
 							<div style={{ display: "flex", justifyContent: "end", alignItems: "center" }}>
 								<span style={{ marginRight: "12px" }}>Hello, Eddy ~</span>
 								<Dropdown overlay={profileOption} placement="bottomCenter" arrow>
 									<Avatar icon={<UserOutlined />}></Avatar>
 								</Dropdown>
-							</div>
+							</div> :
+							<>
+								<Login />
+								<Signup />
+							</>
 						}
 					</Col>
 				</Row>
