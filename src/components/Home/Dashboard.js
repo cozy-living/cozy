@@ -25,6 +25,9 @@ class Dashboard extends Component {
     //TODO: create new event
     this.closeModal();
   }
+  onDelete = () => {
+    //TODO: delete event
+  }
   render() {
     const admin = this.state.admin;
     const {TextArea} = Input;
@@ -86,23 +89,26 @@ class Dashboard extends Component {
         </Modal>
         <List
           dataSource={data}
-          bordered
           style={{margin: "40px"}}
           renderItem={item => (
-            <List.Item className={styles.items}>
-               <Card 
-               style={{width:"100%"}}
-               title={item.title}
-               extra={
-                    <>
-                      <span style={{marginRight: "20px"}}>{item.date}</span>
-                      {admin && <Button type="danger" icon={<CloseOutlined/>} shape="circle"></Button>}
-                    </>
-                 }
-               >
-                {item.content}
-               </Card>
-            </List.Item>
+            <>
+              <div className={styles.items} >
+                <img src="favicon.ico" width="150" height="150" style={{borderRadius: "50%"}}/>
+                <Card 
+                style={{height:"150", width:"85%", marginLeft: "20px"}}
+                title={item.title}
+                extra={
+                      <>
+                        <span style={{marginRight: "20px"}}>{item.date}</span>
+                        {admin && <Button type="danger" style={{borderRadius: "20px"}} onClick={this.onDelete}>Delete</Button>}
+                      </>
+                  }
+                >
+                  {item.content}
+                </Card>
+              </div>
+              <div style={{height: "30px"}}></div>
+            </>
           )}
   />,
       </>
@@ -111,3 +117,19 @@ class Dashboard extends Component {
 }
 
 export default Dashboard;
+
+{/* <List.Item className={styles.items} >
+<img src="favicon.ico" width="150" height="150"/>
+<Card 
+style={{height:"150", width:"85%", marginLeft: "20px", border: "2px solid rgb(4, 4, 114)", borderRadius: "30px"}}
+title={item.title}
+extra={
+      <>
+        <span style={{marginRight: "20px"}}>{item.date}</span>
+        {admin && <Button type="danger" icon={<CloseOutlined/>} shape="circle"></Button>}
+      </>
+  }
+>
+  {item.content}
+</Card>
+</List.Item> */}

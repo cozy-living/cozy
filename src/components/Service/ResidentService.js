@@ -51,7 +51,7 @@ class ResidentService extends Component {
               {id: 2, type: "Maintainance", suit: "2A", date: "2022.02.09", state: "unfinished", user_id: "2"}]
     //dummy data
     return (
-      <Content style={{height:"550px", display:"flex", flexDirection:"column", justifyContent:"flex-start", overflow: "auto"}}>
+      <Content style={{display:"flex", flexDirection:"column", justifyContent:"flex-start"}}>
         <h1 className="service_title">Service</h1>
         <div className="reserve_botton">
           <Button onClick={this.resetService} disabled={!myService}>Reserve Service</Button>
@@ -70,7 +70,7 @@ class ResidentService extends Component {
                       title={item.type}
                       description={"APT:" + item.suit + "\tDATE:" + item.date}
                     />
-                    <Button type="danger" icon={<CloseOutlined/>} shape="circle" onClick={this.onCancel}></Button>
+                    <Button type="danger" style={{borderRadius: "20px"}} onClick={this.onCancel}>Delete</Button>
                   </List.Item>
               )}
             />
