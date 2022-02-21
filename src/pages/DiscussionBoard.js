@@ -77,7 +77,7 @@ const DiscussionBoard = () => {
       </div>
       <div className={classes.posts}>
         {showPost && <Post visible={showPost} data={newPosts}/>}
-        {showMyPost && <MyPost visible={showMyPost} />}
+        {showMyPost && <MyPost visible={showMyPost} data={newPosts}/>}
       </div>
     </div>
   );

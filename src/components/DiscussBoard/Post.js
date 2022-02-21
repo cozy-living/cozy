@@ -11,8 +11,6 @@ const Post = (props) => {
     return <p>Posts</p>;
   };
 
-  let newTitle = "OPS";
-
   return (
     <div className={classes.container}>
       <Col span={16}>

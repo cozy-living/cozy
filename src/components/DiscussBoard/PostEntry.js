@@ -61,7 +61,7 @@ const PostEntry = (props) => {
               </a>
             }
             avatar={<Avatar icon={<UserOutlined />} alt={props.name} />}
-            content={<Tooltip title={props.residence}>{props.detail}</Tooltip>}
+            content={props.detail}
             datetime={<span>{props.date}</span>}
           />
         </li>
