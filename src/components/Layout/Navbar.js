@@ -49,8 +49,8 @@ class Navbar extends React.Component {
 
 
 
-	handleLoginSuccess = (token, username) => {
-		localStorage.setItem("authToken", token)
+	handleLoginSuccess = (userId, username) => {
+		localStorage.setItem("userId", userId)
 		localStorage.setItem("username", username)
 		this.setState({
 			authed: true,

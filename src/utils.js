@@ -2,8 +2,8 @@
 
 const domain = "http://18.216.82.23:8080"
 
-export const login = (credential) => {
-	const url = `${domain}/authenticate/resident`
+export const login = (credential, asHost) => {
+	const url = `${domain}/authenticate/${asHost ? "resident" : "admin"}`
 
 	return fetch(url, {
 		method: "POST",
@@ -15,7 +15,7 @@ export const login = (credential) => {
 		if (response.status !== 200) {
 			throw Error("Fail to log in")
 		}
-		return response.json()
+		return response.json();
 	})
 }
 
@@ -43,7 +43,10 @@ export const addEvent = (userId, requestBody) => {
 
 	return fetch(url, {
 		method: "POST",
-		body: requestBody,
+        headers: {
+            "Content-Type": "application/json",
+        },
+		body: JSON.stringify(requestBody),
 	}).then((response) => {
 		if (response.status !== 200) {
 			throw Error("Fail to add event")
