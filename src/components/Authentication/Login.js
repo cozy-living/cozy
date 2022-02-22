@@ -1,5 +1,5 @@
 import React from "react"
-import { Form, Button, Input, Space, message, Modal } from "antd"
+import { Form, Button, Input, Space, message, Modal, Checkbox } from "antd"
 import { UserOutlined } from "@ant-design/icons"
 import { login } from "../../utils"
 
@@ -10,6 +10,7 @@ class Login extends React.Component {
 	state = {
 		loading: false,
 		visible: false,
+		asAdmin: false,
 	}
 
 	showModal = () => {
@@ -35,8 +36,10 @@ class Login extends React.Component {
 
 		try {
 			const params = formInstance.getFieldsValue()
-			const resp = await login(params)
-			this.props.handleLoginSuccess(resp.token, params["username"])
+			const userId = await login(params, this.state.asAdmin);
+			this.props.handleLoginSuccess(userId, params["username"])
+			localStorage.setItem("userId", userId);
+			localStorage.setItem("asHost", this.state.asAdmin);
 			message.success("Welcome, " + params["username"])
 		} catch (error) {
 			message.error(error.message)
@@ -53,7 +56,11 @@ class Login extends React.Component {
 			visible: false,
 		})
 	}
-
+	handleCheckboxOnChange = (e) => {
+		this.setState({
+			asAdmin: e.target.checked,
+		});
+	}
 
 	render() {
 		return (
@@ -110,7 +117,15 @@ class Login extends React.Component {
 								placeholder="Password"
 							/>
 						</Form.Item>
+						
 					</Form>
+					<Checkbox 
+						disabled={this.state.loading}
+						checked={this.state.asAdmin}
+						onChange={this.handleCheckboxOnChange}
+						>
+						asAdmin
+					</Checkbox>
 				</Modal>
 			</>
 
