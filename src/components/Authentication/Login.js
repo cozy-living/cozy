@@ -36,9 +36,10 @@ class Login extends React.Component {
 
 		try {
 			const params = formInstance.getFieldsValue()
-			const userId = await login(params);
-			localStorage.setItem("userId", userId);
+			const userId = await login(params, this.state.asAdmin);
 			this.props.handleLoginSuccess(userId, params["username"])
+			localStorage.setItem("userId", userId);
+			localStorage.setItem("asHost", this.state.asAdmin);
 			message.success("Welcome, " + params["username"])
 		} catch (error) {
 			message.error(error.message)

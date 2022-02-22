@@ -7,12 +7,16 @@ import { CloseOutlined } from "@ant-design/icons";
 import { addEvent, deleteEvent, listEvents } from "../../utils";
 class Dashboard extends Component {
   state = {
-    admin: true,
+    admin: false,
     isModalVisible: false,
     loading: false,
     data: [],
   }
-  componentDidMount() {
+  componentDidMount = () => {
+    const asHost = localStorage.getItem("asHost");
+    this.setState({
+      admin: asHost,
+    })
     this.loadEvents();
   }
   loadEvents = async () => {
@@ -45,9 +49,6 @@ class Dashboard extends Component {
   }
   onPostEvent = async (values) => {
     const userId = localStorage.getItem("userId");
-    const formData = new FormData();
-    formData.append("title", values.title);
-    formData.append("content", values.content);
     this.setState({
       loading: true,
     })
@@ -65,14 +66,13 @@ class Dashboard extends Component {
 
   }
   render() {
-    const admin = this.state.admin;
     const {TextArea} = Input;
-    const data = this.state.data;
+    const { data, admin } = this.state;
     return (
       <>
         <h1 className={styles.title}>DashBoard</h1>
         {
-          admin && <Button onClick={this.showModal} style={{marginLeft: "50px"}}>
+          admin == "true" && <Button onClick={this.showModal} style={{marginLeft: "50px"}}>
             Post Event
           </Button>
         }
@@ -113,7 +113,7 @@ class Dashboard extends Component {
                 extra={
                       <>
                         <span style={{marginRight: "20px"}}>{item.date.substring(0, 10)}</span>
-                        {admin && <DeleteButton eventId={item.id} onRemoveSuccess={this.loadEvents}/>}
+                        {admin == "true" && <DeleteButton eventId={item.id} onRemoveSuccess={this.loadEvents}/>}
                       </>
                   }
                 >

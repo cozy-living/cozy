@@ -1,9 +1,11 @@
 // TODO: define RESTful APIs to fetch data from backend
 
+import { message } from "antd"
+
 const domain = "http://18.216.82.23:8080"
 
 export const login = (credential, asHost) => {
-	const url = `${domain}/authenticate/${asHost ? "resident" : "admin"}`
+	const url = `${domain}/authenticate/${asHost ? "admin" : "resident"}`
 
 	return fetch(url, {
 		method: "POST",
@@ -195,7 +197,10 @@ export const addReservation = (userId, requestBody) => {
 	const url = `${domain}/${userId}/reservations`
 	return fetch(url, {
 		method: "POST",
-		requestBody: requestBody
+		headers: {
+            "Content-Type": "application/json",
+        },
+		body: JSON.stringify(requestBody),
 	}).then((response) => {
 		if (response.status !== 200) {
 			throw Error("Fail to add reservation")
@@ -204,8 +209,8 @@ export const addReservation = (userId, requestBody) => {
 	})
 }
 
-export const deleteReservation = (reservationId) => {
-	const url = `${domain}/reservation/${reservationId}`
+export const deleteReservation = (userId, reservationId) => {
+	const url = `${domain}/${userId}/reservations/${reservationId}`
 
 	return fetch(url, {
 		method: "DELETE",
