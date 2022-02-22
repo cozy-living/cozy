@@ -103,7 +103,8 @@ class ResidentService extends Component {
                       title={item.type}
                       description={"APT:" + item.suit + "\tDATE:" + item.date.substring(0, 10)}
                     />
-                    <DeleteReservationButton reservationId={item.id} loadData={this.loadData}/>
+                    {/* user delete reservation button */}
+                    {/* <DeleteReservationButton reservationId={item.id} loadData={this.loadData}/> */}
                   </List.Item>
               )}
             />
