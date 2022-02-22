@@ -1,7 +1,5 @@
 // TODO: define RESTful APIs to fetch data from backend
 
-import { message } from "antd"
-
 const domain = "http://18.216.82.23:8080"
 
 export const login = (credential, asHost) => {
