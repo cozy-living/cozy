@@ -13,12 +13,13 @@ const Post = (props) => {
 
   return (
     <div className={classes.container}>
-      <Col span={16}>
+      <Col span={12}>
         {props.data.map((post) => (
           <PostEntry
             id={post.id}
             name={post.name}
             email={post.email}
+            suite={post.suite}
             title={post.title}
             date={post.date}
             detail={post.detail}

@@ -11,16 +11,9 @@ const PostEntry = (props) => {
       <Card title={props.title} className={classes.card}>
         <li>
           <Comment
-            author={
-              <a
-                href={"mailto:" + props.email}
-                Tooltip={<span>{props.residence}</span>}
-              >
-                {props.name}
-              </a>
-            }
+            author={<a href={"mailto:" + props.email}>{props.name}</a>}
             avatar={<Avatar icon={<UserOutlined />} alt={props.name} />}
-            content={props.detail}
+            content={<Tooltip title={props.suite}>{props.detail}</Tooltip>}
             datetime={<span>{props.date}</span>}
           />
         </li>

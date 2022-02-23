@@ -1,6 +1,6 @@
 import React, { createElement, useState } from "react";
 
-import { Card, Comment, Tooltip, Avatar } from "antd";
+import { Card, Comment, Tooltip, Avatar, Image } from "antd";
 import {
   DislikeOutlined,
   LikeOutlined,
@@ -10,6 +10,8 @@ import {
 } from "@ant-design/icons";
 import classes from "./PostEntry.module.css";
 import CreateComment from "./CreateComment";
+import AddComment from "./AddComment";
+import NewComment from "./NewComment";
 
 const PostEntry = (props) => {
   const [likes, setLikes] = useState(0);
@@ -51,21 +53,18 @@ const PostEntry = (props) => {
       <Card title={props.title} className={classes.card}>
         <li>
           <Comment
-            actions={actions}
-            author={
-              <a
-                href={"mailto:" + props.email}
-                Tooltip={<span>{props.residence}</span>}
-              >
-                {props.name}
-              </a>
-            }
+            // actions={actions}
+            author={<a href={"mailto:" + props.email}>{props.name}</a>}
             avatar={<Avatar icon={<UserOutlined />} alt={props.name} />}
-            content={props.detail}
+            content={<Tooltip title={props.suite}>{props.detail}</Tooltip>}
             datetime={<span>{props.date}</span>}
           />
+          <Image
+            width={200}
+            src="https://s3.us-east-2.amazonaws.com/cozy-bucket-1/1645597631456-neko.png"
+          />
         </li>
-        <CreateComment />
+        <NewComment name={props.name}/>
       </Card>
     </ul>
   );

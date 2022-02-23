@@ -2,69 +2,45 @@ import React, { useState } from "react";
 
 import { Modal, Button } from "antd";
 import CreateForm from "./CreateForm";
+import PostForm from "./PostForm";
 
 const CreatePost = (props) => {
-	const [visible, setVisible] = useState(false);
-	const [loading, setLoading] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-	const showModal = () => {
-		setVisible(true);
-	};
+  const showModal = () => {
+    setVisible(true);
+  };
 
-	const onSumbitHandler = () => {
-		setLoading(true);
-		setTimeout(() => {
-			setVisible(false);
-			setLoading(false);
-		}, 1500);
-	};
+  const onCancelHandler = () => {
+    setVisible(false);
+  };
 
-	const onCancelHandler = () => {
-		setVisible(false);
-	};
-
-	const savePostDataHandler = (enteredPostData) => {
-		const postData = {
-			...enteredPostData,
-			id: Math.random().toString(),
-		};
-		props.onAddPost(postData);
-	}
-
-	return (
-		<>
-			<Button
-				type="primary"
-				shape="round"
-				onClick={showModal}
-				style={{ marginLeft: "15%" }}
-			>
-				Create Post
-			</Button>
-			<Modal
-				visible={visible}
-				title="Create Your Post"
-				onOk={onSumbitHandler}
-				onCancel={onCancelHandler}
-				width={800}
-				footer={[
-					<Button key="back" onClick={onCancelHandler}>
-						Return
-					</Button>,
-					<Button
-						key="submit"
-						type="primary"
-						loading={loading}
-						onClick={onSumbitHandler}
-					>
-						Submit
-					</Button>,
-				]}
-			>
-				{<CreateForm onSavePostData={savePostDataHandler} />}
-			</Modal>
-		</>
-	);
+  return (
+    <>
+      <Button
+        type="primary"
+        shape="round"
+        onClick={showModal}
+        style={{ marginLeft: "135px" }}
+      >
+        Create Post
+      </Button>
+      <Modal
+        visible={visible}
+        title="Create Your Post"
+        onCancel={onCancelHandler}
+        width={800}
+        footer={[
+          <Button key="back" onClick={onCancelHandler}>
+            Return
+          </Button>,
+        ]}
+      >
+        {<PostForm onSavePostData={props.onAddPost} />}
+      </Modal>
+    </>
+  );
 };
 
 export default CreatePost;
