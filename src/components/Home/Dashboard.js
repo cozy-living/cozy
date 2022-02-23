@@ -2,13 +2,39 @@
 
 import React, { Component } from "react";
 import styles from "./Dashboard.module.css"
-import {List, Card, Button, Modal, Form, Input} from "antd";
+import {List, Card, Button, Modal, Form, Input, message} from "antd";
 import { CloseOutlined } from "@ant-design/icons";
+import { addEvent, deleteEvent, listEvents } from "../../utils";
 class Dashboard extends Component {
   state = {
-    admin: true,
+    admin: false,
     isModalVisible: false,
     loading: false,
+    data: [],
+  }
+  componentDidMount = () => {
+    const asHost = localStorage.getItem("asHost");
+    this.setState({
+      admin: asHost,
+    })
+    this.loadEvents();
+  }
+  loadEvents = async () => {
+    this.setState({
+      loading: true,
+    })
+    try {
+      const resp = await listEvents();
+      this.setState({
+        data: resp,
+      });
+    } catch (error) {
+      message.error(error.message);
+    } finally {
+      this.setState({
+        loading: false,
+      })
+    }
   }
   //TODO:get events
   showModal = () => {
@@ -21,49 +47,38 @@ class Dashboard extends Component {
       isModalVisible: false,
     })
   }
-  onFinish = () => {
-    //TODO: create new event
-    this.closeModal();
+  onPostEvent = async (values) => {
+    const userId = localStorage.getItem("userId");
+    this.setState({
+      loading: true,
+    })
+    try {
+      await addEvent(userId, values);
+    } catch (error) {
+      message.error(error.message);      
+    } finally {
+      this.setState({
+        loading: false,
+      })
+      this.closeModal();
+      this.loadEvents();
+    }
+
   }
   render() {
-    const admin = this.state.admin;
     const {TextArea} = Input;
-    //dummy data
-    const data = [
-      {
-        title: 'Title 1',
-        content: "Content 1",
-        date: "2022-02-16",
-      },
-      {
-        title: 'Title 2',
-        content: "Content 2",
-        date: "2022-02-16",
-      },
-      {
-        title: 'Title 3',
-        content: "Content 3",
-        date: "2022-02-16",
-      },
-      {
-        title: 'Title 4',
-        content: "Content 4",
-        date: "2022-02-16",
-      },
-    ];
-    //dummy data
+    const { data, admin } = this.state;
     return (
       <>
         <h1 className={styles.title}>DashBoard</h1>
         {
-          admin && <Button onClick={this.showModal} style={{marginLeft: "50px"}}>
+          admin == "true" && <Button onClick={this.showModal} style={{marginLeft: "50px"}}>
             Post Event
           </Button>
         }
         <Modal visible={this.state.isModalVisible} footer={null} onCancel={this.closeModal}>
           <div>Event Post</div>
-          <Form
-            onFinish={this.onFinish}>
+          <Form onFinish={this.onPostEvent}>
             <Form.Item
               name="title"
               rules={[{ required: true, message: 'Please input event title!' }]}
@@ -79,30 +94,34 @@ class Dashboard extends Component {
             <Button 
               loading={this.state.loading} 
               type="primary"
-              htmlType="submit" >
+              htmlType="submit"
+               >
               submit
             </Button>
           </Form>
         </Modal>
         <List
           dataSource={data}
-          bordered
           style={{margin: "40px"}}
           renderItem={item => (
-            <List.Item className={styles.items}>
-               <Card 
-               style={{width:"100%"}}
-               title={item.title}
-               extra={
-                    <>
-                      <span style={{marginRight: "20px"}}>{item.date}</span>
-                      {admin && <Button type="danger" icon={<CloseOutlined/>} shape="circle"></Button>}
-                    </>
-                 }
-               >
-                {item.content}
-               </Card>
-            </List.Item>
+            <>
+              <div className={styles.items} >
+                <img src="favicon.ico" width="150" height="150" style={{borderRadius: "50%"}}/>
+                <Card 
+                style={{height:"150", width:"85%", marginLeft: "20px"}}
+                title={item.title}
+                extra={
+                      <>
+                        <span style={{marginRight: "20px"}}>{item.date.substring(0, 10)}</span>
+                        {admin == "true" && <DeleteButton eventId={item.id} onRemoveSuccess={this.loadEvents}/>}
+                      </>
+                  }
+                >
+                  {item.content}
+                </Card>
+              </div>
+              <div style={{height: "30px"}}></div>
+            </>
           )}
   />,
       </>
@@ -110,4 +129,48 @@ class Dashboard extends Component {
   }
 }
 
+class DeleteButton extends Component {
+
+  state = {
+    loading: false,
+  }
+  onDelete = async () => {
+    const {eventId, onRemoveSuccess} = this.props;
+    const userId = localStorage.getItem("userId");
+    this.setState({
+      loading: true,
+    })
+    try {
+      await deleteEvent(userId, eventId);
+      onRemoveSuccess();
+    } catch (error) {
+      message.error(error.message);
+    } finally {
+      this.setState({
+        loading: false,
+      })
+    }
+    
+  }
+  render() {
+    return <Button type="danger" style={{borderRadius: "20px"}} onClick={this.onDelete}>Delete</Button>
+  }
+}
+
 export default Dashboard;
+
+{/* <List.Item className={styles.items} >
+<img src="favicon.ico" width="150" height="150"/>
+<Card 
+style={{height:"150", width:"85%", marginLeft: "20px", border: "2px solid rgb(4, 4, 114)", borderRadius: "30px"}}
+title={item.title}
+extra={
+      <>
+        <span style={{marginRight: "20px"}}>{item.date}</span>
+        {admin && <Button type="danger" icon={<CloseOutlined/>} shape="circle"></Button>}
+      </>
+  }
+>
+  {item.content}
+</Card>
+</List.Item> */}
