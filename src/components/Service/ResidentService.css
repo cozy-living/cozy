@@ -1,0 +1,26 @@
+.reserve_form {
+    width: 80%;
+    border: 1px solid #f0f0f0;
+    border-radius: 2px;
+    margin-top: 20px;
+    margin-left: 100px;
+    margin-right: 100px;
+  }
+
+.reserve_botton {
+  margin-left: 50px;
+}
+
+.service_title {
+  color: rgb(4, 4, 114);
+  font-weight: bold;
+  font-size: xx-large;
+  margin-left: 50px;
+  margin-top: 20px;
+}
+
+.resident_item {
+  padding-left: 100px;
+  padding-top: 20px;
+  padding-right: 100px;
+}

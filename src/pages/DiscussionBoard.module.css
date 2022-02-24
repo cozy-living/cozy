@@ -1,0 +1,38 @@
+.title {
+  font-size: xx-large;
+  font-weight: bold;
+  color: rgb(0, 0, 133);
+  margin-left: 50px;
+  margin-top: 20px;
+}
+
+.tabs {
+  margin-top: 30px;
+  text-align: center;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+}
+
+.posts {
+  margin-top: 30px;
+  font-size: xx-large;
+}
+
+.button {
+  font-size: 24px;
+  width: 400px;
+
+}
+
+.page {
+  /* background-color: rgb(196, 196, 196); */
+  padding-bottom: 80px;
+}
+
+.postTab {
+  background-color: grey;
+  border-color: grey;
+  font-size: 24px;
+  width: 400px;
+}
