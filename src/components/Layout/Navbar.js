@@ -1,10 +1,11 @@
 import React from "react"
 
-import { Row, Col, Layout, Menu, Button, Avatar, Dropdown, message } from "antd"
+import { Row, Col, Layout, Menu, Button, Avatar, Dropdown, message, Image } from "antd"
 import { UserOutlined } from "@ant-design/icons/lib/icons"
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Login from "../Authentication/Login"
 import Signup from "../Authentication/Signup"
+import logo from "../../assets/images/resident-logo.png";
 
 const { Header } = Layout;
 
@@ -64,6 +65,7 @@ class Navbar extends React.Component {
 		this.setState({
 			authed: false,
 		})
+		message.success("Successfully logged out!")
 	}
 
 
@@ -72,10 +74,10 @@ class Navbar extends React.Component {
 
 		const profileOption = (
 			<Menu>
-				<Menu.Item>
-					<span>Account</span>
-					<Link to="/dashboard"></Link>
-				</Menu.Item>
+				{/*<Menu.Item>*/}
+				{/*	<span>Account</span>*/}
+				{/*	<Link to="/dashboard"></Link>*/}
+				{/*</Menu.Item>*/}
 				<Menu.Item
 					style={{ color: "red" }}
 					onClick={this.handleLogOut}
@@ -91,8 +93,12 @@ class Navbar extends React.Component {
 				<Row>
 					<Col span={4} style={{ display: "flex", justifyContent: "start", alignItems: "center" }}>
 						<div>
-							{/* TODO : Fill the Logo image here */}
-							LOGO HERE
+							<img
+								src={logo}
+								alt="Logo Here"
+								width="140"
+								height="40"
+							/>
 						</div>
 					</Col>
 					<Col span={16} style={{ display: "flex", justifyContent: "start", alignItems: "center" }}>
@@ -118,7 +124,7 @@ class Navbar extends React.Component {
 					<Col span={4}>
 						{this.state.authed ?
 							<div style={{ display: "flex", justifyContent: "end", alignItems: "center" }}>
-								<span style={{ marginRight: "12px" }}>Hello, {this.state.username} ~</span>
+								<span style={{ marginRight: "12px" }}>{this.state.username}</span>
 								<Dropdown overlay={profileOption} placement="bottomCenter" arrow>
 									<Avatar icon={<UserOutlined />}></Avatar>
 								</Dropdown>

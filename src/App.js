@@ -10,7 +10,7 @@ import {
 import Dashboard from "./pages/Dashboard";
 import DiscussionBoard from "./pages/DiscussionBoard";
 import Home from "./pages/Home";
-import NotFound from "./pages/NotFount";
+import NotFound from "./pages/NotFound";
 import Payment from "./pages/Payment";
 import ServiceBoard from "./pages/ServiceBoard";
 
