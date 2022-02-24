@@ -17,3 +17,10 @@
     border: 2px solid rgb(4, 4, 114);
     border-radius: 40px;
   }
+
+.event_post {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 10px;
+}
