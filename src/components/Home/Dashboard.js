@@ -6,7 +6,6 @@ import {List, Card, Button, Modal, Form, Input, message} from "antd";
 import { CloseOutlined } from "@ant-design/icons";
 import { addEvent, deleteEvent, listEvents } from "../../utils";
 class Dashboard extends Component {
-  imageRef = React.createRef();
   state = {
     admin: false,
     isModalVisible: false,
@@ -50,17 +49,11 @@ class Dashboard extends Component {
   }
   onPostEvent = async (values) => {
     const userId = localStorage.getItem("userId");
-    const formData = new FormData();
-    const {f} = this.imageRef.current;
-    formData.append("file", f);
-    formData.append("title", values.title);
-    formData.append("content", values.content);
     this.setState({
       loading: true,
     })
     try {
-      await addEvent(userId, formData);
-      message.success("event added successfully");
+      await addEvent(userId, values);
     } catch (error) {
       message.error(error.message);      
     } finally {
@@ -88,26 +81,15 @@ class Dashboard extends Component {
           <Form onFinish={this.onPostEvent}>
             <Form.Item
               name="title"
-              label="Title"
               rules={[{ required: true, message: 'Please input event title!' }]}
             >
               <Input showCount maxLength={20} placeholder="title"/>
             </Form.Item>
             <Form.Item
               name="content"
-              label="Content"
               rules={[{ required: true, message: 'Please input event content!' }]}
             >
                <TextArea showCount maxLength={100} placeholder="content"/>
-            </Form.Item>
-            <Form.Item
-              name="file" label="Image" rules={[{ required: false, message: 'Please input event image!'}]}
-            >
-              <input 
-                type="file"
-                accept="image/png, image/jpeg, image/jpg"
-                ref={this.imageRef}
-              />
             </Form.Item>
             <Button 
               loading={this.state.loading} 
@@ -124,7 +106,7 @@ class Dashboard extends Component {
           renderItem={item => (
             <>
               <div className={styles.items} >
-                <img src={item.fileUrl} width="150" height="150" style={{borderRadius: "50%"}} alt=""/>
+                <img src="favicon.ico" width="150" height="150" style={{borderRadius: "50%"}}/>
                 <Card 
                 style={{height:"150", width:"85%", marginLeft: "20px"}}
                 title={item.title}
