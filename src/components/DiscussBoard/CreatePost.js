@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Modal, Button } from "antd";
 import CreateForm from "./CreateForm";
 import PostForm from "./PostForm";
+import classes from "./CreatePost.module.css";
 
 const CreatePost = (props) => {
   const [visible, setVisible] = useState(false);
@@ -18,14 +19,19 @@ const CreatePost = (props) => {
 
   return (
     <>
-      <Button
-        type="primary"
-        shape="round"
-        onClick={showModal}
-        style={{ marginLeft: "135px" }}
-      >
-        Create Post
-      </Button>
+      <div>
+        {/* <Button
+          type="primary"
+          onClick={showModal}
+          // style={{ marginLeft: "135px" }}
+        >
+          Create Post
+        </Button> */}
+        <button onClick={showModal} className={classes.button}>
+          Create Post
+        </button>
+        {/* <button onClick={showModal}>Create Post</button> */}
+      </div>
       <Modal
         visible={visible}
         title="Create Your Post"

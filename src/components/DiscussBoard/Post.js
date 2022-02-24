@@ -7,26 +7,24 @@ import AddComment from "./AddComment";
 import PostEntry from "./PostEntry";
 
 const Post = (props) => {
-  const getText = () => {
-    return <p>Posts</p>;
-  };
-
   return (
-    <div className={classes.container}>
-      <Col span={12}>
-        {props.data.map((post) => (
-          <PostEntry
-            id={post.id}
-            name={post.name}
-            email={post.email}
-            suite={post.suite}
-            title={post.title}
-            date={post.date}
-            detail={post.detail}
-          />
-        ))}
-      </Col>
-    </div>
+    <>
+      <div className={classes.container}>
+        <Col span={12}>
+          {props.data.map((post) => (
+            <PostEntry
+              id={post.id}
+              name={post.name}
+              email={post.email}
+              suite={post.suite}
+              title={post.title}
+              detail={post.detail}
+              url={post.url}
+            />
+          ))}
+        </Col>
+      </div>
+    </>
   );
 };
 

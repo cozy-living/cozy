@@ -15,8 +15,8 @@ const MyPost = (props) => {
             email={post.email}
             suite={post.suite}
             title={post.title}
-            date={post.date}
             detail={post.detail}
+            url={post.url}
           />
         ))}
       </Col>

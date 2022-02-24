@@ -7,7 +7,7 @@ import MyPostButton from "./MyPostButton";
 
 const PostEntry = (props) => {
   return (
-    <ul>
+    <ul style={{marginLeft: "-40px"}}>
       <Card title={props.title} className={classes.card}>
         <li>
           <Comment

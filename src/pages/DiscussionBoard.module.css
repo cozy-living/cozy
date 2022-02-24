@@ -16,16 +16,23 @@
 
 .posts {
   margin-top: 30px;
+  font-size: xx-large;
 }
 
 .button {
-  font-family: Bradley Hand, cursive;
-  font-size: 30px;
+  font-size: 24px;
   width: 400px;
-  background-color: rgb(47, 239, 253);
+
 }
 
 .page {
   /* background-color: rgb(196, 196, 196); */
   padding-bottom: 80px;
+}
+
+.postTab {
+  background-color: grey;
+  border-color: grey;
+  font-size: 24px;
+  width: 400px;
 }

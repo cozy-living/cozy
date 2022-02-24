@@ -26,13 +26,18 @@ const DiscussionBoard = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  /*
+  let userId = localStorage.getItem("userId")
+  let fetchWeb = "http://18.216.82.23:8080/" + userId + "/posts"
+  fetch(fetchWeb)
+ */
+
   const fetchPostHandler = useCallback(async () => {
     setIsLoading(true);
     setError(null);
+    let web = "http://18.216.82.23:8080/posts";
     try {
-      const response = await fetch(
-        "http://18.216.82.23:8080/posts"
-      );
+      const response = await fetch(web);
 
       if (!response.ok) {
         throw new Error("There is something went wrong!!!");
@@ -48,6 +53,7 @@ const DiscussionBoard = () => {
           title: postData.title,
           date: postData.date,
           detail: postData.content,
+          url: postData.fileUrl,
         };
       });
       setPosts(transformedPosts);
@@ -73,7 +79,9 @@ const DiscussionBoard = () => {
 
   const addPostHandler = async (post) => {
     console.log(post);
-    const response = await fetch("http://18.216.82.23", {
+    let userId = localStorage.getItem("userId");
+    let web = "http://18.216.82.23/8080/" + userId + "/posts"
+    const response = await fetch(web, {
       method: "POST",
       body: JSON.stringify(post),
       header: {
@@ -89,14 +97,10 @@ const DiscussionBoard = () => {
       <p className={classes.title}>Discussion Board</p>
       <CreatePost onAddPost={addPostHandler} />
       <div className={classes.tabs}>
-        <button className={classes.button} onClick={ShowPostHandler}>
+        <button className={classes.postTab} onClick={ShowPostHandler}>
           Posts
         </button>
-        <button
-          className={classes.button}
-          onClick={ShowMyPostHandler}
-          style={{ marginLeft: "10px" }}
-        >
+        <button className={classes.button} onClick={ShowMyPostHandler}>
           My Posts
         </button>
       </div>
