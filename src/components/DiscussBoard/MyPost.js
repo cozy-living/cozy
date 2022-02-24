@@ -2,28 +2,23 @@ import React from "react";
 
 import { Card, Col, Row } from "antd";
 import classes from "./Post.module.css";
-import MyPostButton from "./MyPostButton";
+import MyPostEntry from "./MyPostEntry";
 
-const MyPost = () => {
+const MyPost = (props) => {
   return (
     <div className={classes.container}>
-      <Col span={16}>
-        <Card className={classes.card} title="User1">
-          My Post #1
-          {<MyPostButton />}
-        </Card>
-      </Col>
-      <Col span={16}>
-        <Card className={classes.card} title="User2">
-          My Post #2
-          {<MyPostButton />}
-        </Card>
-      </Col>
-      <Col span={16}>
-        <Card className={classes.card} title="User3">
-          My Post #3
-          {<MyPostButton />}
-        </Card>
+      <Col span={12}>
+        {props.data.map((post) => (
+          <MyPostEntry
+            id={post.id}
+            name={post.name}
+            email={post.email}
+            suite={post.suite}
+            title={post.title}
+            detail={post.detail}
+            url={post.url}
+          />
+        ))}
       </Col>
     </div>
   );

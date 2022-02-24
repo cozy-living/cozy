@@ -3,138 +3,11 @@ import React, { useState } from "react";
 import {
   Form,
   Input,
-  Cascader,
-  Select,
   Checkbox,
   Button,
   DatePicker,
 } from "antd";
 
-const { Option } = Select;
-
-// dummy data for resident
-const residences = [
-  {
-    value: "unit1",
-    label: "Unit 1",
-    children: [
-      {
-        value: "floor1",
-        label: "Floor 1",
-        children: [
-          {
-            value: "apt100",
-            label: "APT 100",
-          },
-          {
-            value: "apt101",
-            label: "APT 101",
-          },
-          {
-            value: "apt102",
-            label: "APT 102",
-          },
-        ],
-      },
-      {
-        value: "floor2",
-        label: "Floor 2",
-        children: [
-          {
-            value: "apt200",
-            label: "APT 200",
-          },
-          {
-            value: "apt201",
-            label: "APT 201",
-          },
-          {
-            value: "apt202",
-            label: "APT 202",
-          },
-        ],
-      },
-      {
-        value: "floor3",
-        label: "Floor 3",
-        children: [
-          {
-            value: "apt300",
-            label: "APT 300",
-          },
-          {
-            value: "apt301",
-            label: "APT 301",
-          },
-          {
-            value: "apt302",
-            label: "APT 302",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    value: "unit2",
-    label: "Unit 2",
-    children: [
-      {
-        value: "floor1",
-        label: "Floor 1",
-        children: [
-          {
-            value: "apt100",
-            label: "APT 100",
-          },
-          {
-            value: "apt101",
-            label: "APT 101",
-          },
-          {
-            value: "apt102",
-            label: "APT 102",
-          },
-        ],
-      },
-      {
-        value: "floor2",
-        label: "Floor 2",
-        children: [
-          {
-            value: "apt200",
-            label: "APT 200",
-          },
-          {
-            value: "apt201",
-            label: "APT 201",
-          },
-          {
-            value: "apt202",
-            label: "APT 202",
-          },
-        ],
-      },
-      {
-        value: "floor3",
-        label: "Floor 3",
-        children: [
-          {
-            value: "apt300",
-            label: "APT 300",
-          },
-          {
-            value: "apt301",
-            label: "APT 301",
-          },
-          {
-            value: "apt302",
-            label: "APT 302",
-          },
-        ],
-      },
-    ],
-  },
-];
 const formItemLayout = {
   labelCol: {
     xs: {
@@ -188,8 +61,8 @@ const CreateForm = (props) => {
     setEnteredDetail(event.target.value);
   };
 
-  const sumbitHandler = (event) => {
-    event.preventDefault();
+  function sumbitHandler(event) {
+    // event.preventDefault();
 
     const postData = {
       name: enteredName,
@@ -210,34 +83,11 @@ const CreateForm = (props) => {
 
   const [form] = Form.useForm();
 
-  const onFinish = (values) => {
-    console.log("Received values of form: ", values);
-  };
-
-  //   phone number prefix selector
-  const prefixSelector = (
-    <Form.Item style={{ width: "1px" }} name="prefix" noStyle>
-      <Select
-        style={{
-          width: 70,
-        }}
-      >
-        <Option value="1">+1</Option>
-        <Option value="86">+86</Option>
-      </Select>
-    </Form.Item>
-  );
-
   return (
     <Form
       {...formItemLayout}
       form={form}
       name="register"
-      onFinish={onFinish}
-      initialValues={{
-        residence: ["Unit 1", "Floor 2", "APT 202"],
-        prefix: "+1",
-      }}
       scrollToFirstError
       style={{ left: "50%", marginTop: "30px" }}
       onSubmit={sumbitHandler}
@@ -364,7 +214,7 @@ const CreateForm = (props) => {
       >
         <Form.Item>
           <Button type="primary" htmlType="submit">
-            Requirement Check
+            Submit
           </Button>
         </Form.Item>
       </div>

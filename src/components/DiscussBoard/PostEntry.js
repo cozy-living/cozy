@@ -1,6 +1,11 @@
 import React, { createElement, useState } from "react";
 
-import { Card, Comment, Tooltip, Avatar } from "antd";
+import { Player } from "video-react";
+import ReactPlayer from "react-player";
+import ReactAudioPlayer from "react-audio-player";
+import poster from "../../assets/images/logo.svg";
+
+import { Card, Comment, Tooltip, Avatar, Image } from "antd";
 import {
   DislikeOutlined,
   LikeOutlined,
@@ -10,6 +15,8 @@ import {
 } from "@ant-design/icons";
 import classes from "./PostEntry.module.css";
 import CreateComment from "./CreateComment";
+import AddComment from "./AddComment";
+import NewComment from "./NewComment";
 
 const PostEntry = (props) => {
   const [likes, setLikes] = useState(0);
@@ -46,26 +53,61 @@ const PostEntry = (props) => {
     <span key="comment-basic-reply-to">Reply to</span>,
   ];
 
+  function get_url_extension(url) {
+    return url.split(/[#?]/)[0].split(".").pop().trim().toLowerCase();
+  }
+
+  let content = <p>Found No URL</p>;
+
+  console.log(props.url);
+  console.log(get_url_extension(props.url));
+
+  if (
+    get_url_extension(props.url) === "jpg" ||
+    get_url_extension(props.url) === "png" ||
+    get_url_extension(props.url) === "jpeg"
+  ) {
+    content = <Image src={props.url} />;
+  }
+
+  if (
+    get_url_extension(props.url) === "mov" ||
+    get_url_extension(props.url) === "mp4" ||
+    get_url_extension(props.url) === "avi" ||
+    get_url_extension(props.url) === "wmv"
+  ) {
+    content = (
+      <ReactPlayer
+        url={props.url}
+        width="100%"
+        height="100%"
+        controls={true}
+      ></ReactPlayer>
+    );
+  }
+
+  if (
+    get_url_extension(props.url) === "mp3" ||
+    get_url_extension(props.url) === "flac"
+  ) {
+    content = <ReactAudioPlayer src={props.url} controls></ReactAudioPlayer>;
+  }
+
   return (
-    <ul>
+    <ul style={{ marginLeft: "-40px" }}>
       <Card title={props.title} className={classes.card}>
         <li>
           <Comment
-            actions={actions}
-            author={
-              <a
-                href={"mailto:" + props.email}
-                Tooltip={<span>{props.residence}</span>}
-              >
-                {props.name}
-              </a>
-            }
+            // actions={actions}
+            author={<a href={"mailto:" + props.email}>{props.name}</a>}
             avatar={<Avatar icon={<UserOutlined />} alt={props.name} />}
-            content={<Tooltip title={props.residence}>{props.detail}</Tooltip>}
+            content={<Tooltip title={props.suite}>{props.detail}</Tooltip>}
             datetime={<span>{props.date}</span>}
+            style={{fontSize: "24px"}}
           />
+          {content}
         </li>
-        <CreateComment />
+        <NewComment name={props.name} />
       </Card>
     </ul>
   );

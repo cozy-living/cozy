@@ -1,9 +1,9 @@
 .title {
-  font-size: 36px;
+  font-size: xx-large;
   font-weight: bold;
   color: rgb(0, 0, 133);
-  margin-left: 10%;
-  margin-top: 30px;
+  margin-left: 50px;
+  margin-top: 20px;
 }
 
 .tabs {
@@ -16,17 +16,23 @@
 
 .posts {
   margin-top: 30px;
-  margin-left: 400px;
+  font-size: xx-large;
 }
 
 .button {
-  font-family: Bradley Hand, cursive;
   font-size: 24px;
   width: 400px;
-  background-color: rgb(47, 239, 253);
+
 }
 
 .page {
   /* background-color: rgb(196, 196, 196); */
   padding-bottom: 80px;
+}
+
+.postTab {
+  background-color: grey;
+  border-color: grey;
+  font-size: 24px;
+  width: 400px;
 }
