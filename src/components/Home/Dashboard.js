@@ -36,7 +36,6 @@ class Dashboard extends Component {
       })
     }
   }
-  //TODO:get events
   showModal = () => {
     this.setState({
       isModalVisible: true,
@@ -46,24 +45,6 @@ class Dashboard extends Component {
     this.setState({
       isModalVisible: false,
     })
-  }
-  onPostEvent = async (values) => {
-    const userId = localStorage.getItem("userId");
-    this.setState({
-      loading: true,
-    })
-    try {
-      await addEvent(userId, values);
-    } catch (error) {
-      message.error(error.message);      
-    } finally {
-      this.setState({
-        loading: false,
-      })
-      this.closeModal();
-      this.loadEvents();
-    }
-
   }
   render() {
     const {TextArea} = Input;
@@ -77,19 +58,30 @@ class Dashboard extends Component {
           </Button>
         }
         <Modal visible={this.state.isModalVisible} footer={null} onCancel={this.closeModal}>
-          <div>Event Post</div>
-          <Form onFinish={this.onPostEvent}>
+          <PostEvent closeModal={this.closeModal} loadEvents={this.loadEvents}/>
+          {/* <Form onFinish={this.onPostEvent}>
             <Form.Item
               name="title"
+              label="Title"
               rules={[{ required: true, message: 'Please input event title!' }]}
             >
               <Input showCount maxLength={20} placeholder="title"/>
             </Form.Item>
             <Form.Item
               name="content"
+              label="Content"
               rules={[{ required: true, message: 'Please input event content!' }]}
             >
                <TextArea showCount maxLength={100} placeholder="content"/>
+            </Form.Item>
+            <Form.Item
+              name="file" label="Image" rules={[{ required: false, message: 'Please input event image!'}]}
+            >
+              <input 
+                type="file"
+                accept="image/png, image/jpeg, image/jpg"
+                ref={this.imageRef}
+              />
             </Form.Item>
             <Button 
               loading={this.state.loading} 
@@ -98,7 +90,7 @@ class Dashboard extends Component {
                >
               submit
             </Button>
-          </Form>
+          </Form> */}
         </Modal>
         <List
           dataSource={data}
@@ -106,7 +98,7 @@ class Dashboard extends Component {
           renderItem={item => (
             <>
               <div className={styles.items} >
-                <img src="favicon.ico" width="150" height="150" style={{borderRadius: "50%"}}/>
+                <img src={item.fileUrl} width="150" height="150" style={{borderRadius: "50%"}} alt=""/>
                 <Card 
                 style={{height:"150", width:"85%", marginLeft: "20px"}}
                 title={item.title}
@@ -126,6 +118,82 @@ class Dashboard extends Component {
   />,
       </>
     )
+  }
+}
+
+class PostEvent extends Component {
+  state = {
+    loading: false,
+    content: "",
+    title: "",
+    file: null,
+  }
+  onPostEvent = async (e) => {
+    e.preventDefault();
+    const userId = localStorage.getItem("userId");
+    const formData = new FormData();
+    const {title, content, file} = this.state;
+    formData.append("file", file);
+    formData.append("title", title);
+    formData.append("content", content);
+    this.setState({
+      loading: true,
+    })
+    try {
+      await addEvent(userId, formData);
+      message.success("event added successfully");
+    } catch (error) {
+      message.error(error.message);      
+    } finally {
+      this.setState({
+        loading: false,
+      })
+      this.props.closeModal();
+      this.props.loadEvents();
+    }
+
+  }
+  handleTitleChange = (e) => {
+    this.setState({
+      title: e.target.value,
+    })
+  }
+  handleContentChange = (e) => {
+    this.setState({
+      content: e.target.value,
+    })
+  }
+  handleFileChange = (e) => {
+    this.setState({
+      file: e.target.files[0],
+    })
+  }
+  render() {
+    return <>
+              <div>Event Post</div>
+              <form action="?" className={styles.event_post}>
+                  <input 
+                    placeholder="title"
+                    type="text"
+                    required
+                    onChange={this.handleTitleChange}
+                  />
+                  <textarea
+                    placeholder="content"
+                    rows={3}
+                    required
+                    onChange={this.handleContentChange}
+                  />
+                  <input 
+                    type="file"
+                    name="image"
+                    accept="image/*"
+                    required="required"
+                    onChange={this.handleFileChange}
+                  />
+                  <button onClick={this.onPostEvent} loading={this.state.loading}>submit</button>
+              </form>
+            </>
   }
 }
 

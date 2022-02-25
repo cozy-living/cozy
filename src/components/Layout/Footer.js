@@ -6,6 +6,7 @@ import {
   FacebookOutlined,
   GooglePlusOutlined,
   InstagramOutlined,
+  GithubOutlined,
 } from "@ant-design/icons";
 import classes from "./Footer.module.css";
 
@@ -26,6 +27,9 @@ const Footer = () => {
           </a>
           <a href="https://www.instagram.com/">
             <InstagramOutlined />
+          </a>
+          <a href="https://github.com/cozy-living">
+            <GithubOutlined />
           </a>
         </Space>
       </div>
@@ -54,6 +58,7 @@ const Footer = () => {
             <a>FAQ</a>
           </Col>
         </Row>
+        {/*<p style={ {textAlign: 'center', color: 'white'} }>Cozy ©2022   Created by a team of aspiring software engineers</p>*/}
       </div>
     </div>
   );

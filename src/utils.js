@@ -37,21 +37,17 @@ export const register = (credential) => {
 	})
 }
 
-export const addEvent = (userId, requestBody) => {
+export const addEvent = (userId, data) => {
 
-	const url = `${domain}/${userId}/events`
+	const url = `${domain}/${userId}/events`;
 
 	return fetch(url, {
 		method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-		body: JSON.stringify(requestBody),
+		body: data,
 	}).then((response) => {
 		if (response.status !== 200) {
 			throw Error("Fail to add event")
 		}
-		return response.json()
 	})
 }
 
