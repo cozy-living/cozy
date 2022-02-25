@@ -90,23 +90,7 @@ class ResidentService extends Component {
           <Button onClick={this.setService} disabled={myService}>My Service</Button>
         </div>
           {
-            myService ? 
-            // <List
-            //   bordered
-            //   dataSource={requests}
-            //   style={{margin: "40px"}}
-              //TODO:get items from backend
-              // renderItem={item => (
-              //     <List.Item className="resident_item">
-              //       <List.Item.Meta
-              //         title={item.type}
-              //         description={"APT:" + item.suite + "\tDATE:" + item.date.substring(0, 10)}
-              //       />
-              //       {/* user delete reservation button */}
-              //       {/* <DeleteReservationButton reservationId={item.id} loadData={this.loadData}/> */}
-              //     </List.Item>
-              // )}
-            // />
+            myService ?
                 <List
                     dataSource={requests}
                     style={{margin: "40px"}}
@@ -124,7 +108,7 @@ class ResidentService extends Component {
                                   </>
                                 }
                             >
-                              {/*{item.content}*/}
+                              {item.state}
                             </Card>
                           </div>
                           <div style={{height: "30px"}}></div>
