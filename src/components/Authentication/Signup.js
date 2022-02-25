@@ -62,12 +62,12 @@ class Signup extends React.Component {
 					style={{ margin: "6px" }}
 					onClick={this.showModal}
 				>
-					Signup
+					Sign up
 				</Button>
 
 				<Modal
 					visible={this.state.visible}
-					title="Login"
+					title="Sign up"
 					onOk={this.handleSubmit}
 					onCancel={this.handleCancel}
 					width={400}

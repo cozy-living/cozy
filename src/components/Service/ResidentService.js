@@ -1,8 +1,7 @@
 // TODO: implement the service component. The Service page should contain 2 tabs (CreateRequest + ViewRequests) for a resident, and one tab only (ProcessRequests) for an admin
 import React, { Component } from "react";
-import { Button, Calendar, List, Layout, Form, Select, message} from "antd";
-import styles from './ResidentService.css';
-import { CloseOutlined } from "@ant-design/icons/lib/icons";
+import styles from './ResidentService.module.css';
+import {Button, Calendar, List, Layout, Form, Select, message, Card} from "antd";
 import { addReservation, deleteReservation, listReservationsByUser } from "../../utils";
 
 class ResidentService extends Component {
@@ -85,32 +84,56 @@ class ResidentService extends Component {
     //dummy data
     return (
       <Content style={{display:"flex", flexDirection:"column", justifyContent:"flex-start"}}>
-        <h1 className="service_title">Service</h1>
+        <h1 className="service_title">Service Board</h1>
         <div className="reserve_botton">
           <Button onClick={this.resetService} disabled={!myService}>Reserve Service</Button>
           <Button onClick={this.setService} disabled={myService}>My Service</Button>
         </div>
           {
             myService ? 
-            <List
-              bordered
-              dataSource={requests}
-              style={{margin: "40px"}}
+            // <List
+            //   bordered
+            //   dataSource={requests}
+            //   style={{margin: "40px"}}
               //TODO:get items from backend
-              renderItem={item => (
-                  <List.Item className="resident_item">
-                    <List.Item.Meta
-                      title={item.type}
-                      description={"APT:" + item.suit + "\tDATE:" + item.date.substring(0, 10)}
-                    />
-                    {/* user delete reservation button */}
-                    {/* <DeleteReservationButton reservationId={item.id} loadData={this.loadData}/> */}
-                  </List.Item>
-              )}
-            />
+              // renderItem={item => (
+              //     <List.Item className="resident_item">
+              //       <List.Item.Meta
+              //         title={item.type}
+              //         description={"APT:" + item.suite + "\tDATE:" + item.date.substring(0, 10)}
+              //       />
+              //       {/* user delete reservation button */}
+              //       {/* <DeleteReservationButton reservationId={item.id} loadData={this.loadData}/> */}
+              //     </List.Item>
+              // )}
+            // />
+                <List
+                    dataSource={requests}
+                    style={{margin: "40px"}}
+                    renderItem={item => (
+                        <>
+                          <div className = {styles.items} >
+                            {/*TODO: change image based on event type*/}
+                            <img src="common_room.jpeg" width="150" height="150" style={{borderRadius: "50%"}} alt=""/>
+                            <Card
+                                style={{height:"150", width:"85%", marginLeft: "20px"}}
+                                title={item.type}
+                                extra={
+                                  <>
+                                    <span style={{marginRight: "20px"}}>{item.date.substring(0, 10)}</span>
+                                  </>
+                                }
+                            >
+                              {/*{item.content}*/}
+                            </Card>
+                          </div>
+                          <div style={{height: "30px"}}></div>
+                        </>
+                    )}
+                />
             :
             <Form 
-              className="reserve_form"
+              className={styles.reserve_form}
               onFinish={this.onFinish}
               >
               <Form.Item

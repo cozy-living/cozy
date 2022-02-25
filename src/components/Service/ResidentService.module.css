@@ -24,3 +24,23 @@
   padding-top: 20px;
   padding-right: 100px;
 }
+
+.title {
+    font-weight: bold;
+    font-size: xx-large;
+    margin-left: 50px;
+    margin-top: 20px;
+    color: rgb(4, 4, 114);
+}
+
+.items {
+    display: flex;
+    justify-content: left;
+    background-color: white;
+    padding-left: 50px;
+    padding-top: 20px;
+    padding-right: 50px;
+    padding-bottom: 20px;
+    border: 2px solid rgb(4, 4, 114);
+    border-radius: 40px;
+}
