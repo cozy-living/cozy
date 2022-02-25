@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+
+import "./PostForm.css";
 
 import classes from "./PostForm.module.css";
 
 const PostForm = (props) => {
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredDetail, setEnteredDetail] = useState("");
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [file, setFile] = useState([]);
 
   const titleChangeHandler = (event) => {
     setEnteredTitle(event.target.value);
@@ -16,31 +20,50 @@ const PostForm = (props) => {
     setEnteredDetail(event.target.value);
   };
 
+  const fileSelectedHandler = (event) => {
+    setFile(event.target.files[0]);
+  };
+
   const submitHandler = (event) => {
     event.preventDefault();
 
     const post = {
       title: enteredTitle,
       content: enteredDetail,
-      file: selectedFile,
+      file: file,
     };
 
     props.onSavePostData(post);
     setEnteredTitle("");
     setEnteredDetail("");
+    setFile([]);
   };
+  
+//   const onSubmitHandler = (event) => {
+//     event.preventDefault();
 
-  const fileSelectedHandler = (event) => {
-    setSelectedFile(event.target.files[0]);
-    console.log(event.target.files[0]);
-  };
+//     let userId = localStorage.getItem("userId");
+//     let web = "http://18.216.82.23/8080/" + userId + "/posts";
 
-  const fileUploadHandler = () => {
-    console.log(selectedFile);
-  };
+//     const data = new FormData();
+
+//     for (let i = 0; i < files.length; i++) {
+//       data.append("file", files[i]);
+//     }
+
+//     axios
+//       .post(web, data)
+//       .then((response) => {
+//         toast.success("Upload Success");
+//         props.onSuccess(response.data);
+//       })
+//       .catch((e) => {
+//         toast.error("Upload Error");
+//       });
+//   };
 
   return (
-    <form className={classes.form}>
+    <div className={classes.form}>
       <div className={classes.control}>
         <label htmlFor="title">Post Title</label>
         <input
@@ -62,12 +85,24 @@ const PostForm = (props) => {
         ></textarea>
       </div>
       <div className={classes.container}>
-        <input type="file" onChange={fileSelectedHandler} />
+        <form method="post" action="#" id="#">
+          <div className="form-group files">
+            <label>Upload Your File</label>
+            <input
+              type="file"
+              onChange={fileSelectedHandler}
+              className="form-control"
+            />
+          </div>
+          {/* <div className={classes.container}>
+            <button>Upload</button>
+          </div> */}
+        </form>
       </div>
       <button onClick={submitHandler} style={{ marginTop: "1rem" }}>
         Submit
       </button>
-    </form>
+    </div>
   );
 };
 
