@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import axios from "axios";
 
 import Post from "../components/DiscussBoard/Post";
 import MyPost from "../components/DiscussBoard/MyPost";
@@ -25,6 +26,11 @@ const DiscussionBoard = () => {
   const [myPosts, setMyPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [files, setFiles] = useState([]);
+
+  const onSuccess = (savedFiles) => {
+    setFiles(savedFiles);
+  };
 
   /*
   let userId = localStorage.getItem("userId")
@@ -50,6 +56,7 @@ const DiscussionBoard = () => {
           name: postData.user.username,
           email: postData.user.email,
           suite: postData.user.suite,
+          postid: postData.id,
           title: postData.title,
           date: postData.date,
           detail: postData.content,
@@ -80,7 +87,7 @@ const DiscussionBoard = () => {
   const addPostHandler = async (post) => {
     console.log(post);
     let userId = localStorage.getItem("userId");
-    let web = "http://18.216.82.23/8080/" + userId + "/posts"
+    let web = "http://18.216.82.23/8080/" + userId + "/posts";
     const response = await fetch(web, {
       method: "POST",
       body: JSON.stringify(post),
@@ -89,15 +96,35 @@ const DiscussionBoard = () => {
       },
     });
     const data = await response.json();
+    // auto fetch?
+    fetchPostHandler();
     console.log(data);
+  };
+
+  // use axios
+  const addPostHandlerAxios = (post) => {
+    console.log(post);
+    let userId = localStorage.getItem("userId");
+    axios
+      .request({
+        method: "post",
+        url: `http://18.216.82.23/8080/${userId}/posts`,
+        data: post,
+      })
+      .then((response) => {
+        fetchPostHandler();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
     <div className={classes.page}>
       <p className={classes.title}>Discussion Board</p>
-      <CreatePost onAddPost={addPostHandler} />
+      <CreatePost onAddPost={addPostHandlerAxios} onSuccess={onSuccess} />
       <div className={classes.tabs}>
-        <button className={classes.postTab} onClick={ShowPostHandler}>
+        <button className={classes.button} onClick={ShowPostHandler}>
           Posts
         </button>
         <button className={classes.button} onClick={ShowMyPostHandler}>
@@ -109,7 +136,13 @@ const DiscussionBoard = () => {
           <Post visible={showPost} data={posts} error={error} />
         )}
         {!isLoading && posts.length > 0 && showMyPost && (
-          <MyPost visible={showMyPost} data={posts} error={error} />
+          <MyPost
+            visible={showMyPost}
+            data={posts}
+            error={error}
+            fetchHandler={fetchPostHandler}
+            onEdit={addPostHandler}
+          />
         )}
         {!isLoading && posts.length === 0 && !error && <p>Found No Posts!</p>}
         {isLoading && <p>Loading...</p>}

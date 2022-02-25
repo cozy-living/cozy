@@ -1,9 +1,7 @@
 import React, { createElement, useState } from "react";
 
-import { Player } from "video-react";
 import ReactPlayer from "react-player";
 import ReactAudioPlayer from "react-audio-player";
-import poster from "../../assets/images/logo.svg";
 
 import { Card, Comment, Tooltip, Avatar, Image } from "antd";
 import {
@@ -57,17 +55,14 @@ const PostEntry = (props) => {
     return url.split(/[#?]/)[0].split(".").pop().trim().toLowerCase();
   }
 
-  let content = <p>Found No URL</p>;
-
-  console.log(props.url);
-  console.log(get_url_extension(props.url));
+  let urlFile = <p>Found No URL</p>;
 
   if (
     get_url_extension(props.url) === "jpg" ||
     get_url_extension(props.url) === "png" ||
     get_url_extension(props.url) === "jpeg"
   ) {
-    content = <Image src={props.url} />;
+    urlFile = <Image src={props.url} />;
   }
 
   if (
@@ -76,7 +71,7 @@ const PostEntry = (props) => {
     get_url_extension(props.url) === "avi" ||
     get_url_extension(props.url) === "wmv"
   ) {
-    content = (
+    urlFile = (
       <ReactPlayer
         url={props.url}
         width="100%"
@@ -90,7 +85,7 @@ const PostEntry = (props) => {
     get_url_extension(props.url) === "mp3" ||
     get_url_extension(props.url) === "flac"
   ) {
-    content = <ReactAudioPlayer src={props.url} controls></ReactAudioPlayer>;
+    urlFile = <ReactAudioPlayer src={props.url} controls></ReactAudioPlayer>;
   }
 
   return (
@@ -103,9 +98,8 @@ const PostEntry = (props) => {
             avatar={<Avatar icon={<UserOutlined />} alt={props.name} />}
             content={<Tooltip title={props.suite}>{props.detail}</Tooltip>}
             datetime={<span>{props.date}</span>}
-            style={{fontSize: "24px"}}
           />
-          {content}
+          {urlFile}
         </li>
         <NewComment name={props.name} />
       </Card>

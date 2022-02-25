@@ -7,7 +7,6 @@ import classes from "./CreatePost.module.css";
 
 const CreatePost = (props) => {
   const [visible, setVisible] = useState(false);
-  const [loading, setLoading] = useState(false);
 
   const showModal = () => {
     setVisible(true);
@@ -43,7 +42,12 @@ const CreatePost = (props) => {
           </Button>,
         ]}
       >
-        {<PostForm onSavePostData={props.onAddPost} />}
+        {
+          <PostForm
+            onSavePostData={props.onAddPost}
+            onSuccess={props.onSuccess}
+          />
+        }
       </Modal>
     </>
   );

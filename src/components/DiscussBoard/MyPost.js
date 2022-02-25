@@ -14,9 +14,12 @@ const MyPost = (props) => {
             name={post.name}
             email={post.email}
             suite={post.suite}
+            postid={post.postid}
             title={post.title}
             detail={post.detail}
             url={post.url}
+            fetchHandler={props.fetchHandler}
+            onEdit={props.onEdit}
           />
         ))}
       </Col>
