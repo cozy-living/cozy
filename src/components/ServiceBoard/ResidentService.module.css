@@ -8,7 +8,12 @@
   }
 
 .reserve_button {
-  margin-left: 50px;
+  background-color: rgb(4, 4, 114);
+  color: white;
+  border-radius: 5px;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .service_title {

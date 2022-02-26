@@ -6,7 +6,7 @@
 
 import React, { Component } from "react";
 import styles from './ResidentService.module.css';
-import { Button, Calendar, List, Layout, Form, Select, message, Card } from "antd";
+import { Button, DatePicker, List, Layout, Form, Select, message, Card } from "antd";
 import { addReservation, deleteReservation, listReservationsByUser } from "../../utils";
 import { displayText, selectImage } from "../../helperFunc";
 
@@ -90,9 +90,9 @@ class ResidentService extends Component {
     ];
 
     return (
-      <Content style={{ display: "flex", flexDirection: "column", justifyContent: "flex-start" }}>
+      <Content style={{ display: "flex", flexDirection: "column", justifyContent: "flex-start"}}>
         <h1 className={styles.service_title}>Service Board</h1>
-        <div className={styles.reserve_button}>
+        <div style={{marginLeft: "40px"}}>
           <Button onClick={this.resetService} disabled={!myService}>Reserve Service</Button>
           <Button onClick={this.setService} disabled={myService}>My Service</Button>
         </div>
@@ -100,7 +100,7 @@ class ResidentService extends Component {
           myService ?
             <List
               dataSource={requests}
-              style={{ margin: "40px" }}
+              style={{ margin: "40px"}}
               renderItem={item => (
                 <>
                   <div className={styles.items} >
@@ -124,13 +124,14 @@ class ResidentService extends Component {
             />
             :
             <Form
+              style={{display: "flex", justifyContent: "flex-start", gap: "30px", height: "370px"}}
               className={styles.reserve_form}
               onFinish={this.onFinish}
             >
               <Form.Item
                 name="type" label="Service" rules={[{ required: true, message: "service type required" }]}
               >
-                <Select placeholder="Select service type">
+                <Select placeholder="Select service type" >
                   <Option value="room_reservation">Common Room Reservation</Option>
                   <Option value="maintenance">Condo Maintenance</Option>
                 </Select>
@@ -141,16 +142,16 @@ class ResidentService extends Component {
                 label="Date"
                 rules={[{ required: true, message: "date required" }]}
               >
-                <Calendar fullscreen={false} defaultValue={null} />
+                <DatePicker />
               </Form.Item>
               <Form.Item>
-                <Button
-                  type="primary"
+                <button
                   htmlType="submit"
-                  style={{ marginLeft: "600px", marginBottom: "20px" }}
-                  loading={this.state.loading}>
-                  Submit
-                </Button>
+                  loading={this.state.loading}
+                  className={styles.reserve_button}
+                  > 
+                    Submit
+                </button>
               </Form.Item>
             </Form>
         }
