@@ -5,7 +5,7 @@ import { UserOutlined } from "@ant-design/icons/lib/icons"
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Login from "../Authentication/Login"
 import Signup from "../Authentication/Signup"
-import logo from "../../assets/images/resident-logo.png";
+import { Redirect } from "react-router-dom";
 
 const { Header } = Layout;
 
@@ -57,15 +57,16 @@ class Navbar extends React.Component {
 			authed: true,
 			username: username
 		})
+		window.location.href = "./home";
 	}
 	
 	handleLogOut = () => {
-		localStorage.removeItem("authToken")
+		localStorage.removeItem("userId")
 		localStorage.removeItem("username")
 		this.setState({
 			authed: false,
 		})
-		message.success("Successfully logged out!")
+		window.location.href = "./home";
 	}
 
 
@@ -86,7 +87,7 @@ class Navbar extends React.Component {
 				</Menu.Item>
 			</Menu>
 		)
-
+		const userId = localStorage.getItem("userId");
 		return (
 
 			<Header style={{ background: "white" }}>
@@ -94,7 +95,7 @@ class Navbar extends React.Component {
 					<Col span={4} style={{ display: "flex", justifyContent: "start", alignItems: "center" }}>
 						<div>
 							<img
-								src={logo}
+								src="resident-logo.png"
 								alt="Logo Here"
 								width="140"
 								height="40"
@@ -102,6 +103,7 @@ class Navbar extends React.Component {
 						</div>
 					</Col>
 					<Col span={16} style={{ display: "flex", justifyContent: "start", alignItems: "center" }}>
+					{userId &&
 						<Menu theme="light" mode="horizontal" defaultSelectedKeys={['1']}>
 							<Menu.Item key="1">
 								<span>Home</span>
@@ -120,19 +122,20 @@ class Navbar extends React.Component {
 								<Link to="discussion" />
 							</Menu.Item>
 						</Menu>
+					}
 					</Col>
 					<Col span={4}>
-						{this.state.authed ?
+						{userId ?
 							<div style={{ display: "flex", justifyContent: "end", alignItems: "center" }}>
 								<span style={{ marginRight: "12px" }}>{this.state.username}</span>
 								<Dropdown overlay={profileOption} placement="bottomCenter" arrow>
 									<Avatar icon={<UserOutlined />}></Avatar>
 								</Dropdown>
 							</div> :
-							<>
+							<div>
 								<Login handleLoginSuccess={this.handleLoginSuccess} />
 								<Signup />
-							</>
+							</div>
 						}
 					</Col>
 				</Row>

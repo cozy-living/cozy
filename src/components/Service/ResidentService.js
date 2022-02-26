@@ -84,8 +84,8 @@ class ResidentService extends Component {
     //dummy data
     return (
       <Content style={{display:"flex", flexDirection:"column", justifyContent:"flex-start"}}>
-        <h1 className="service_title">Service Board</h1>
-        <div className="reserve_botton">
+        <h1 className={styles.service_title}>Service Board</h1>
+        <div className={styles.reserve_button}>
           <Button onClick={this.resetService} disabled={!myService}>Reserve Service</Button>
           <Button onClick={this.setService} disabled={myService}>My Service</Button>
         </div>

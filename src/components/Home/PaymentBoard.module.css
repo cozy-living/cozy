@@ -1,0 +1,24 @@
+.layout {
+    margin-left: 15%;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 20px;
+    width: 70%;
+}
+
+.title {
+    color: rgb(4, 4, 114);
+    font-weight: bold;
+    font-size: xx-large;
+    margin-top: 20px;
+}
+
+.submitButton {
+    background-color: rgb(10, 10, 131);
+    color: white;
+    border-radius: 5px;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}

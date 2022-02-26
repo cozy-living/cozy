@@ -1,8 +1,16 @@
+import { Col, Row } from "antd";
+import PaymentBoard from "../components/Home/PaymentBoard"
+
 const Payment = () => {
     return (
-      <div className='centered'>
-        <p>The Payment page</p>
-      </div>
+      <Row style={{height: "700px"}}>
+        <Col span={13}>
+          <PaymentBoard />
+        </Col>
+        <Col span={7} >
+          <img src="Background.png" style={{height: "700px", width: "700px"}}></img>
+        </Col>
+      </Row>
     );
   };
   
