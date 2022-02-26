@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 
 import Post from "../components/DiscussBoard/Post";
@@ -6,7 +6,9 @@ import MyPost from "../components/DiscussBoard/MyPost";
 
 import classes from "./DiscussionBoard.module.css";
 import CreatePost from "../components/DiscussBoard/CreatePost";
-import PostForm from "../components/DiscussBoard/PostForm";
+
+import { addPost, listPostByUser } from "../utils";
+import { message } from "antd";
 
 /*
           DiscussionBoard
@@ -25,12 +27,6 @@ const DiscussionBoard = () => {
   const [posts, setPosts] = useState([]);
   const [myPosts, setMyPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [files, setFiles] = useState([]);
-
-  const onSuccess = (savedFiles) => {
-    setFiles(savedFiles);
-  };
 
   /*
   let userId = localStorage.getItem("userId")
@@ -38,18 +34,43 @@ const DiscussionBoard = () => {
   fetch(fetchWeb)
  */
 
-  const fetchPostHandler = useCallback(async () => {
+  const fetchMyPostHandler = async () => {
     setIsLoading(true);
-    setError(null);
-    let web = "http://18.216.82.23:8080/posts";
+    let userId = localStorage.getItem("userId");
     try {
-      const response = await fetch(web);
+      let data = await listPostByUser(userId);
+      console.log(data);
+      const transformedMyPosts = data.map((myPostData) => {
+        return {
+          id: myPostData.user.id,
+          name: myPostData.user.username,
+          suite: myPostData.user.suite,
+          email: myPostData.user.email,
+          postid: myPostData.id,
+          title: myPostData.title,
+          detail: myPostData.content,
+          date: myPostData.date,
+          url: myPostData.fileUrl,
+        };
+      });
+      setMyPosts(transformedMyPosts);
+    } catch (error) {
+      message.error(error.message);
+    }
+    setIsLoading(false);
+  };
+
+  const fetchPostHandler = async () => {
+    setIsLoading(true);
+    try {
+      const response = await fetch("http://18.216.82.23:8080/posts");
 
       if (!response.ok) {
-        throw new Error("There is something went wrong!!!");
+        throw new Error("Fail to list posts");
       }
 
       const data = await response.json();
+      console.log(data);
       const transformedPosts = data.map((postData) => {
         return {
           id: postData.user.id,
@@ -65,64 +86,52 @@ const DiscussionBoard = () => {
       });
       setPosts(transformedPosts);
     } catch (error) {
-      setError(error.message);
+      message.error(error.message);
     }
     setIsLoading(false);
-  }, []);
-
-  useEffect(() => {
-    fetchPostHandler();
-  }, [fetchPostHandler]);
+  };
 
   const ShowPostHandler = () => {
     setShowPost(true);
     setShowMyPost(false);
+    fetchPostHandler();
   };
 
   const ShowMyPostHandler = () => {
     setShowMyPost(true);
     setShowPost(false);
+    fetchMyPostHandler();
   };
 
   const addPostHandler = async (post) => {
     console.log(post);
+    setIsLoading(true);
     let userId = localStorage.getItem("userId");
-    let web = "http://18.216.82.23/8080/" + userId + "/posts";
-    const response = await fetch(web, {
-      method: "POST",
-      body: JSON.stringify(post),
-      header: {
-        "Content-type": "application/json",
-      },
-    });
-    const data = await response.json();
-    // auto fetch?
-    fetchPostHandler();
-    console.log(data);
-  };
-
-  // use axios
-  const addPostHandlerAxios = (post) => {
-    console.log(post);
-    let userId = localStorage.getItem("userId");
-    axios
-      .request({
-        method: "post",
-        url: `http://18.216.82.23/8080/${userId}/posts`,
-        data: post,
-      })
-      .then((response) => {
-        fetchPostHandler();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    try {
+      await addPost(userId, post);
+      message.success("Post Added Successfully");
+    } catch (err) {
+      message.error(err.message);
+    } finally {
+      setIsLoading(false);
+      fetchPostHandler();
+    }
+    // const response = await fetch(web, {
+    //   method: "POST",
+    //   body: JSON.stringify(post),
+    //   header: {
+    //     "Content-type": "application/json",
+    //   },
+    // });
+    // const data = await response.json();
+    // // auto fetch?
+    // fetchPostHandler();
   };
 
   return (
     <div className={classes.page}>
       <p className={classes.title}>Discussion Board</p>
-      <CreatePost onAddPost={addPostHandlerAxios} onSuccess={onSuccess} />
+      <CreatePost onAddPost={addPostHandler} />
       <div className={classes.tabs}>
         <button className={classes.button} onClick={ShowPostHandler}>
           Posts
@@ -132,21 +141,31 @@ const DiscussionBoard = () => {
         </button>
       </div>
       <div className={classes.posts}>
-        {!isLoading && posts.length > 0 && showPost && (
-          <Post visible={showPost} data={posts} error={error} />
+        {isLoading && (
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <p>Loading...</p>
+          </div>
         )}
-        {!isLoading && posts.length > 0 && showMyPost && (
+        {!isLoading && posts.length > 0 && showPost && (
+          <Post visible={showPost} data={posts} />
+        )}
+        {!isLoading && myPosts.length > 0 && showMyPost && (
           <MyPost
             visible={showMyPost}
-            data={posts}
-            error={error}
-            fetchHandler={fetchPostHandler}
-            onEdit={addPostHandler}
+            data={myPosts}
+            fetchHandler={fetchMyPostHandler}
           />
         )}
-        {!isLoading && posts.length === 0 && !error && <p>Found No Posts!</p>}
-        {isLoading && <p>Loading...</p>}
-        {!isLoading && error && <p>{error}</p>}
+        {!isLoading && showPost && posts.length === 0 && (
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <p>Found No Posts!</p>
+          </div>
+        )}
+        {!isLoading && showMyPost && myPosts.length === 0 && (
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <p>You have no posts yet!</p>
+          </div>
+        )}
         {/* {showPost && <Post visible={showPost} data={posts} error={error} />}
         {showMyPost && (
           <MyPost visible={showMyPost} data={posts} error={error} />

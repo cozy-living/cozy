@@ -59,7 +59,7 @@ class Navbar extends React.Component {
 	}
 	
 	handleLogOut = () => {
-		localStorage.removeItem("authToken")
+		localStorage.removeItem("userId")
 		localStorage.removeItem("username")
 		this.setState({
 			authed: false,
