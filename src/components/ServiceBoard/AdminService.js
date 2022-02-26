@@ -39,7 +39,7 @@ class AdminService extends Component {
   render() {
     const { Content } = Layout;
     const { requests } = this.state;
-    console.log(requests);
+    // console.log(requests);
     return (
         <Content style={{ display: "flex", flexDirection: "column", 
         justifyContent: "flex-start", backgroundColor: "rgb(230, 230, 230)" }}>
@@ -74,7 +74,8 @@ class AdminService extends Component {
                   title={displayText(item.type)}
                   extra={
                     <>
-                      <span style={{ marginRight: "20px" }}>Requested on {item.date.substring(0, 10)}</span>
+                      <span style={{ marginRight: "20px" }}>Requested by {item.user.username} at 
+                       Suite {item.user.suite} on {item.date.substring(0, 10)}</span>
                     </>
                   }
                 >

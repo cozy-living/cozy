@@ -118,6 +118,23 @@ const DiscussionBoard = () => {
       });
   };
 
+//   <div className={styles.reserve_button}>
+//   <Button onClick={this.resetService} disabled={!myService}>Reserve Service</Button>
+//   <Button onClick={this.setService} disabled={myService}>My Service</Button>
+// </div>
+// setService = () => {
+//   this.setState({
+//     myService: true,
+//   });
+//   console.log(this.state.myService);
+// }
+
+// resetService = () => {
+//   this.setState({
+//     myService: false,
+//   });
+//   console.log(this.state.myService);
+// }
   return (
     <div className={classes.page}>
       <p className={classes.title}>Discussion Board</p>

@@ -1,11 +1,12 @@
 // TODO: implement the payment component (exclusive to residents)
 
 import styles from "./PaymentBoard.module.css";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Button, Checkbox, Form, Input, message } from "antd";
 
 const PaymentBoard = () => {
-    // let formRef = React.createRef();
+    // TODO: use ref to validate form items upon submission
+    // const ref = useRef(null);
     const [due, setDue] = useState(100);
     const [loading, setLoading] = useState(false);
 
@@ -24,7 +25,7 @@ const PaymentBoard = () => {
             <div style={{ marginBottom: "20px", fontSize: "large" }}>
                 Your payment amount is $ <strong style={{ font: "fantasy" }}>{due}</strong>
             </div>
-            <Form>
+            <Form>  
                 <Form.Item>
                     <Input placeholder="Card Number" required="true" name="card-number" disabled={loading} />
                 </Form.Item>
