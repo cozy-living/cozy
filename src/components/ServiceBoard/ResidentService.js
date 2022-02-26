@@ -111,7 +111,7 @@ class ResidentService extends Component {
                       title={displayText(item.type)}
                       extra={
                         <>
-                          <span style={{ marginRight: "20px" }}>{item.date.substring(0, 10)}</span>
+                          <span style={{ marginRight: "20px" }}>Requested on {item.date.substring(0, 10)}</span>
                         </>
                       }
                     >
@@ -144,13 +144,13 @@ class ResidentService extends Component {
                 <Calendar fullscreen={false} defaultValue={null} />
               </Form.Item>
               <Form.Item>
-                <Button
-                  type="primary"
+                <button
                   htmlType="submit"
                   style={{ marginLeft: "600px", marginBottom: "20px" }}
-                  loading={this.state.loading}>
+                  loading={this.state.loading}
+                  className={styles.submit_button}>
                   Submit
-                </Button>
+                </button>
               </Form.Item>
             </Form>
         }

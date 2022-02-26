@@ -1,16 +1,21 @@
 // TODO: implement the payment component (exclusive to residents)
 
 import styles from "./PaymentBoard.module.css";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Button, Checkbox, Form, Input, message } from "antd";
 
 const PaymentBoard = () => {
+    // let formRef = React.createRef();
     const [due, setDue] = useState(100);
     const [loading, setLoading] = useState(false);
 
     const handlePayment = () => {
-        setDue(0);
-        message.success("Your payment was successful!");
+        if (due === 0) {
+            message.warning("Your statement balance is 0!");
+        } else {
+            setDue(0);
+            message.success("Your payment was successful!");
+        }
     }
 
     return (
@@ -21,19 +26,21 @@ const PaymentBoard = () => {
             </div>
             <Form>
                 <Form.Item>
-                    <Input placeholder="Card Number" />
+                    <Input placeholder="Card Number" required="true" name="card-number" disabled={loading} />
                 </Form.Item>
                 <Form.Item>
-                    <Input placeholder="Expiration Date" />
+                    <Input placeholder="Expiration Date" required="true" name="expiration-date" disabled={loading} />
                 </Form.Item>
                 <Form.Item>
-                    <Input placeholder="CVV" />
+                    <Input placeholder="CVV" required="true" name="cvv" disabled={loading} />
                 </Form.Item>
                 <Form.Item>
-                    <Checkbox>Terms Agreement</Checkbox>
+                    <Checkbox required="true" name="terms-agreement" disabled={loading}>Terms Agreement</Checkbox>
                 </Form.Item>
                 <Form.Item>
-                    <button className={styles.submitButton} loading={loading} onClick={handlePayment}>Make Payment</button>
+                    <button className={styles.submitButton}
+                        loading={loading}
+                        onClick={handlePayment}>Make Payment</button>
                 </Form.Item>
             </Form>
         </div>

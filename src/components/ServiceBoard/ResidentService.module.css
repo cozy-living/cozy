@@ -12,7 +12,7 @@
 }
 
 .service_title {
-  color: rgb(4, 4, 114);
+  color: rgb(5, 0, 38);
   font-weight: bold;
   font-size: xx-large;
   margin-left: 50px;
@@ -30,7 +30,7 @@
     font-size: xx-large;
     margin-left: 50px;
     margin-top: 20px;
-    color: rgb(4, 4, 114);
+    color: rgb(5, 0, 38);
 }
 
 .items {
@@ -41,6 +41,14 @@
     padding-top: 20px;
     padding-right: 50px;
     padding-bottom: 20px;
-    border: 2px solid rgb(4, 4, 114);
+    border: 2px solid rgb(5, 0, 38);
     border-radius: 40px;
+}
+
+.submit_button {
+  background-color: rgb(5, 0, 38);
+  color: white;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
