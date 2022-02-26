@@ -90,7 +90,8 @@ class ResidentService extends Component {
     ];
 
     return (
-      <Content style={{ display: "flex", flexDirection: "column", justifyContent: "flex-start"}}>
+      <Content style={{ display: "flex", flexDirection: "column", 
+      justifyContent: "flex-start", backgroundColor: "rgb(230, 230, 230)"}}>
         <h1 className={styles.service_title}>Service Board</h1>
         <div style={{marginLeft: "40px"}}>
           <Button onClick={this.resetService} disabled={!myService}>Reserve Service</Button>
@@ -111,7 +112,7 @@ class ResidentService extends Component {
                       title={displayText(item.type)}
                       extra={
                         <>
-                          <span style={{ marginRight: "20px" }}>{item.date.substring(0, 10)}</span>
+                          <span style={{ marginRight: "20px" }}>Requested on {item.date.substring(0, 10)}</span>
                         </>
                       }
                     >

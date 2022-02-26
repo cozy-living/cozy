@@ -87,7 +87,7 @@ const PostEntry = (props) => {
   }
 
   return (
-    <ul style={{ marginLeft: "-40px" }}>
+    <ul>
       <Card title={props.title} className={classes.card}>
         <li>
           <Comment

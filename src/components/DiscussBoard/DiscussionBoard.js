@@ -1,4 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
+import { Button } from "antd";
+
 import axios from "axios";
 
 import Post from "./Post";
@@ -6,6 +8,9 @@ import MyPost from "./MyPost";
 
 import classes from "./DiscussionBoard.module.css";
 import CreatePost from "./CreatePost";
+
+import { addPost, listPostByUser } from "../../utils";
+import { message } from "antd";
 
 /*
           DiscussionBoard
@@ -16,39 +21,53 @@ import CreatePost from "./CreatePost";
 */
 
 const DiscussionBoard = () => {
-  const [showPost, setShowPost] = useState(false);
 
-  const [showMyPost, setShowMyPost] = useState(false);
+  const url = "http://18.216.82.23:8080";
 
-  // fetched data
+  const [myPost, setMyPost] = useState(false);
+
   const [posts, setPosts] = useState([]);
   const [myPosts, setMyPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [files, setFiles] = useState([]);
-
-  const onSuccess = (savedFiles) => {
-    setFiles(savedFiles);
-  };
-
-  /*
-  let userId = localStorage.getItem("userId")
-  let fetchWeb = "http://18.216.82.23:8080/" + userId + "/posts"
-  fetch(fetchWeb)
- */
 
   const fetchPostHandler = useCallback(async () => {
     setIsLoading(true);
     setError(null);
-    let web = "http://18.216.82.23:8080/posts";
+    const web = `${url}/posts`;
     try {
-      const response = await fetch(web);
+      let data = await listPostByUser(userId);
+      console.log(data);
+      const transformedMyPosts = data.map((myPostData) => {
+        return {
+          id: myPostData.user.id,
+          name: myPostData.user.username,
+          suite: myPostData.user.suite,
+          email: myPostData.user.email,
+          postid: myPostData.id,
+          title: myPostData.title,
+          detail: myPostData.content,
+          date: myPostData.date,
+          url: myPostData.fileUrl,
+        };
+      });
+      setMyPosts(transformedMyPosts);
+    } catch (error) {
+      message.error(error.message);
+    }
+    setIsLoading(false);
+  };
+
+  const fetchPostHandler = async () => {
+    setIsLoading(true);
+    try {
+      const response = await fetch("http://18.216.82.23:8080/posts");
 
       if (!response.ok) {
-        throw new Error("There is something went wrong!!!");
+        throw new Error("Fail to list posts");
       }
 
       const data = await response.json();
+      console.log(data);
       const transformedPosts = data.map((postData) => {
         return {
           id: postData.user.id,
@@ -64,29 +83,15 @@ const DiscussionBoard = () => {
       });
       setPosts(transformedPosts);
     } catch (error) {
-      setError(error.message);
+      message.error(error.message);
     }
     setIsLoading(false);
-  }, []);
-
-  useEffect(() => {
-    fetchPostHandler();
-  }, [fetchPostHandler]);
-
-  const ShowPostHandler = () => {
-    setShowPost(true);
-    setShowMyPost(false);
-  };
-
-  const ShowMyPostHandler = () => {
-    setShowMyPost(true);
-    setShowPost(false);
   };
 
   const addPostHandler = async (post) => {
-    console.log(post);
-    let userId = localStorage.getItem("userId");
-    let web = "http://18.216.82.23/8080/" + userId + "/posts";
+    // console.log(post);
+    const userId = localStorage.getItem("userId");
+    const web = `${url}/${userId}/posts`;
     const response = await fetch(web, {
       method: "POST",
       body: JSON.stringify(post),
@@ -95,19 +100,17 @@ const DiscussionBoard = () => {
       },
     });
     const data = await response.json();
-    // auto fetch?
     fetchPostHandler();
-    console.log(data);
+    // console.log(data);
   };
 
-  // use axios
   const addPostHandlerAxios = (post) => {
-    console.log(post);
-    let userId = localStorage.getItem("userId");
+    // console.log(post);
+    const userId = localStorage.getItem("userId");
     axios
       .request({
         method: "post",
-        url: `http://18.216.82.23/8080/${userId}/posts`,
+        url: `${url}/${userId}/posts`,
         data: post,
       })
       .then((response) => {
@@ -121,22 +124,26 @@ const DiscussionBoard = () => {
   return (
     <div className={classes.page}>
       <p className={classes.title}>Discussion Board</p>
-      <CreatePost onAddPost={addPostHandlerAxios} onSuccess={onSuccess} />
-      <div className={classes.tabs}>
+      {/* <div className={classes.tabs}>
         <button className={classes.button} onClick={ShowPostHandler}>
           Posts
         </button>
         <button className={classes.button} onClick={ShowMyPostHandler}>
           My Posts
         </button>
+      </div> */}
+      <div className={classes.button}>
+        <Button onClick={() => setMyPost(false)} disabled={!myPost}>Posts</Button>
+        <Button onClick={() => setMyPost(true)} disabled={myPost}>My Posts</Button> 
       </div>
+      <CreatePost onAddPost={addPostHandlerAxios} onSuccess={onSuccess} />
       <div className={classes.posts}>
-        {!isLoading && posts.length > 0 && showPost && (
-          <Post visible={showPost} data={posts} error={error} />
+        {!isLoading && posts.length > 0 && !myPost && (
+          <Post visible={!myPost} data={posts} error={error} />
         )}
-        {!isLoading && posts.length > 0 && showMyPost && (
+        {!isLoading && posts.length > 0 && myPost && (
           <MyPost
-            visible={showMyPost}
+            visible={myPost}
             data={posts}
             error={error}
             fetchHandler={fetchPostHandler}
@@ -146,10 +153,6 @@ const DiscussionBoard = () => {
         {!isLoading && posts.length === 0 && !error && <p>Found No Posts!</p>}
         {isLoading && <p>Loading...</p>}
         {!isLoading && error && <p>{error}</p>}
-        {/* {showPost && <Post visible={showPost} data={posts} error={error} />}
-        {showMyPost && (
-          <MyPost visible={showMyPost} data={posts} error={error} />
-        )} */}
       </div>
     </div>
   );

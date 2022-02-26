@@ -60,7 +60,9 @@ class Dashboard extends Component {
     const { TextArea } = Input;
     const { data, admin } = this.state;
     return (
-      <>
+      <div>
+        <div className={styles.dashboard_header}></div>
+        <div className={styles.dashboard_body}>
         <h1 className={styles.title}>Event Dashboard</h1>
         {
           admin == "true" && <Button onClick={this.showModal} style={{ marginLeft: "50px" }}>
@@ -82,7 +84,7 @@ class Dashboard extends Component {
                   title={item.title}
                   extra={
                     <>
-                      <span style={{ marginRight: "20px" }}>{item.date.substring(0, 10)}</span>
+                      <span style={{ marginRight: "20px" }}>Published on {item.date.substring(0, 10)}</span>
                       {admin == "true" && <DeleteButton eventId={item.id} onRemoveSuccess={this.loadEvents} />}
                     </>
                   }
@@ -94,7 +96,8 @@ class Dashboard extends Component {
             </>
           )}
         />,
-      </>
+        </div>
+      </div>
     )
   }
 }

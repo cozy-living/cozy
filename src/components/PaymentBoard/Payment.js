@@ -3,7 +3,7 @@ import PaymentBoard from "./PaymentBoard"
 
 const Payment = () => {
     return (
-      <Row style={{height: "700px"}}>
+      <Row style={{height: "700px", backgroundColor: "rgb(230, 230, 230)"}}>
         <Col span={13}>
           <PaymentBoard />
         </Col>

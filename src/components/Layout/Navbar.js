@@ -69,7 +69,7 @@ class Navbar extends React.Component {
 					<Col span={4} style={{ display: "flex", justifyContent: "start", alignItems: "center" }}>
 						<div>
 							<img
-								src="resident_logo.png"
+								src={selectLogo()}
 								alt="Logo Here"
 								width="175"
 								height="55"

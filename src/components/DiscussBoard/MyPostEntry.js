@@ -7,7 +7,7 @@ import ReactAudioPlayer from "react-audio-player";
 import classes from "./PostEntry.module.css";
 import MyPostButton from "./MyPostButton";
 
-const PostEntry = (props) => {
+const MyPostEntry = (props) => {
   function get_url_extension(url) {
     return url.split(/[#?]/)[0].split(".").pop().trim().toLowerCase();
   }
@@ -69,4 +69,4 @@ const PostEntry = (props) => {
   );
 };
 
-export default PostEntry;
+export default MyPostEntry;
