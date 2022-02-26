@@ -5,7 +5,7 @@ import { UserOutlined } from "@ant-design/icons/lib/icons"
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Login from "../Authentication/Login"
 import Signup from "../Authentication/Signup"
-import { __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED } from "react-dom";
+import { selectLogo } from "../../helperFunc";
 
 const { Header } = Layout;
 
@@ -42,13 +42,12 @@ class Navbar extends React.Component {
 	handleLogOut = () => {
 		localStorage.removeItem("userId")
 		localStorage.removeItem("username")
+		localStorage.setItem("asHost", false)
 		this.setState({
 			authed: false,
 		})
 		window.location.href = "./home";
 	}
-
-
 
 	render() {
 
@@ -73,7 +72,7 @@ class Navbar extends React.Component {
 								src="resident_logo.png"
 								alt="Logo Here"
 								width="175"
-								height="50"
+								height="55"
 							/>
 						</div>
 					</Col>

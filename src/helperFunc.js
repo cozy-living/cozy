@@ -23,3 +23,9 @@ export const selectImage = (data) => {
             return data;
     }
 }
+
+// TODO: fix this!
+export const selectLogo = () => {
+    // console.log(localStorage.getItem("asHost"));
+    return localStorage.getItem("asHost") == true ? "admin_logo.png" : "resident_logo.png";
+}
