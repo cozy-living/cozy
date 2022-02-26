@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { Button } from "antd";
+
 import axios from "axios";
 
 import Post from "./Post";
@@ -19,24 +21,19 @@ import { message } from "antd";
 */
 
 const DiscussionBoard = () => {
-  const [showPost, setShowPost] = useState(false);
 
-  const [showMyPost, setShowMyPost] = useState(false);
+  const url = "http://18.216.82.23:8080";
 
-  // fetched data
+  const [myPost, setMyPost] = useState(false);
+
   const [posts, setPosts] = useState([]);
   const [myPosts, setMyPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  /*
-  let userId = localStorage.getItem("userId")
-  let fetchWeb = "http://18.216.82.23:8080/" + userId + "/posts"
-  fetch(fetchWeb)
- */
-
-  const fetchMyPostHandler = async () => {
+  const fetchPostHandler = useCallback(async () => {
     setIsLoading(true);
-    let userId = localStorage.getItem("userId");
+    setError(null);
+    const web = `${url}/posts`;
     try {
       let data = await listPostByUser(userId);
       console.log(data);
@@ -91,102 +88,71 @@ const DiscussionBoard = () => {
     setIsLoading(false);
   };
 
-  const ShowPostHandler = () => {
-    setShowPost(true);
-    setShowMyPost(false);
-    fetchPostHandler();
-  };
-
-  const ShowMyPostHandler = () => {
-    setShowMyPost(true);
-    setShowPost(false);
-    fetchMyPostHandler();
-  };
-
   const addPostHandler = async (post) => {
-    console.log(post);
-    setIsLoading(true);
-    let userId = localStorage.getItem("userId");
-    try {
-      await addPost(userId, post);
-      message.success("Post Added Successfully");
-    } catch (err) {
-      message.error(err.message);
-    } finally {
-      setIsLoading(false);
-      fetchPostHandler();
-    }
-    // const response = await fetch(web, {
-    //   method: "POST",
-    //   body: JSON.stringify(post),
-    //   header: {
-    //     "Content-type": "application/json",
-    //   },
-    // });
-    // const data = await response.json();
-    // // auto fetch?
-    // fetchPostHandler();
+    // console.log(post);
+    const userId = localStorage.getItem("userId");
+    const web = `${url}/${userId}/posts`;
+    const response = await fetch(web, {
+      method: "POST",
+      body: JSON.stringify(post),
+      header: {
+        "Content-type": "application/json",
+      },
+    });
+    const data = await response.json();
+    fetchPostHandler();
+    // console.log(data);
   };
 
-  //   <div className={styles.reserve_button}>
-  //   <Button onClick={this.resetService} disabled={!myService}>Reserve Service</Button>
-  //   <Button onClick={this.setService} disabled={myService}>My Service</Button>
-  // </div>
-  // setService = () => {
-  //   this.setState({
-  //     myService: true,
-  //   });
-  //   console.log(this.state.myService);
-  // }
+  const addPostHandlerAxios = (post) => {
+    // console.log(post);
+    const userId = localStorage.getItem("userId");
+    axios
+      .request({
+        method: "post",
+        url: `${url}/${userId}/posts`,
+        data: post,
+      })
+      .then((response) => {
+        fetchPostHandler();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-  // resetService = () => {
-  //   this.setState({
-  //     myService: false,
-  //   });
-  //   console.log(this.state.myService);
-  // }
   return (
     <div className={classes.page}>
       <p className={classes.title}>Discussion Board</p>
-      <CreatePost onAddPost={addPostHandler} />
-      <div className={classes.tabs}>
+      {/* <div className={classes.tabs}>
         <button className={classes.button} onClick={ShowPostHandler}>
           Posts
         </button>
         <button className={classes.button} onClick={ShowMyPostHandler}>
           My Posts
         </button>
+      </div> */}
+      <div className={classes.button}>
+        <Button onClick={() => setMyPost(false)} disabled={!myPost}>Posts</Button>
+        <Button onClick={() => setMyPost(true)} disabled={myPost}>My Posts</Button> 
       </div>
+      <CreatePost onAddPost={addPostHandlerAxios} onSuccess={onSuccess} />
       <div className={classes.posts}>
-        {isLoading && (
-          <div style={{ display: "flex", justifyContent: "center" }}>
-            <p>Loading...</p>
-          </div>
+        {!isLoading && posts.length > 0 && !myPost && (
+          <Post visible={!myPost} data={posts} error={error} />
         )}
-        {!isLoading && posts.length > 0 && showPost && (
-          <Post visible={showPost} data={posts} />
-        )}
-        {!isLoading && myPosts.length > 0 && showMyPost && (
+        {!isLoading && posts.length > 0 && myPost && (
           <MyPost
-            visible={showMyPost}
-            data={myPosts}
-            fetchHandler={fetchMyPostHandler}
+            visible={myPost}
+            data={posts}
+            error={error}
+            fetchHandler={fetchPostHandler}
+            onEdit={addPostHandler}
           />
         )}
-        {!isLoading && showPost && posts.length === 0 && (
-          <div style={{ display: "flex", justifyContent: "center" }}>
-            <p>Found No Posts!</p>
-          </div>
-        )}
-        {!isLoading && showMyPost && myPosts.length === 0 && (
-          <div style={{ display: "flex", justifyContent: "center" }}>
-            <p>You have no posts yet!</p>
-          </div>
-        )}
-        {/* {showPost && <Post visible={showPost} data={posts} error={error} />}
-        {showMyPost && (
-          <MyPost visible={showMyPost} data={posts} error={error} />
-        )} */}
+        {!isLoading && posts.length === 0 && !error && <p>Found No Posts!</p>}
+        {isLoading && <p>Loading...</p>}
+        {!isLoading && error && <p>{error}</p>}
       </div>
     </div>
   );
