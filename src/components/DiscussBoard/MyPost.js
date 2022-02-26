@@ -19,7 +19,6 @@ const MyPost = (props) => {
             detail={post.detail}
             url={post.url}
             fetchHandler={props.fetchHandler}
-            onEdit={props.onEdit}
           />
         ))}
       </Col>

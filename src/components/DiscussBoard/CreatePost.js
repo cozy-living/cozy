@@ -45,6 +45,7 @@ const CreatePost = (props) => {
           <PostForm
             onSavePostData={props.onAddPost}
             onSuccess={props.onSuccess}
+            onVisible={visible}
           />
         }
       </Modal>

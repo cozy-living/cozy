@@ -3,43 +3,38 @@ import axios from "axios";
 
 import { Modal, Button, message } from "antd";
 import classes from "./MyPostButton.module.css";
-import { PropertySafetyFilled } from "@ant-design/icons";
+import EditButton from "./EditButton";
+import { listPostByUser } from "../../utils";
 
 const MyPostButton = (props) => {
   const [visible, setVisible] = useState(false);
-  const [editedTitle, setEditedTitle] = useState("");
-  const [editedDetail, setEditedDetail] = useState("");
-
-  const titleChangeHandler = (event) => {
-    setEditedTitle(event.target.value);
-    console.log(event.target.value);
-    console.log(editedTitle);
-  };
-
-  const detailChangeHandler = (event) => {
-    setEditedDetail(event.target.value);
-    console.log(event.target.value);
-    console.log(editedDetail);
-  };
+  const [myPosts, setMyPosts] = useState([]);
 
   const showModal = () => {
     setVisible(true);
+    getPostHanlder();
   };
 
   const onCancelHandler = () => {
     setVisible(false);
   };
 
-  const onChangeHandler = (event) => {
-    event.preventDefault();
-
-    const post = {
-      title: editedTitle,
-      content: editedDetail,
-    };
-
-    props.onEdit(post);
-    setVisible(false);
+  const getPostHanlder = async () => {
+    let userId = localStorage.getItem("userId");
+    try {
+      const data = await listPostByUser(userId);
+      console.log(data);
+      console.log(props.postId);
+      const transformedData = data.map((postData) => {
+        return {
+          title: postData.title,
+          detail: postData.content,
+        };
+      });
+      setMyPosts(transformedData);
+    } catch (error) {
+      message.error(error.message);
+    }
   };
 
   const deletePostHanlder = () => {
@@ -47,10 +42,11 @@ const MyPostButton = (props) => {
     axios
       .delete(`http://18.216.82.23:8080/${userId}/posts/${props.postId}`)
       .then((response) => {
-        props.fetchHandler();
         message.success("Successfully Removed!");
+        props.fetchHandler();
       })
       .catch((error) => {
+        message.error(error.message);
         console.log(error);
       });
   };
@@ -69,15 +65,7 @@ const MyPostButton = (props) => {
         ]}
       >
         <div className={classes.control}>
-          <label>Your Title</label>
-          <textarea onChange={titleChangeHandler}>{props.title}</textarea>
-          <label className={classes.detail}>Your Post Detail</label>
-          <textarea rows="5" id="detail" onChange={detailChangeHandler}>
-            {props.content}
-          </textarea>
-          <div className={classes.buttonContainer}>
-            <button onClick={onChangeHandler}>Submit</button>
-          </div>
+          <EditButton data={myPosts} postId={props.postId} />
         </div>
       </Modal>
       <button onClick={showModal} className={classes.edit}>
