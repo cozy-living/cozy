@@ -59,7 +59,7 @@ class Navbar extends React.Component {
 		})
 		window.location.href = "./home";
 	}
-	
+
 	handleLogOut = () => {
 		localStorage.removeItem("userId")
 		localStorage.removeItem("username")
@@ -75,10 +75,6 @@ class Navbar extends React.Component {
 
 		const profileOption = (
 			<Menu>
-				{/*<Menu.Item>*/}
-				{/*	<span>Account</span>*/}
-				{/*	<Link to="/dashboard"></Link>*/}
-				{/*</Menu.Item>*/}
 				<Menu.Item
 					style={{ color: "red" }}
 					onClick={this.handleLogOut}
@@ -102,8 +98,7 @@ class Navbar extends React.Component {
 							/>
 						</div>
 					</Col>
-					<Col span={16} style={{ display: "flex", justifyContent: "start", alignItems: "center" }}>
-					{userId &&
+					<Col span={16}>
 						<Menu theme="light" mode="horizontal" defaultSelectedKeys={['1']}>
 							<Menu.Item key="1">
 								<span>Home</span>
@@ -122,7 +117,6 @@ class Navbar extends React.Component {
 								<Link to="discussion" />
 							</Menu.Item>
 						</Menu>
-					}
 					</Col>
 					<Col span={4}>
 						{userId ?
