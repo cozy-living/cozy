@@ -29,7 +29,7 @@ class App extends React.Component {
   render() {
     return (
       <Layout
-        style={{ height: "auto", fontFamily: "Times New Roman" }}
+        style={{ height: "auto", fontFamily: 'IBM Plex Mono' }}
       >
         <Router>
           <Navbar />

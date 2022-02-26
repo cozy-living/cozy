@@ -1,7 +1,7 @@
 .footer {
   padding-top: 10px;
   padding-bottom: 20px;
-  background-color: rgb(3, 16, 60);
+  background-color: rgb(5, 0, 38);
   text-align: center;
 }
 
@@ -12,6 +12,6 @@
 
 .link {
   font-size: 18px;
-  font-family: Times, Times New Roman, serif;
+  font-family: 'IBM Plex Mono';
   font-weight: bold;
 }
