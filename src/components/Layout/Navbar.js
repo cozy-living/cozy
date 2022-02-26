@@ -99,7 +99,6 @@ class Navbar extends React.Component {
 						</div>
 					</Col>
 					<Col span={16}>
-
 						<Menu theme="light" mode="horizontal" defaultSelectedKeys={['1']}>
 							<Menu.Item key="1">
 								<span>Home</span>
