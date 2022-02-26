@@ -1,5 +1,5 @@
 .title {
-    color: rgb(4, 4, 114);
+    color: rgb(5, 0, 38);
     font-weight: bold;
     font-size: 50px;
     margin-left: 15%;
@@ -7,14 +7,14 @@
 }
 
 .content {
-    color: rgb(4, 4, 114);
+    color: rgb(5, 0, 38);
     font-size: 30px;
     margin-left: 15%;
     margin-top: 50px;
 }
 
 .button {
-    background-color: rgb(4, 4, 114);
+    background-color: rgb(5, 0, 38);
     color: white;
     border-radius: 5px;
     padding: 5px;
@@ -26,4 +26,8 @@
 
 .button:hover {
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.home_background {
+    background-color: rgb(230, 230, 230);
 }

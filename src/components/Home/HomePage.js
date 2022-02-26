@@ -4,18 +4,18 @@
    and display dashboards and different navbar options for logged in residents and admins.
 */
 
-import { Row, Col } from "antd";
+import { Row, Col, message } from "antd";
 import styles from "./HomePage.module.css";
-import Login from "../Authentication/Login";
 
 const HomePage = () => {
   return (
-    <Row style={{ height: "700px" }}>
+    <Row style={{ height: "700px" }} className={styles.home_background}>
       <Col span={13}>
         <div className={styles.title}>Welcome to Cozy Resident Portal</div>
         <div className={styles.content}>Better Living!</div>
         <div className={styles.content}>Smarter Living!</div>
-        <button className={styles.button}>Explore More</button>
+        <button className={styles.button}
+        onClick={() => message.warning("You need to log in first!")}>Explore More</button>
       </Col>
       <Col span={7} >
         <img src="background.png" style={{ height: "700px", width: "700px" }}></img>
