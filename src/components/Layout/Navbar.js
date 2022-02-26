@@ -9,28 +9,6 @@ import { Redirect } from "react-router-dom";
 
 const { Header } = Layout;
 
-// TODO (or Things to fix):
-//   #1. Put logo into place
-//   #2. Change authed from false to true: notice the avartar and login/signup button is NOT in the same position 
-//   #3. Implement on-click response: navbar option, profile option, logo?
-//   #4. Navbar collapses when window is resized: use grid gutter for responsive design ({ xs: 8, sm: 16, md: 24, lg: 32 })
-
-
-// const profileOption = (
-// 	<Menu>
-// 		<Menu.Item>
-// 			<span>Account</span>
-// 			<Link to="/dashboard"></Link>
-// 		</Menu.Item>
-// 		<Menu.Item
-// 			style={{ color: "red" }}
-// 			onClick={this.handleLogOut}
-// 		>
-// 			<span>Log Out</span>
-// 		</Menu.Item>
-// 	</Menu>
-// )
-
 
 class Navbar extends React.Component {
 	state = {
@@ -40,10 +18,11 @@ class Navbar extends React.Component {
 
 
 	componentDidMount() {
-		const authToken = localStorage.getItem("authToken")
+		const userId = localStorage.getItem("userId")
 		const username = localStorage.getItem("username")
+		console.log("navbar mount")
 		this.setState({
-			authed: authToken != null,
+			authed: userId != null,
 			username: username,
 		})
 	}
@@ -137,7 +116,5 @@ class Navbar extends React.Component {
 		)
 	}
 }
-
-
 
 export default Navbar;
