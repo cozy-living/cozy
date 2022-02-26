@@ -1,7 +1,7 @@
 .title {
   font-size: xx-large;
   font-weight: bold;
-  color: rgb(0, 0, 133);
+  color: rgb(5. 0, 38);
   margin-left: 50px;
   margin-top: 20px;
 }
@@ -11,7 +11,7 @@
   text-align: center;
   font-size: 18px;
   display: flex;
-  justify-content: center;
+  justify-content: left;
 }
 .tabs button:active {
   background-color: grey;
@@ -28,7 +28,7 @@
 }
 
 .page {
-  /* background-color: rgb(196, 196, 196); */
+  background-color: rgb(230, 230, 230);
   padding-bottom: 80px;
 }
 

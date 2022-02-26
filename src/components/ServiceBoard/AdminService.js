@@ -39,8 +39,10 @@ class AdminService extends Component {
   render() {
     const { Content } = Layout;
     const { requests } = this.state;
+    console.log(requests);
     return (
-        <Content style={{ display: "flex", flexDirection: "column", justifyContent: "flex-start" }}>
+        <Content style={{ display: "flex", flexDirection: "column", 
+        justifyContent: "flex-start", backgroundColor: "rgb(230, 230, 230)" }}>
         <h1 className={styles.service_title}>Resident Requests</h1>
 
         {/* <List
@@ -72,7 +74,7 @@ class AdminService extends Component {
                   title={displayText(item.type)}
                   extra={
                     <>
-                      <span style={{ marginRight: "20px" }}>{item.date.substring(0, 10)}</span>
+                      <span style={{ marginRight: "20px" }}>Requested on {item.date.substring(0, 10)}</span>
                     </>
                   }
                 >

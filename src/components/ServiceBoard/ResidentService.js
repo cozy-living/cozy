@@ -90,7 +90,8 @@ class ResidentService extends Component {
     ];
 
     return (
-      <Content style={{ display: "flex", flexDirection: "column", justifyContent: "flex-start" }}>
+      <Content style={{ display: "flex", flexDirection: "column", 
+      justifyContent: "flex-start", backgroundColor: "rgb(230, 230, 230)"}}>
         <h1 className={styles.service_title}>Service Board</h1>
         <div className={styles.reserve_button}>
           <Button onClick={this.resetService} disabled={!myService}>Reserve Service</Button>
