@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { Button } from "antd";
+
 import axios from "axios";
 
 import Post from "./Post";
@@ -7,6 +8,9 @@ import MyPost from "./MyPost";
 
 import classes from "./DiscussionBoard.module.css";
 import CreatePost from "./CreatePost";
+
+import { addPost, listPostByUser } from "../../utils";
+import { message } from "antd";
 
 /*
           DiscussionBoard
@@ -25,25 +29,45 @@ const DiscussionBoard = () => {
   const [posts, setPosts] = useState([]);
   const [myPosts, setMyPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [files, setFiles] = useState([]);
-
-  const onSuccess = (savedFiles) => {
-    setFiles(savedFiles);
-  };
 
   const fetchPostHandler = useCallback(async () => {
     setIsLoading(true);
     setError(null);
     const web = `${url}/posts`;
     try {
-      const response = await fetch(web);
+      let data = await listPostByUser(userId);
+      console.log(data);
+      const transformedMyPosts = data.map((myPostData) => {
+        return {
+          id: myPostData.user.id,
+          name: myPostData.user.username,
+          suite: myPostData.user.suite,
+          email: myPostData.user.email,
+          postid: myPostData.id,
+          title: myPostData.title,
+          detail: myPostData.content,
+          date: myPostData.date,
+          url: myPostData.fileUrl,
+        };
+      });
+      setMyPosts(transformedMyPosts);
+    } catch (error) {
+      message.error(error.message);
+    }
+    setIsLoading(false);
+  };
+
+  const fetchPostHandler = async () => {
+    setIsLoading(true);
+    try {
+      const response = await fetch("http://18.216.82.23:8080/posts");
 
       if (!response.ok) {
-        throw new Error("Something went wrong!");
+        throw new Error("Fail to list posts");
       }
 
       const data = await response.json();
+      console.log(data);
       const transformedPosts = data.map((postData) => {
         return {
           id: postData.user.id,
@@ -59,14 +83,10 @@ const DiscussionBoard = () => {
       });
       setPosts(transformedPosts);
     } catch (error) {
-      setError(error.message);
+      message.error(error.message);
     }
     setIsLoading(false);
-  }, []);
-
-  useEffect(() => {
-    fetchPostHandler();
-  }, [fetchPostHandler]);
+  };
 
   const addPostHandler = async (post) => {
     // console.log(post);

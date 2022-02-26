@@ -11,6 +11,7 @@ const PostForm = (props) => {
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredDetail, setEnteredDetail] = useState("");
   const [file, setFile] = useState([]);
+  const [showModal, SetShowModal] = useState(props.onVisible);
 
   const titleChangeHandler = (event) => {
     setEnteredTitle(event.target.value);
@@ -27,40 +28,40 @@ const PostForm = (props) => {
   const submitHandler = (event) => {
     event.preventDefault();
 
-    const post = {
-      title: enteredTitle,
-      content: enteredDetail,
-      file: file,
-    };
+    const formData = new FormData();
+    formData.append("title", enteredTitle);
+    formData.append("content", enteredDetail);
+    formData.append("file", file);
 
-    props.onSavePostData(post);
+    props.onSavePostData(formData);
     setEnteredTitle("");
     setEnteredDetail("");
     setFile([]);
+    SetShowModal(false);
   };
-  
-//   const onSubmitHandler = (event) => {
-//     event.preventDefault();
 
-//     let userId = localStorage.getItem("userId");
-//     let web = "http://18.216.82.23/8080/" + userId + "/posts";
+  //   const onSubmitHandler = (event) => {
+  //     event.preventDefault();
 
-//     const data = new FormData();
+  //     let userId = localStorage.getItem("userId");
+  //     let web = "http://18.216.82.23/8080/" + userId + "/posts";
 
-//     for (let i = 0; i < files.length; i++) {
-//       data.append("file", files[i]);
-//     }
+  //     const data = new FormData();
 
-//     axios
-//       .post(web, data)
-//       .then((response) => {
-//         toast.success("Upload Success");
-//         props.onSuccess(response.data);
-//       })
-//       .catch((e) => {
-//         toast.error("Upload Error");
-//       });
-//   };
+  //     for (let i = 0; i < files.length; i++) {
+  //       data.append("file", files[i]);
+  //     }
+
+  //     axios
+  //       .post(web, data)
+  //       .then((response) => {
+  //         toast.success("Upload Success");
+  //         props.onSuccess(response.data);
+  //       })
+  //       .catch((e) => {
+  //         toast.error("Upload Error");
+  //       });
+  //   };
 
   return (
     <div className={classes.form}>
