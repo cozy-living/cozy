@@ -74,8 +74,9 @@ class AdminService extends Component {
                   title={displayText(item.type)}
                   extra={
                     <>
-                      <span style={{ marginRight: "20px" }}>Requested by {item.user.username} at 
-                       Suite {item.user.suite} on {item.date.substring(0, 10)}</span>
+                      <span style={{ marginRight: "20px" }}>Requested by <b>{item.user.username}</b></span>
+                      <span style={{ marginRight: "20px" }}>Suite {item.user.suite}</span>
+                      <span style={{ marginRight: "20px" }}>{item.date.substring(0, 10)}</span>
                     </>
                   }
                 >

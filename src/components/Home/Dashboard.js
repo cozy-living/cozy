@@ -32,6 +32,7 @@ class Dashboard extends Component {
     })
     try {
       const resp = await listEvents();
+      // console.log(resp);
       this.setState({
         data: resp,
       });
@@ -84,7 +85,8 @@ class Dashboard extends Component {
                   title={item.title}
                   extra={
                     <>
-                      <span style={{ marginRight: "20px" }}>Published on {item.date.substring(0, 10)}</span>
+                      <span style={{ marginRight: "40px" }}>Published by <b>{item.user.username}</b></span>
+                      <span style={{ marginRight: "20px" }}>{item.date.substring(0, 10)}</span>
                       {admin == "true" && <DeleteButton eventId={item.id} onRemoveSuccess={this.loadEvents} />}
                     </>
                   }

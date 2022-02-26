@@ -14,10 +14,10 @@ const HomePage = () => {
       <div className={styles.title}>Welcome to Cozy Resident Portal</div>
       <div className={styles.content}>Better Living!</div>
       <div className={styles.content}>Smarter Living!</div>
-      <button className={styles.button}>Explore More</button>
+      <button className={styles.button} onClick={() => message.warn("You need to log in first!")}>Explore More</button>
     </Col>
     <Col span={7} >
-      <img src="Background.png" style={{height: "700px", width: "695px"}}></img>
+      <img src="background.png" style={{height: "700px", width: "695px"}}></img>
     </Col>
   </Row>
   )
