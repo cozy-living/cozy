@@ -97,9 +97,9 @@ class Dashboard extends Component {
           style={{margin: "40px"}}
           renderItem={item => (
             <>
-              <div className={styles.items} >
+              <div className = {styles.items} >
                 <img src={item.fileUrl} width="150" height="150" style={{borderRadius: "50%"}} alt=""/>
-                <Card 
+                <Card
                 style={{height:"150", width:"85%", marginLeft: "20px"}}
                 title={item.title}
                 extra={

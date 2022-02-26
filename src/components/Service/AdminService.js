@@ -2,7 +2,7 @@
 
 import React, { Component } from "react";
 import { Layout, List, Button, message } from "antd";
-import styles from './ResidentService.css';
+import styles from './ResidentService.module.css';
 import { CheckCircleTwoTone, CheckOutlined, CloseCircleTwoTone, CloseOutlined } from "@ant-design/icons/lib/icons";
 import {listReservations, deleteReservation} from "../../utils";
 class AdminService extends Component {

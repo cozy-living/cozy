@@ -119,12 +119,12 @@ class Login extends React.Component {
 						</Form.Item>
 						
 					</Form>
-					<Checkbox 
+					<Checkbox
 						disabled={this.state.loading}
 						checked={this.state.asAdmin}
 						onChange={this.handleCheckboxOnChange}
 						>
-						asAdmin
+						Admin Account
 					</Checkbox>
 				</Modal>
 			</>
