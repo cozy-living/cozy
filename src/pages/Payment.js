@@ -8,7 +8,7 @@ const Payment = () => {
           <PaymentBoard />
         </Col>
         <Col span={7} >
-          <img src="Background.png" style={{height: "700px", width: "700px"}}></img>
+          <img src="Background.png" style={{height: "700px", width: "695px"}}></img>
         </Col>
       </Row>
     );
