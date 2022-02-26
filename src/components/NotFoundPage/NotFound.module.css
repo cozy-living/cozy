@@ -1,0 +1,14 @@
+.title {
+    color: rgb(4, 4, 114);
+    font-weight: bold;
+    font-size: 50px;
+    margin-left: 15%;
+    margin-top: 60px;
+}
+
+.content {
+    color: rgb(4, 4, 114);
+    font-size: 30px;
+    margin-left: 15%;
+    margin-top: 50px;
+}

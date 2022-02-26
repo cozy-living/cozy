@@ -1,5 +1,5 @@
 import { Col, Row } from "antd";
-import PaymentBoard from "../components/Home/PaymentBoard"
+import PaymentBoard from "./PaymentBoard"
 
 const Payment = () => {
     return (
@@ -8,7 +8,7 @@ const Payment = () => {
           <PaymentBoard />
         </Col>
         <Col span={7} >
-          <img src="Background.png" style={{height: "700px", width: "700px"}}></img>
+          <img src="background.png" style={{height: "700px", width: "700px"}}></img>
         </Col>
       </Row>
     );

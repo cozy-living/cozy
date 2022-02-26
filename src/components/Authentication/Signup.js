@@ -1,6 +1,5 @@
 import React from "react"
 import { Form, Button, Input, Space, message, Modal } from "antd"
-import { UserOutlined } from "@ant-design/icons"
 import { register } from "../../utils"
 
 
@@ -58,7 +57,7 @@ class Signup extends React.Component {
 		return (
 			<>
 				<Button
-					type="primary"
+					type="text"
 					style={{ margin: "6px" }}
 					onClick={this.showModal}
 				>

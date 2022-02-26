@@ -12,8 +12,6 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import classes from "./PostEntry.module.css";
-import CreateComment from "./CreateComment";
-import AddComment from "./AddComment";
 import NewComment from "./NewComment";
 
 const PostEntry = (props) => {

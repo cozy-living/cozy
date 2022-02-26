@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import AdminService from '../components/Service/AdminService';
-import ResidentService from '../components/Service/ResidentService';
+import AdminService from '../components/ServiceBoard/AdminService';
+import ResidentService from '../components/ServiceBoard/ResidentService';
 class ServiceBoard extends Component {
   state = {
     admin: false,

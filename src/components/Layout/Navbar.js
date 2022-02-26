@@ -5,7 +5,7 @@ import { UserOutlined } from "@ant-design/icons/lib/icons"
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Login from "../Authentication/Login"
 import Signup from "../Authentication/Signup"
-import { Redirect } from "react-router-dom";
+import { __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED } from "react-dom";
 
 const { Header } = Layout;
 
@@ -20,7 +20,7 @@ class Navbar extends React.Component {
 	componentDidMount() {
 		const userId = localStorage.getItem("userId")
 		const username = localStorage.getItem("username")
-		console.log("navbar mount")
+		// console.log("navbar mount")
 		this.setState({
 			authed: userId != null,
 			username: username,
@@ -70,32 +70,35 @@ class Navbar extends React.Component {
 					<Col span={4} style={{ display: "flex", justifyContent: "start", alignItems: "center" }}>
 						<div>
 							<img
-								src="resident-logo.png"
+								src="resident_logo.png"
 								alt="Logo Here"
-								width="140"
-								height="40"
+								width="175"
+								height="50"
 							/>
 						</div>
 					</Col>
 					<Col span={16}>
-						<Menu theme="light" mode="horizontal" defaultSelectedKeys={['1']}>
-							<Menu.Item key="1">
-								<span>Home</span>
-								<Link to="/" />
-							</Menu.Item>
-							<Menu.Item key="2">
-								<span>Payment</span>
-								<Link to="payment" />
-							</Menu.Item>
-							<Menu.Item key="3">
-								<span>Service</span>
-								<Link to="service" />
-							</Menu.Item>
-							<Menu.Item key="4">
-								<span>Post</span>
-								<Link to="discussion" />
-							</Menu.Item>
-						</Menu>
+						{userId ?
+							<Menu theme="light" mode="horizontal" defaultSelectedKeys={['1']}>
+								<Menu.Item key="1">
+									<span>Home</span>
+									<Link to="/" />
+								</Menu.Item>
+								<Menu.Item key="2">
+									<span>Payment</span>
+									<Link to="payment" />
+								</Menu.Item>
+								<Menu.Item key="3">
+									<span>Service</span>
+									<Link to="service" />
+								</Menu.Item>
+								<Menu.Item key="4">
+									<span>Post</span>
+									<Link to="discussion" />
+								</Menu.Item>
+							</Menu> :
+							<div></div>
+						}
 					</Col>
 					<Col span={4}>
 						{userId ?
