@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 import { Modal, Button } from "antd";
-import CreateForm from "./CreateForm";
 import PostForm from "./PostForm";
 import classes from "./CreatePost.module.css";
 

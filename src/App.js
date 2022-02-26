@@ -7,18 +7,19 @@ import {
   Redirect,
 } from "react-router-dom";
 
-import Dashboard from "./pages/Dashboard";
-import DiscussionBoard from "./pages/DiscussionBoard";
-import Home from "./pages/Home";
-import NotFound from "./pages/NotFound";
-import Payment from "./pages/Payment";
-import ServiceBoard from "./pages/ServiceBoard";
+import Layout from "antd/lib/layout/layout";
 
-import Navbar from "./components/Layout/Navbar";
-import Footer from "./components/Layout/Footer";
+import Home from "./routes/Home";
+import ServiceBoard from "./routes/ServiceBoard";
+
 import Login from "./components/Authentication/Login";
 import Signup from "./components/Authentication/Signup";
-import Layout from "antd/lib/layout/layout";
+import DiscussionBoard from "./components/DiscussBoard/DiscussionBoard";
+import Payment from "./components/PaymentBoard/Payment";
+import Navbar from "./components/Layout/Navbar";
+import Footer from "./components/Layout/Footer";
+import NotFound from "./components/NotFoundPage/NotFound";
+
 
 class App extends React.Component {
   state = {
@@ -28,7 +29,7 @@ class App extends React.Component {
   render() {
     return (
       <Layout
-        style={{ height: "auto", fontFamily: "Times New Roman"}}
+        style={{ height: "auto", fontFamily: 'IBM Plex Mono' }}
       >
         <Router>
           <Navbar />
@@ -44,9 +45,6 @@ class App extends React.Component {
             </Route>
             <Route path="/signup">
               <Signup />
-            </Route>
-            <Route path="/dashboard">
-              <Dashboard />
             </Route>
             <Route path="/discussion">
               <DiscussionBoard />
@@ -67,44 +65,5 @@ class App extends React.Component {
     );
   }
 }
-
-// function App() {
-// 	return (
-// 		<>
-
-// 			<Navbar />
-// 			<Switch>
-// 				<Route path="/" exact>
-// 					<Redirect to="/home" />
-// 				</Route>
-// 				<Route path="/home" exact>
-// 					<Home />
-// 				</Route>
-// 				<Route path="/login">
-// 					<Login />
-// 				</Route>
-// 				<Route path="/signup">
-// 					<Signup />
-// 				</Route>
-// 				<Route path="/dashboard">
-// 					<Dashboard />
-// 				</Route>
-// 				<Route path="/discussion">
-// 					<DiscussionBoard />
-// 				</Route>
-// 				<Route path="/service">
-// 					<ServiceBoard />
-// 				</Route>
-// 				<Route path="/payment">
-// 					<Payment />
-// 				</Route>
-// 				<Route path="*">
-// 					<NotFound />
-// 				</Route>
-// 			</Switch>
-// 			<Footer />
-// 		</>
-// 	);
-// }
 
 export default App;

@@ -56,6 +56,7 @@ class Login extends React.Component {
 			visible: false,
 		})
 	}
+	
 	handleCheckboxOnChange = (e) => {
 		this.setState({
 			asAdmin: e.target.checked,
@@ -66,7 +67,7 @@ class Login extends React.Component {
 		return (
 			<>
 				<Button
-					type="secondary"
+					type="text"
 					style={{ margin: "6px" }}
 					onClick={this.showModal}
 				>
@@ -117,13 +118,13 @@ class Login extends React.Component {
 								placeholder="Password"
 							/>
 						</Form.Item>
-						
+
 					</Form>
 					<Checkbox
 						disabled={this.state.loading}
 						checked={this.state.asAdmin}
 						onChange={this.handleCheckboxOnChange}
-						>
+					>
 						Admin Account
 					</Checkbox>
 				</Modal>

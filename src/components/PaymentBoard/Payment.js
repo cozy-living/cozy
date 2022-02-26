@@ -1,5 +1,5 @@
 import { Col, Row } from "antd";
-import PaymentBoard from "../components/Home/PaymentBoard"
+import PaymentBoard from "./PaymentBoard"
 
 const Payment = () => {
     return (

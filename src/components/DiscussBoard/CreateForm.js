@@ -28,13 +28,6 @@ const formItemLayout = {
 };
 
 const CreateForm = (props) => {
-  /*
-  Fullname
-  E-mail
-  Post Title
-  Date
-  Post Detail
-  */
   const [enteredName, setEnteredName] = useState("");
   const [enteredEmail, setEnteredEmail] = useState("");
   const [enteredTitle, setEnteredTitle] = useState("");
@@ -63,7 +56,6 @@ const CreateForm = (props) => {
 
   function sumbitHandler(event) {
     // event.preventDefault();
-
     const postData = {
       name: enteredName,
       email: enteredEmail,

@@ -2,8 +2,6 @@ import React from "react";
 
 import { Card, Col, Row } from "antd";
 import classes from "./Post.module.css";
-import CreateComment from "./CreateComment";
-import AddComment from "./AddComment";
 import PostEntry from "./PostEntry";
 
 const Post = (props) => {

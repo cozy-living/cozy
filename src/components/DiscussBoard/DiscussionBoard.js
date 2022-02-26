@@ -1,12 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 
-import Post from "../components/DiscussBoard/Post";
-import MyPost from "../components/DiscussBoard/MyPost";
+import Post from "./Post";
+import MyPost from "./MyPost";
 
 import classes from "./DiscussionBoard.module.css";
-import CreatePost from "../components/DiscussBoard/CreatePost";
-import PostForm from "../components/DiscussBoard/PostForm";
+import CreatePost from "./CreatePost";
 
 /*
           DiscussionBoard

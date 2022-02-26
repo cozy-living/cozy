@@ -1,5 +1,4 @@
 import React from "react";
-import AddComment from "./AddComment";
 
 import classes from "./CreateComment.module.css";
 
