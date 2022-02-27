@@ -55,7 +55,7 @@ class App extends React.Component {
             <Route path="/payment">
               <Payment />
             </Route>
-            <Route path="*">
+            <Route path="/*">
               <NotFound />
             </Route>
           </Switch>

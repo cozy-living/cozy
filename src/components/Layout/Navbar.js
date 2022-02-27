@@ -1,6 +1,6 @@
 import React from "react"
 
-import { Row, Col, Layout, Menu, Avatar, Dropdown } from "antd"
+import { Row, Col, Layout, Menu, Avatar, Dropdown, message } from "antd"
 import { UserOutlined } from "@ant-design/icons/lib/icons"
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Login from "../Authentication/Login"
@@ -11,6 +11,7 @@ const { Header } = Layout;
 
 
 class Navbar extends React.Component {
+	
 	state = {
 		authed: false,
 		username: "",
@@ -35,7 +36,7 @@ class Navbar extends React.Component {
 			authed: true,
 			username: username
 		})
-		window.location.href = "./home";
+		window.location.href = "http://cozy-frontend.s3-website.us-east-2.amazonaws.com/home";
 	}
 
 	handleLogOut = () => {
@@ -45,11 +46,10 @@ class Navbar extends React.Component {
 		this.setState({
 			authed: false,
 		})
-		window.location.href = "./home";
+		window.location.href = "/home";
 	}
 
 	render() {
-
 		const profileOption = (
 			<Menu>
 				<Menu.Item
@@ -80,7 +80,7 @@ class Navbar extends React.Component {
 							<Menu theme="light" mode="horizontal" defaultSelectedKeys={['1']}>
 								<Menu.Item key="1">
 									<span>Home</span>
-									<Link to="/" />
+									<Link to="/home" />
 								</Menu.Item>
 								{localStorage.getItem("asHost") === 'false' &&
 									<Menu.Item key="2">
