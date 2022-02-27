@@ -9,7 +9,7 @@ import MyPost from "./MyPost";
 import classes from "./DiscussionBoard.module.css";
 import CreatePost from "./CreatePost";
 
-import { addPost, listPostByUser } from "../../utils";
+import { listPostByUser } from "../../utils";
 import { message } from "antd";
 
 /*
@@ -30,32 +30,32 @@ const DiscussionBoard = () => {
   const [myPosts, setMyPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  // const fetchMyPostHandler = useCallback(async () => {
-  //   setIsLoading(true);
-  //   const web = `${url}/posts`;
-  //   try {
-  //     const userId = localStorage.getItem("userId");
-  //     const data = await listPostByUser(userId);
-  //     console.log(data);
-  //     const transformedMyPosts = data.map((myPostData) => {
-  //       return {
-  //         id: myPostData.user.id,
-  //         name: myPostData.user.username,
-  //         suite: myPostData.user.suite,
-  //         email: myPostData.user.email,
-  //         postid: myPostData.id,
-  //         title: myPostData.title,
-  //         detail: myPostData.content,
-  //         date: myPostData.date,
-  //         url: myPostData.fileUrl,
-  //       };
-  //     });
-  //     setMyPosts(transformedMyPosts);
-  //   } catch (error) {
-  //     message.error(error.message);
-  //   }
-  //   setIsLoading(false);
-  // });
+  const fetchMyPostHandler = useCallback(async () => {
+    setIsLoading(true);
+    try {
+      const userId = localStorage.getItem("userId");
+      const data = await listPostByUser(userId);
+      const web = `${url}/${userId}/posts`;
+      // console.log(data);
+      const transformedMyPosts = data.map((myPostData) => {
+        return {
+          id: myPostData.user.id,
+          name: myPostData.user.username,
+          suite: myPostData.user.suite,
+          email: myPostData.user.email,
+          postid: myPostData.id,
+          title: myPostData.title,
+          detail: myPostData.content,
+          date: myPostData.date,
+          url: myPostData.fileUrl,
+        };
+      });
+      setMyPosts(transformedMyPosts);
+    } catch (error) {
+      message.error(error.message);
+    }
+    setIsLoading(false);
+  });
 
   const fetchPostHandler = useCallback(async () => {
     setIsLoading(true);
@@ -90,6 +90,7 @@ const DiscussionBoard = () => {
 
   useEffect(() => {
     fetchPostHandler();
+    fetchMyPostHandler();
   }, [fetchPostHandler]);
 
   const addPostHandler = async (post) => {
@@ -105,6 +106,7 @@ const DiscussionBoard = () => {
     });
     const data = await response.json();
     fetchPostHandler();
+    fetchMyPostHandler();
     // console.log(data);
   };
 
@@ -118,7 +120,9 @@ const DiscussionBoard = () => {
         data: post,
       })
       .then((response) => {
+        message.success("Post successfully added!");
         fetchPostHandler();
+        fetchMyPostHandler();
       })
       .catch((err) => {
         console.log(err);
@@ -128,14 +132,6 @@ const DiscussionBoard = () => {
   return (
     <div className={classes.page}>
       <p className={classes.title}>Discussion Board</p>
-      {/* <div className={classes.tabs}>
-        <button className={classes.button} onClick={ShowPostHandler}>
-          Posts
-        </button>
-        <button className={classes.button} onClick={ShowMyPostHandler}>
-          My Posts
-        </button>
-      </div> */}
       <div className={classes.button}>
         <Button onClick={() => setMyPost(false)} disabled={!myPost}>Posts</Button>
         <Button onClick={() => setMyPost(true)} disabled={myPost}>My Posts</Button>
@@ -146,14 +142,9 @@ const DiscussionBoard = () => {
           <Post visible={!myPost} data={posts} />
         )}
         {!isLoading && posts.length > 0 && myPost && (
-          <MyPost
-            visible={myPost}
-            data={posts}
-            fetchHandler={fetchPostHandler}
-            onEdit={addPostHandler}
-          />
+          <MyPost visible={!myPost} data={myPosts} />
         )}
-        {!isLoading && posts.length === 0 && <p>Found No Posts!</p>}
+        {!isLoading && posts.length === 0 && <p>No posts yet</p>}
         {isLoading && <p>Loading...</p>}
         {!isLoading}
       </div>

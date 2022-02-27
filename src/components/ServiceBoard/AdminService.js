@@ -1,4 +1,4 @@
-// TODO: implement the page for viewing all past requests submitted by a resident (a tab in the Service page)
+// The page for viewing all past requests submitted by a resident (a tab in the Service page)
 
 import React, { Component } from "react";
 import styles from './AdminService.module.css';
@@ -39,28 +39,12 @@ class AdminService extends Component {
   render() {
     const { Content } = Layout;
     const { requests } = this.state;
-    // console.log(requests);
     return (
-        <Content style={{ display: "flex", flexDirection: "column", 
-        justifyContent: "flex-start", backgroundColor: "rgb(230, 230, 230)" }}>
+      <Content style={{
+        display: "flex", flexDirection: "column",
+        justifyContent: "flex-start", backgroundColor: "rgb(230, 230, 230)"
+      }}>
         <h1 className={styles.service_title}>Resident Requests</h1>
-
-        {/* <List
-          bordered
-          dataSource={requests}
-          style={{ margin: "40px" }}
-          //TODO:get items from backend
-          renderItem={item => (
-            <List.Item className="resident_item">
-              <List.Item.Meta
-                title={item.type}
-                description={" DATE:" + item.date}
-              />
-              <ApproveBotton reservationId={item.id} loadData={this.loadData} />
-              <RejectBotton reservationId={item.id} loadData={this.loadData} />
-            </List.Item>
-          )}
-        /> */}
 
         <List
           dataSource={requests}
@@ -80,7 +64,6 @@ class AdminService extends Component {
                     </>
                   }
                 >
-                  {/* {"Reservation Status: " + displayText(item.state)} */}
                   <RejectBotton reservationId={item.id} loadData={this.loadData} />
                   <ApproveBotton reservationId={item.id} loadData={this.loadData} />
                 </Card>

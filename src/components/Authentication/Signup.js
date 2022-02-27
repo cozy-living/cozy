@@ -1,5 +1,5 @@
 import React from "react"
-import { Form, Button, Input, Space, message, Modal } from "antd"
+import { Form, Button, Input, message, Modal } from "antd"
 import { register } from "../../utils"
 
 
@@ -37,8 +37,7 @@ class Signup extends React.Component {
 
 		try {
 			let f = formInstance.getFieldValue()
-			const {confirm, ...registerRequest} = f; 
-			// console.log(registerRequest);
+			const { confirm, ...registerRequest } = f;
 			await register(registerRequest)
 			message.success("Successfully created an account!")
 			this.setState({

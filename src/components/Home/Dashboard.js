@@ -1,12 +1,11 @@
 /*
-   TODO: implement the dashboard component. 
    An admin can edit or delete a dashboard by clicking the corresponding button in a dashboard, 
    while a resident can only view a dashboard.
 */
 
 import React, { Component } from "react";
 import styles from "./Dashboard.module.css"
-import { List, Card, Button, Modal, Form, Input, message } from "antd";
+import { List, Card, Button, Modal, Input, message } from "antd";
 import { addEvent, deleteEvent, listEvents } from "../../utils";
 
 class Dashboard extends Component {
@@ -32,7 +31,6 @@ class Dashboard extends Component {
     })
     try {
       const resp = await listEvents();
-      // console.log(resp);
       this.setState({
         data: resp,
       });
@@ -64,40 +62,40 @@ class Dashboard extends Component {
       <div>
         <div className={styles.dashboard_header}></div>
         <div className={styles.dashboard_body}>
-        <h1 className={styles.title}>Event Dashboard</h1>
-        {
-          admin == "true" && <Button onClick={this.showModal} style={{ marginLeft: "50px" }}>
-            Post Event
-          </Button>
-        }
-        <Modal visible={this.state.isModalVisible} footer={null} onCancel={this.closeModal}>
-          <PostEvent closeModal={this.closeModal} loadEvents={this.loadEvents} />
-        </Modal>
-        <List
-          dataSource={data}
-          style={{ margin: "40px" }}
-          renderItem={item => (
-            <>
-              <div className={styles.items} >
-                <img src={item.fileUrl} width="150" height="150" style={{ borderRadius: "50%" }} alt="" />
-                <Card
-                  style={{ height: "150", width: "85%", marginLeft: "65px" }}
-                  title={item.title}
-                  extra={
-                    <>
-                      <span style={{ marginRight: "40px" }}>Published by <b>{item.user.username}</b></span>
-                      <span style={{ marginRight: "20px" }}>{item.date.substring(0, 10)}</span>
-                      {admin == "true" && <DeleteButton eventId={item.id} onRemoveSuccess={this.loadEvents} />}
-                    </>
-                  }
-                >
-                  {item.content}
-                </Card>
-              </div>
-              <div style={{ height: "30px" }}></div>
-            </>
-          )}
-        />,
+          <h1 className={styles.title}>Event Dashboard</h1>
+          {
+            admin === "true" && <Button onClick={this.showModal} style={{ marginLeft: "50px" }}>
+              Post Event
+            </Button>
+          }
+          <Modal visible={this.state.isModalVisible} footer={null} onCancel={this.closeModal}>
+            <PostEvent closeModal={this.closeModal} loadEvents={this.loadEvents} />
+          </Modal>
+          <List
+            dataSource={data}
+            style={{ margin: "40px" }}
+            renderItem={item => (
+              <>
+                <div className={styles.items} >
+                  <img src={item.fileUrl} width="150" height="150" style={{ borderRadius: "50%" }} alt="" />
+                  <Card
+                    style={{ height: "150", width: "85%", marginLeft: "65px" }}
+                    title={item.title}
+                    extra={
+                      <>
+                        <span style={{ marginRight: "40px" }}>Published by <b>{item.user.username}</b></span>
+                        <span style={{ marginRight: "20px" }}>{item.date.substring(0, 10)}</span>
+                        {admin === "true" && <DeleteButton eventId={item.id} onRemoveSuccess={this.loadEvents} />}
+                      </>
+                    }
+                  >
+                    {item.content}
+                  </Card>
+                </div>
+                <div style={{ height: "30px" }}></div>
+              </>
+            )}
+          />,
         </div>
       </div>
     )

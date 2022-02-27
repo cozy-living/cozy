@@ -6,35 +6,19 @@
   margin-top: 20px;
 }
 
-/* .tabs {
-  margin-top: 30px;
-  text-align: center;
-  font-size: 18px;
-  display: flex;
-  justify-content: left;
-} */
-
-
-/* .tabs button:active {
-  background-color: grey;
-} */
-
-
 .posts {
   margin-top: 40px;
   font-size: xx-large;
 }
 
 .button {
-  /* font-size: 24px;
-  width: 400px; */
   margin-top: 30px;
   margin-left: 50px;
 }
 
 .page {
   background-color: rgb(230, 230, 230);
-  padding-bottom: 80px;
+  padding-bottom: 250px;
 }
 
 .postTab {

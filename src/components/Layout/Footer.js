@@ -58,7 +58,6 @@ const Footer = () => {
             <a>FAQ</a>
           </Col>
         </Row>
-        {/*<p style={ {textAlign: 'center', color: 'white'} }>Cozy ©2022   Created by a team of aspiring software engineers</p>*/}
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import React from "react"
 
-import { Row, Col, Layout, Menu, Button, Avatar, Dropdown, message, Image } from "antd"
+import { Row, Col, Layout, Menu, Avatar, Dropdown } from "antd"
 import { UserOutlined } from "@ant-design/icons/lib/icons"
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Login from "../Authentication/Login"
@@ -20,7 +20,6 @@ class Navbar extends React.Component {
 	componentDidMount() {
 		const userId = localStorage.getItem("userId")
 		const username = localStorage.getItem("username")
-		// console.log("navbar mount")
 		this.setState({
 			authed: userId != null,
 			username: username,

@@ -1,6 +1,7 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import AdminService from '../components/ServiceBoard/AdminService';
 import ResidentService from '../components/ServiceBoard/ResidentService';
+
 class ServiceBoard extends Component {
   state = {
     admin: false,
@@ -15,9 +16,9 @@ class ServiceBoard extends Component {
     return (
       <div className='centered'>
         {
-        this.state.admin == "true" ? <AdminService />
-        :
-        <ResidentService />
+          this.state.admin === "true" ? <AdminService />
+            :
+            <ResidentService />
         }
       </div>
     )

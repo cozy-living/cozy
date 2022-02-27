@@ -1,5 +1,4 @@
 /* 
-  TODO: implement the service component. 
   The Service page should contain 2 tabs (CreateRequest + ViewRequests) for a resident, 
   and one tab only (ProcessRequests) for an admin.
 */
@@ -90,10 +89,12 @@ class ResidentService extends Component {
     ];
 
     return (
-      <Content style={{ display: "flex", flexDirection: "column",   paddingBottom: "200px", 
-      justifyContent: "flex-start", backgroundColor: "rgb(230, 230, 230)"}}>
+      <Content style={{
+        display: "flex", flexDirection: "column", paddingBottom: "350px",
+        justifyContent: "flex-start", backgroundColor: "rgb(230, 230, 230)"
+      }}>
         <h1 className={styles.service_title}>Service Board</h1>
-        <div style={{marginLeft: "40px"}}>
+        <div style={{ marginLeft: "40px" }}>
           <Button onClick={this.resetService} disabled={!myService}>Reserve Service</Button>
           <Button onClick={this.setService} disabled={myService}>My Service</Button>
         </div>
@@ -101,11 +102,10 @@ class ResidentService extends Component {
           myService ?
             <List
               dataSource={requests}
-              style={{ margin: "40px"}}
+              style={{ margin: "40px" }}
               renderItem={item => (
                 <>
                   <div className={styles.items} >
-                    {/*TODO: change image based on event type*/}
                     <img src={selectImage(item.type)} width="150" height="150" style={{ borderRadius: "50%" }} alt="" />
                     <Card
                       style={{ height: "150", width: "85%", marginLeft: "65px" }}
@@ -125,7 +125,7 @@ class ResidentService extends Component {
             />
             :
             <Form
-              style={{display: "flex", justifyContent: "flex-start", gap: "30px", height: "370px"}}
+              style={{ display: "flex", justifyContent: "flex-start", gap: "30px", height: "370px" }}
               className={styles.reserve_form}
               onFinish={this.onFinish}
             >
@@ -150,8 +150,8 @@ class ResidentService extends Component {
                   htmlType="submit"
                   loading={this.state.loading}
                   className={styles.reserve_button}
-                  > 
-                    Submit
+                >
+                  Submit
                 </button>
               </Form.Item>
             </Form>

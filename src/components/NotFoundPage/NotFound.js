@@ -3,7 +3,7 @@ import styles from "./NotFound.module.css";
 
 const NotFound = () => {
   return (
-    <Row style={{ height: "700px" }}>
+    <Row style={{ height: "700px", backgroundColor: "rgb(230, 230, 230)" }}>
       <Col span={13}>
         <div className={styles.title}>Oops! That page couldn't be found.</div>
         <div className={styles.content}>The requested URL was not found on this server.</div>
@@ -14,6 +14,6 @@ const NotFound = () => {
     </Row>
   )
 }
-  
+
 export default NotFound;
 

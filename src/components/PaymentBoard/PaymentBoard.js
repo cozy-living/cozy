@@ -1,8 +1,6 @@
-// TODO: implement the payment component (exclusive to residents)
-
 import styles from "./PaymentBoard.module.css";
 import React, { useState, useRef } from "react";
-import { Button, Checkbox, Form, Input, message } from "antd";
+import { Checkbox, Form, Input, message } from "antd";
 
 const PaymentBoard = () => {
     // TODO: use ref to validate form items upon submission

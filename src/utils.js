@@ -1,4 +1,4 @@
-// TODO: define RESTful APIs to fetch data from backend
+// define RESTful APIs to fetch data from backend
 
 const domain = "http://18.216.82.23:8080"
 

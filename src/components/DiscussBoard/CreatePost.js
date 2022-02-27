@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Modal, Button } from "antd";
+import { Modal } from "antd";
 import PostForm from "./PostForm";
 import classes from "./CreatePost.module.css";
 
@@ -18,34 +18,22 @@ const CreatePost = (props) => {
   return (
     <>
       <div>
-        {/* <Button
-          type="primary"
-          onClick={showModal}
-          // style={{ marginLeft: "135px" }}
-        >
-          Create Post
-        </Button> */}
         <button onClick={showModal} className={classes.button}>
           Create Post
         </button>
-        {/* <button onClick={showModal}>Create Post</button> */}
       </div>
       <Modal
         visible={visible}
         title="Create Your Post"
         onCancel={onCancelHandler}
         width={800}
-        footer={[
-          <Button key="back" onClick={onCancelHandler}>
-            Return
-          </Button>,
-        ]}
+        footer={<></>}
       >
         {
           <PostForm
             onSavePostData={props.onAddPost}
             onSuccess={props.onSuccess}
-            onVisible={visible}
+            onCancel={onCancelHandler}
           />
         }
       </Modal>
