@@ -15,7 +15,8 @@ const MyPost = (props) => {
       .delete(`${url}/${userId}/posts/${postId}`)
       .then((response) => {
         message.success("Post successfully deleted!");
-        window.location.reload(false);
+        window.location.reload(false); // TODO: watch out for this in prod environment
+        // best pracitce: recall GET or showModal === false, not viable b/c of the current component structure
       })
       .catch((error) => {
         message.error(error.message);

@@ -1,11 +1,11 @@
 import React from "react";
 
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Route,
   Switch,
   Redirect,
-} from "react-router-dom";
+} from "react-router-dom"; // TODO: use BrowserRouter
 
 import Layout from "antd/lib/layout/layout";
 
@@ -55,7 +55,7 @@ class App extends React.Component {
             <Route path="/payment">
               <Payment />
             </Route>
-            <Route path="/*">
+            <Route path="*">
               <NotFound />
             </Route>
           </Switch>

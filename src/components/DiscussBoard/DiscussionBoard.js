@@ -144,7 +144,7 @@ const DiscussionBoard = () => {
         {!isLoading && posts.length > 0 && myPost && (
           <MyPost visible={!myPost} data={myPosts} />
         )}
-        {!isLoading && posts.length === 0 && <p>No posts yet</p>}
+        {/* {!isLoading && posts.length === 0 && <p>No posts yet</p>} */}
         {isLoading && <p>Loading...</p>}
         {!isLoading}
       </div>

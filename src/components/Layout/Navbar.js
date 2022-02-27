@@ -36,7 +36,7 @@ class Navbar extends React.Component {
 			authed: true,
 			username: username
 		})
-		window.location.href = "http://cozy-frontend.s3-website.us-east-2.amazonaws.com/home";
+		window.location.href = "/"; // use HashRouter will redirect to index.html by default
 	}
 
 	handleLogOut = () => {
@@ -46,7 +46,7 @@ class Navbar extends React.Component {
 		this.setState({
 			authed: false,
 		})
-		window.location.href = "/home";
+		window.location.href = "/"; // use HashRouter will redirect to index.html by default
 	}
 
 	render() {
