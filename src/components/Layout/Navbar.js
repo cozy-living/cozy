@@ -83,10 +83,11 @@ class Navbar extends React.Component {
 									<span>Home</span>
 									<Link to="/" />
 								</Menu.Item>
-								<Menu.Item key="2">
-									<span>Payment</span>
-									<Link to="payment" />
-								</Menu.Item>
+								{localStorage.getItem("asHost") === 'false' &&
+									<Menu.Item key="2">
+										<span>Payment</span>
+										<Link to="payment" />
+									</Menu.Item>}
 								<Menu.Item key="3">
 									<span>Service</span>
 									<Link to="service" />

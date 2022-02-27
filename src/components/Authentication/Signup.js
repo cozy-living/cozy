@@ -37,9 +37,10 @@ class Signup extends React.Component {
 
 		try {
 			let f = formInstance.getFieldValue()
-			delete f["confirm"]
-			await register(f)
-			message.success("Successfully created account")
+			const {confirm, ...registerRequest} = f; 
+			// console.log(registerRequest);
+			await register(registerRequest)
+			message.success("Successfully created an account!")
 			this.setState({
 				visible: false
 			})
@@ -81,21 +82,6 @@ class Signup extends React.Component {
 				>
 					<Form ref={this.formRef} onFinish={this.onFinish}>
 						<Form.Item
-							name="suite"
-							rules={[
-								{
-									required: true,
-									message: 'Please enter suite number',
-								},
-							]}
-						>
-							<Input
-								disabled={this.state.loading}
-								placeholder="Suite"
-							>
-							</Input>
-						</Form.Item>
-						<Form.Item
 							name="username"
 							rules={[
 								{
@@ -129,6 +115,22 @@ class Signup extends React.Component {
 							/>
 						</Form.Item>
 
+						<Form.Item
+							name="suite"
+							rules={[
+								{
+									required: true,
+									message: 'Please enter suite number',
+								},
+							]}
+						>
+							<Input
+								disabled={this.state.loading}
+								placeholder="Suite"
+							>
+							</Input>
+						</Form.Item>
+
 
 						<Form.Item
 							name="password"
@@ -144,7 +146,6 @@ class Signup extends React.Component {
 								placeholder="Password"
 							/>
 						</Form.Item>
-
 
 						<Form.Item
 							name="confirm"
