@@ -21,53 +21,52 @@ import { message } from "antd";
 */
 
 const DiscussionBoard = () => {
-
   const url = "http://18.216.82.23:8080";
 
-  const [myPost, setMyPost] = useState(false);
+  const [showPost, setShowPost] = useState(false);
+  const [showMyPost, setShowMyPost] = useState(false);
 
   const [posts, setPosts] = useState([]);
   const [myPosts, setMyPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  // const fetchMyPostHandler = useCallback(async () => {
-  //   setIsLoading(true);
-  //   const web = `${url}/posts`;
-  //   try {
-  //     const userId = localStorage.getItem("userId");
-  //     const data = await listPostByUser(userId);
-  //     console.log(data);
-  //     const transformedMyPosts = data.map((myPostData) => {
-  //       return {
-  //         id: myPostData.user.id,
-  //         name: myPostData.user.username,
-  //         suite: myPostData.user.suite,
-  //         email: myPostData.user.email,
-  //         postid: myPostData.id,
-  //         title: myPostData.title,
-  //         detail: myPostData.content,
-  //         date: myPostData.date,
-  //         url: myPostData.fileUrl,
-  //       };
-  //     });
-  //     setMyPosts(transformedMyPosts);
-  //   } catch (error) {
-  //     message.error(error.message);
-  //   }
-  //   setIsLoading(false);
-  // });
-
-  const fetchPostHandler = useCallback(async () => {
+  const fetchMyPostHandler = async () => {
     setIsLoading(true);
-    const web = `${url}/posts`;
+    let userId = localStorage.getItem("userId");
     try {
-      const response = await fetch(web);
+      let data = await listPostByUser(userId);
+      console.log(data);
+      const transformedMyPosts = data.map((myPostData) => {
+        return {
+          id: myPostData.user.id,
+          name: myPostData.user.username,
+          suite: myPostData.user.suite,
+          email: myPostData.user.email,
+          postid: myPostData.id,
+          title: myPostData.title,
+          detail: myPostData.content,
+          date: myPostData.date,
+          url: myPostData.fileUrl,
+        };
+      });
+      setMyPosts(transformedMyPosts);
+    } catch (error) {
+      message.error(error.message);
+    }
+    setIsLoading(false);
+  };
+
+  const fetchPostHandler = async () => {
+    setIsLoading(true);
+    try {
+      const response = await fetch("http://18.216.82.23:8080/posts");
 
       if (!response.ok) {
-        throw new Error("Unable to fetch posts!");
+        throw new Error("Fail to list posts");
       }
 
       const data = await response.json();
+      console.log(data);
       const transformedPosts = data.map((postData) => {
         return {
           id: postData.user.id,
@@ -83,14 +82,10 @@ const DiscussionBoard = () => {
       });
       setPosts(transformedPosts);
     } catch (error) {
-      console.log(error.message);
+      message.error(error.message);
     }
     setIsLoading(false);
-  }, []);
-
-  useEffect(() => {
-    fetchPostHandler();
-  }, [fetchPostHandler]);
+  };
 
   const addPostHandler = async (post) => {
     // console.log(post);
@@ -106,6 +101,18 @@ const DiscussionBoard = () => {
     const data = await response.json();
     fetchPostHandler();
     // console.log(data);
+  };
+
+  const ShowPostHandler = () => {
+    setShowPost(true);
+    setShowMyPost(false);
+    fetchPostHandler();
+  };
+
+  const ShowMyPostHandler = () => {
+    setShowMyPost(true);
+    setShowPost(false);
+    fetchMyPostHandler();
   };
 
   const addPostHandlerAxios = (post) => {
@@ -137,25 +144,35 @@ const DiscussionBoard = () => {
         </button>
       </div> */}
       <div className={classes.button}>
-        <Button onClick={() => setMyPost(false)} disabled={!myPost}>Posts</Button>
-        <Button onClick={() => setMyPost(true)} disabled={myPost}>My Posts</Button>
+        <Button
+          onClick={ShowPostHandler}
+          disabled={showPost}
+        >
+          Posts
+        </Button>
+        <Button onClick={ShowMyPostHandler} disabled={showMyPost}>
+          My Posts
+        </Button>
       </div>
       <CreatePost onAddPost={addPostHandlerAxios} />
       <div className={classes.posts}>
-        {!isLoading && posts.length > 0 && !myPost && (
-          <Post visible={!myPost} data={posts} />
+        {!isLoading && showPost && (
+          <Post visible={showPost} data={posts} />
         )}
-        {!isLoading && posts.length > 0 && myPost && (
+        {!isLoading && posts.length > 0 && showMyPost && (
           <MyPost
-            visible={myPost}
-            data={posts}
-            fetchHandler={fetchPostHandler}
+            visible={showMyPost}
+            data={myPosts}
+            fetchHandler={fetchMyPostHandler}
             onEdit={addPostHandler}
           />
         )}
-        {!isLoading && posts.length === 0 && <p>Found No Posts!</p>}
         {isLoading && <p>Loading...</p>}
-        {!isLoading}
+        {!isLoading && showMyPost && myPosts.length === 0 && (
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <p>You have no posts yet!</p>
+          </div>
+        )}
       </div>
     </div>
   );
