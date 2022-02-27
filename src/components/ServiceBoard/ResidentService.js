@@ -94,7 +94,7 @@ class ResidentService extends Component {
         justifyContent: "flex-start", backgroundColor: "rgb(230, 230, 230)"
       }}>
         <h1 className={styles.service_title}>Service Board</h1>
-        <div style={{ marginLeft: "40px" }}>
+        <div style={{ marginLeft: "50px", marginTop: "20px" } }>
           <Button onClick={this.resetService} disabled={!myService}>Reserve Service</Button>
           <Button onClick={this.setService} disabled={myService}>My Service</Button>
         </div>
@@ -125,7 +125,7 @@ class ResidentService extends Component {
             />
             :
             <Form
-              style={{ display: "flex", justifyContent: "flex-start", gap: "30px", height: "370px", marginLeft: "0px", marginTop: "-20px" }}
+              style={{ display: "flex", justifyContent: "flex-start", gap: "30px", height: "370px", marginLeft: "10px", marginTop: "-10px" }}
               className={styles.reserve_form}
               onFinish={this.onFinish}
             >
