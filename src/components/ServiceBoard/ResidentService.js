@@ -125,7 +125,7 @@ class ResidentService extends Component {
             />
             :
             <Form
-              style={{ display: "flex", justifyContent: "flex-start", gap: "30px", height: "370px" }}
+              style={{ display: "flex", justifyContent: "flex-start", gap: "30px", height: "370px", marginLeft: "0px", marginTop: "-20px" }}
               className={styles.reserve_form}
               onFinish={this.onFinish}
             >
