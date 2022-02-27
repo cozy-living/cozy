@@ -105,6 +105,7 @@ class ApproveBotton extends Component {
     })
     try {
       await deleteReservation(userId, this.props.reservationId);
+      message.success("The resident request was approved");
     } catch (error) {
       message.error(error.message);
     } finally {
@@ -131,6 +132,7 @@ class RejectBotton extends Component {
     })
     try {
       await deleteReservation(userId, this.props.reservationId);
+      message.success("The resident request was rejected");
     } catch (error) {
       message.error(error.message);
     } finally {

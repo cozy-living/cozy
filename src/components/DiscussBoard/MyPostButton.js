@@ -42,7 +42,7 @@ const MyPostButton = (props) => {
     axios
       .delete(`http://18.216.82.23:8080/${userId}/posts/${props.postId}`)
       .then((response) => {
-        message.success("Successfully Removed!");
+        message.success("Post successfully deleted!");
         props.fetchHandler();
       })
       .catch((error) => {

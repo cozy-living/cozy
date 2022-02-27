@@ -127,7 +127,7 @@ class PostEvent extends Component {
 
     try {
       await addEvent(userId, formData);
-      message.success("event added successfully");
+      message.success("Event added successfully");
     } catch (error) {
       message.error(error.message);
     } finally {
@@ -200,6 +200,7 @@ class DeleteButton extends Component {
     })
     try {
       await deleteEvent(userId, eventId);
+      message.success("Event deleted successfully")
       onRemoveSuccess();
     } catch (error) {
       message.error(error.message);
