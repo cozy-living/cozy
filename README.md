@@ -1,8 +1,6 @@
 # Cozy
 
-### This is Cozy's frontend repo, [backend repo](https://github.com/cozy-living/cozy-backend) here.
-
-<img src="files/logo.jpg" alt="logo" width="100">
+### This is Cozy's frontend repo. See [backend repo](https://github.com/cozy-living/cozy-backend).
 
 ## App Description
 
@@ -10,10 +8,12 @@ Cozy is a user-friendly website for managing community properties for residents 
 
 <img src="files/home.png" alt="home" width="800">
 
+<br />
 As a resident, a user can make posts in discussion board, schedule maintenance requests, comment on chat threads, and make regular payments.
 
 <img src="files/dashboard.png" alt="dashboard" width="800">
 
+<br />
 As an admin, a user can publish news on dashboard, resolve chat threads, and grant or reject maintenance requests.
 
 <img src="files/dashboard-admin.png" alt="dashboard-admin" width="800">
